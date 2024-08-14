@@ -3,10 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   Phonebook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ischmutz <ischmutz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: willem <willem@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:51:50 by ischmutz          #+#    #+#             */
-/*   Updated: 2024/08/01 16:51:51 by ischmutz         ###   ########.fr       */
+/*   Updated: 2024/08/14 17:47:42 by willem           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+class Phonebook {
+    //stuff
+};
