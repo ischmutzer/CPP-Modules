@@ -1,8 +1,40 @@
+#ifndef PHONEBGOOK_HPP
+#define PHONEBGOOK_HPP
+
 #include <string>
 
+class Contacts {
+    private:
+        std::string _firstName;
+        std::string _lastName;
+        std::string _nickname;
+        std::string _phoneNumber; //do I needx to convert it?
+        std::string _secret;
+
+    public:
+        Contacts();
+        std::string getFirstName();
+        std::string getLastName();
+        std::string getNickName();
+        std::string getPhoneNumber();
+        std::string getSecret();
+};
+
+
+//las columnas deben ser 10char long -> index[0] y index[9]
+//deberia ser un espacio y despues la info y si info < 10char
+//se llena el resto -1 con espacios, si info > 10char at pos 8
+//ponemos un punto
+
+//ex
+// | first name | last name | nickname |
+// | pepe       | alohapepi.| pepito   |
+
 class Phonebook {
-    //stuff
-    //array of contacts -> class
+    private:
+        Contacts contactsArray[8];
+    public:
+        Phonebook();
 };
 
 //dynamic alloc is forbidden
@@ -17,31 +49,4 @@ class Phonebook {
 
 
 
-class Contacts {
-    //first name
-    //last name
-    //nickname
-    //phone number
-    //darkest secret
-    private:
-        std::string _firstName;
-        std::string _lastName;
-        std::string _nickname;
-        std::string _phoneNumber; //do I needx to convert it?
-        std::string _secret;
-
-    public:
-        std::string getFirstName();
-        std::string getLastName();
-        std::string getNickName();
-};
-
-
-//las columnas deben ser 10char long -> index[0] y index[9]
-//deberia ser un espacio y despues la info y si info < 10char
-//se llena el resto -1 con espacios, si info > 10char at pos 8
-//ponemos un punto
-
-//ex
-// | first name | last name | nickname |
-// | pepe       | alohapepi.| pepito   |
+#endif

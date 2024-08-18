@@ -1,14 +1,5 @@
 #include <iostream>
-
-std::string getFirstName() {
-    return _firstName;
-}
-std::string getLastName() {
-    return _lastName;
-}
-std::string getNickName() {
-    return _nickname;
-}
+//#include "Phonebook.hpp"
 
 int main(int argc, char **argv)
 {

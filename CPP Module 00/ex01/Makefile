@@ -6,7 +6,8 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 
 HEADERS = Phonebook.hpp
 
-SRC = Phonebook.cpp
+SRC = Phonebook.cpp\
+Contacts.cpp
 
 OBJ := $(SRC:%.cpp=%.o)
 
