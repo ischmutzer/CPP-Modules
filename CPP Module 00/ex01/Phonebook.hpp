@@ -13,11 +13,18 @@ class Contacts {
 
     public:
         Contacts();
+        Contacts(std:: string firstName, std:: string lastName, std:: string nickname, std:: string phoneNumber, std:: string secret);
+
         std::string getFirstName();
         std::string getLastName();
         std::string getNickName();
         std::string getPhoneNumber();
         std::string getSecret();
+        void        setFirstName(std::string str);
+        void        setLastName(std::string str);
+        void        setNickname(std::string str);
+        void        setPhoneNumber(std::string str);
+        void        setSecret(std::string str);
 };
 
 
@@ -33,8 +40,11 @@ class Contacts {
 class Phonebook {
     private:
         Contacts contactsArray[8];
+        int index;
     public:
         Phonebook();
+        void addContact(std:: string firstName, std:: string lastName, std:: string nickname, std:: string phoneNumber, std:: string secret);
+        int searchContact();
 };
 
 //dynamic alloc is forbidden

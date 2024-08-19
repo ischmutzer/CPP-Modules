@@ -7,7 +7,8 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 HEADERS = Phonebook.hpp
 
 SRC = Phonebook.cpp\
-Contacts.cpp
+Contacts.cpp\
+main.cpp
 
 OBJ := $(SRC:%.cpp=%.o)
 
@@ -23,6 +24,9 @@ $(NAME): $(OBJ) $(HEADERS)
 
 clean:
 	$(RM) $(OBJ)
+
+run: all
+	./$(NAME)
 
 fclean: clean
 	$(RM) $(NAME)
