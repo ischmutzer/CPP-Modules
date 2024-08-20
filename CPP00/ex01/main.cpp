@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Phonebook.hpp"
+#include "Contacts.hpp"
 
 int    add(Phonebook *phonebook) {
     std::string input = "";

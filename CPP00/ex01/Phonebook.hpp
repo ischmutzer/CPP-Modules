@@ -2,30 +2,31 @@
 #define PHONEBGOOK_HPP
 
 #include <string>
+#include "Contacts.hpp"
 
-class Contacts {
-    private:
-        std::string _firstName;
-        std::string _lastName;
-        std::string _nickname;
-        std::string _phoneNumber; //do I needx to convert it?
-        std::string _secret;
+// class Contacts {
+//     private:
+//         std::string _firstName;
+//         std::string _lastName;
+//         std::string _nickname;
+//         std::string _phoneNumber; //do I needx to convert it?
+//         std::string _secret;
 
-    public:
-        Contacts();
-        Contacts(std:: string firstName, std:: string lastName, std:: string nickname, std:: string phoneNumber, std:: string secret);
+//     public:
+//         Contacts();
+//         Contacts(std:: string firstName, std:: string lastName, std:: string nickname, std:: string phoneNumber, std:: string secret);
 
-        std::string getFirstName();
-        std::string getLastName();
-        std::string getNickName();
-        std::string getPhoneNumber();
-        std::string getSecret();
-        void        setFirstName(std::string str);
-        void        setLastName(std::string str);
-        void        setNickname(std::string str);
-        void        setPhoneNumber(std::string str);
-        void        setSecret(std::string str);
-};
+//         std::string getFirstName();
+//         std::string getLastName();
+//         std::string getNickName();
+//         std::string getPhoneNumber();
+//         std::string getSecret();
+//         void        setFirstName(std::string str);
+//         void        setLastName(std::string str);
+//         void        setNickname(std::string str);
+//         void        setPhoneNumber(std::string str);
+//         void        setSecret(std::string str);
+// };
 
 
 //las columnas deben ser 10char long -> index[0] y index[9]
@@ -44,8 +45,9 @@ class Phonebook {
     public:
         Phonebook();
         ~Phonebook();
-        void addContact(std:: string firstName, std:: string lastName, std:: string nickname, std:: string phoneNumber, std:: string secret);
-        int searchContact();
+        void    addContact(std:: string firstName, std:: string lastName, std:: string nickname, std:: string phoneNumber, std:: string secret);
+        void    printContacts();
+        void    searchContact();
 };
 
 //dynamic alloc is forbidden

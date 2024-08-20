@@ -1,4 +1,5 @@
 #include "Phonebook.hpp"
+#include "Contacts.hpp"
 //#include <iostream>
 
 Contacts::Contacts() {
@@ -7,6 +8,7 @@ Contacts::Contacts() {
      _nickname = "";
      _phoneNumber = "";
      _secret = "";
+     _index = 0;
 }
 
 Contacts::Contacts(std:: string firstName, std:: string lastName, std:: string nickname, std:: string phoneNumber, std:: string secret) {
@@ -53,4 +55,8 @@ void    Contacts::setPhoneNumber(std::string str) {
 
 void    Contacts::setSecret(std::string str) {
     _secret = str;
+}
+
+void    Contacts::setIndex(int index) {
+    _index = index;
 }

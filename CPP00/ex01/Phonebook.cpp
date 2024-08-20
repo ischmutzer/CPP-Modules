@@ -1,5 +1,7 @@
 #include <iostream>
+#include <string>
 #include "Phonebook.hpp"
+#include "Contacts.hpp"
 
 Phonebook::Phonebook() {
     index = 0;
@@ -9,10 +11,18 @@ void Phonebook::addContact(std:: string firstName, std:: string lastName, std:: 
     Contacts    contactToAdd(firstName, lastName, nickname, phoneNumber, secret);
     if (index < 8) {
         contactsArray[index] = contactToAdd;
+        contactToAdd.setIndex(index);
         index++;
     }
     else {
         contactsArray[0] = contactToAdd;
+        contactToAdd.setIndex(0);
+    }
+}
+
+void    Phonebook::printContacts() {
+    for (int i = 0; i < 8; i++) {
+        std::cout << "|" << i << contactsArray[i].getFirstName() << contactsArray[i].getLastName() << contactsArray[i].getNickName() << "|" << std::endl;
     }
 }
 
