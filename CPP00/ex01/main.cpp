@@ -9,7 +9,7 @@ int    add(Phonebook *phonebook) {
     std::string lastName = "";
     std::string nickname = "";
     std::string phoneNumber = "";
-    std::string secret = "";a
+    std::string secret = "";
 
     while (firstName.empty() || lastName.empty() || nickname.empty() || phoneNumber.empty() || secret.empty()) {
         if (!std::getline(std::cin, input))
