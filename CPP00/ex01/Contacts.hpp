@@ -27,7 +27,7 @@ class Contacts {
         void        setNickname(std::string str);
         void        setPhoneNumber(std::string str);
         void        setSecret(std::string str);
-        void        setIndex(int index);.
+        void        setIndex(int index);
 };
 
 #endif

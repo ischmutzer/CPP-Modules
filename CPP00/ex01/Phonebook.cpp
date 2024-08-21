@@ -7,6 +7,10 @@ Phonebook::Phonebook() {
     index = 0;
 }
 
+Phonebook::~Phonebook() {
+
+}
+
 void Phonebook::addContact(std:: string firstName, std:: string lastName, std:: string nickname, std:: string phoneNumber, std:: string secret) {
     Contacts    contactToAdd(firstName, lastName, nickname, phoneNumber, secret);
     if (index < 8) {
@@ -21,8 +25,16 @@ void Phonebook::addContact(std:: string firstName, std:: string lastName, std:: 
 }
 
 void    Phonebook::printContacts() {
-    for (int i = 0; i < 8; i++) {
-        std::cout << "|" << i << contactsArray[i].getFirstName() << contactsArray[i].getLastName() << contactsArray[i].getNickName() << "|" << std::endl;
+    for (int i = 0; i < index; i++) {
+        std::cout << "|" << i << "|" << " ";
+        std::cout.write(contactsArray[i].getFirstName().c_str(), 8);
+        std::cout << " " << "|" << " ";
+        std::cout.write(contactsArray[i].getLastName().c_str(), 8);
+        std::cout << " " << "|" << " ";
+        std::cout.write(contactsArray[i].getNickName().c_str(), 8);
+        std::cout << " " << "|" << " " << std::endl;
+        if (i == index)
+            break ;
     }
 }
 

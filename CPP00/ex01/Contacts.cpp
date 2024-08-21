@@ -19,6 +19,10 @@ Contacts::Contacts(std:: string firstName, std:: string lastName, std:: string n
     _secret = secret;
 }
 
+Contacts::~Contacts() {
+    
+}
+
 std::string Contacts::getFirstName() {
     return _firstName;
 }

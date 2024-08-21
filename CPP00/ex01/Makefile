@@ -4,7 +4,8 @@ CXX = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-HEADERS = Phonebook.hpp
+HEADERS = Phonebook.hpp\
+Contacts.hpp
 
 SRC = Phonebook.cpp\
 Contacts.cpp\

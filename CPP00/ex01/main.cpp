@@ -55,7 +55,7 @@ int main(int argc, char **argv)
                 return 1;
         }
         else if (input == "SEARCH") {
-            //search
+            phonebook.printContacts();
         }
         else if (input == "EXIT") {
             break ;
