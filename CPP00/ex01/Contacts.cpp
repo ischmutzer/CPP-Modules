@@ -2,7 +2,7 @@
 #include "Contacts.hpp"
 //#include <iostream>
 
-Contacts::Contacts() {
+Contacts::Contacts() {a
     _firstName = "";
      _lastName = "";
      _nickname = "";
