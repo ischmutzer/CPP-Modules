@@ -4,34 +4,37 @@
 #include "Contacts.hpp"
 
 int    add(Phonebook *phonebook) {
-    std::string input = "";
-    std::string firstName = "";
-    std::string lastName = "";
-    std::string nickname = "";
-    std::string phoneNumber = "";
-    std::string secret = "";
+    std::string firstName, lastName, nickname, phoneNumber, secret;
 
     while (firstName.empty() || lastName.empty() || nickname.empty() || phoneNumber.empty() || secret.empty()) {
-        if (!std::getline(std::cin, input))
-            return 1;
-        else if (firstName.empty())
-            firstName = input;
-        else if (lastName.empty())
-            lastName = input;
-        else if (nickname.empty())
-            nickname = input;
+        if (firstName.empty()) {
+            std::cout << "Input first name" << std::endl;
+            if (!std::getline(std::cin, firstName))
+                return 1;
+        }
+        else if (lastName.empty()) {
+            std::cout << "Input last name" << std::endl;
+            if (!std::getline(std::cin, lastName))
+                return 1;
+        }
+        else if (nickname.empty()) {
+            std::cout << "Input nickname" << std::endl;
+            if (!std::getline(std::cin, nickname))
+                return 1;
+        }
         else if (phoneNumber.empty()) {
             // should I check the phone number for some sort of validity?
-            phoneNumber = input;
+            std::cout << "Input phonenumber" << std::endl;
+            if (!std::getline(std::cin, phoneNumber))
+                return 1;
         }
-        else if (secret.empty())
-            secret = input;
-        else {
-            std::cout << "Please give an input" << std::endl; //broken
-            continue ;
+        else if (secret.empty()) {
+            std::cout << "Input darkest secret" << std::endl;
+            if (!std::getline(std::cin, secret))
+                return 1;
         }
-        phonebook->addContact(firstName, lastName, nickname, phoneNumber, secret);
     }
+    phonebook->addContact(firstName, lastName, nickname, phoneNumber, secret);
     return 0;
 }
 
