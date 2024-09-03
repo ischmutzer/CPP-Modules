@@ -26,7 +26,8 @@ void Phonebook::addContact(std:: string firstName, std:: string lastName, std:: 
 
 void    alignText(const std::string& str, std::size_t width) {
     if (str.length() > width) {
-        std::cout.write(str.c_str(), width);
+        std::cout.write(str.c_str(), width - 1);
+        std::cout << ".";
     }
     else {
         std::string paddedStr = str;
