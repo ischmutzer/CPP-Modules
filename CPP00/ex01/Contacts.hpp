@@ -19,7 +19,7 @@ class Contacts {
 
         std::string getFirstName();
         std::string getLastName();
-        std::string getNickName();
+        std::string getNickname();
         std::string getPhoneNumber();
         std::string getSecret();
         void        setFirstName(std::string str);

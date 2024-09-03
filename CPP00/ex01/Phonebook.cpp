@@ -24,17 +24,32 @@ void Phonebook::addContact(std:: string firstName, std:: string lastName, std:: 
     }
 }
 
+void    alignText(const std::string& str, std::size_t width) {
+    if (str.length() > width) {
+        std::cout.write(str.c_str(), width);
+    }
+    else {
+        std::string paddedStr = str;
+        int diff = 10 - str.length();
+        for (int i = 0; i < diff; i++) {
+            paddedStr += " ";
+        }
+        std::cout.write(paddedStr.c_str(), 8);
+    }
+}
+
 void    Phonebook::printContacts() {
     for (int i = 0; i < index; i++) {
         std::cout << "|" << i << "|" << " ";
-        std::cout.write(contactsArray[i].getFirstName().c_str(), 8);
+        //std::cout.write(contactsArray[i].getFirstName().c_str(), 8);
+        alignText(contactsArray[i].getFirstName(), 8);
         std::cout << " " << "|" << " ";
-        std::cout.write(contactsArray[i].getLastName().c_str(), 8);
+        //std::cout.write(contactsArray[i].getLastName().c_str(), 8);
+        alignText(contactsArray[i].getLastName(), 8);
         std::cout << " " << "|" << " ";
-        std::cout.write(contactsArray[i].getNickName().c_str(), 8);
+        //std::cout.write(contactsArray[i].getNickName().c_str(), 8);
+        alignText(contactsArray[i].getNickname(), 8);
         std::cout << " " << "|" << " " << std::endl;
-        if (i == index)
-            break ;
     }
 }
 

@@ -29,7 +29,7 @@ std::string Contacts::getFirstName() {
 std::string Contacts::getLastName() {
     return _lastName;
 }
-std::string Contacts::getNickName() {
+std::string Contacts::getNickname() {
     return _nickname;
 }
 
