@@ -41,6 +41,10 @@ std::string Contacts::getSecret() {
     return  _secret;
 }
 
+int Contacts::getIndex(){
+    return _index;
+}
+
 void    Contacts::setFirstName(std::string _firstName) {
     this->_firstName = _firstName;
 }

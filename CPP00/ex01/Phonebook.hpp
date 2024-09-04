@@ -41,13 +41,15 @@
 class Phonebook {
     private:
         Contacts contactsArray[8];
-        int index;
+        int _index;
+        int _oldestIndex;
     public:
         Phonebook();
         ~Phonebook();
         void    addContact(std:: string firstName, std:: string lastName, std:: string nickname, std:: string phoneNumber, std:: string secret);
         void    printContacts();
         void    searchContact();
+        int     getIndex();
 };
 
 //dynamic alloc is forbidden

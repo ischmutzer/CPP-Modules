@@ -4,7 +4,8 @@
 #include "Contacts.hpp"
 
 Phonebook::Phonebook() {
-    index = 0;
+    _index = 0;
+    _oldestIndex = 0;
 }
 
 Phonebook::~Phonebook() {
@@ -13,14 +14,24 @@ Phonebook::~Phonebook() {
 
 void Phonebook::addContact(std:: string firstName, std:: string lastName, std:: string nickname, std:: string phoneNumber, std:: string secret) {
     Contacts    contactToAdd(firstName, lastName, nickname, phoneNumber, secret);
-    if (index < 8) {
-        contactsArray[index] = contactToAdd;
-        contactToAdd.setIndex(index);
-        index++;
+    // if (_index >= 8) {
+    //     if (_oldestIndex < 8)
+    //         _oldestIndex++;
+    //     else
+    //         _oldestIndex = 0;
+    // }
+    if (_index < 8) {
+        contactsArray[_index] = contactToAdd;
+        contactToAdd.setIndex(_index);
+        _index++;
     }
     else {
-        contactsArray[0] = contactToAdd;
-        contactToAdd.setIndex(0);
+        contactsArray[_oldestIndex] = contactToAdd;
+        contactToAdd.setIndex(_oldestIndex);
+        if (_oldestIndex < 8)
+            _oldestIndex++;
+        else
+            _oldestIndex = 0;
     }
 }
 
@@ -40,7 +51,7 @@ void    alignText(const std::string& str, std::size_t width) {
 }
 
 void    Phonebook::printContacts() {
-    for (int i = 0; i < index; i++) {
+    for (int i = 0; i < _index; i++) {
         std::cout << "|" << i << "|" << " ";
         //std::cout.write(contactsArray[i].getFirstName().c_str(), 8);
         alignText(contactsArray[i].getFirstName(), 8);
@@ -52,6 +63,10 @@ void    Phonebook::printContacts() {
         alignText(contactsArray[i].getNickname(), 8);
         std::cout << " " << "|" << " " << std::endl;
     }
+}
+
+int Phonebook::getIndex() {
+    return _index;
 }
 
 // int main(int argc, char **argv)
