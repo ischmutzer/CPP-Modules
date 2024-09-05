@@ -42,7 +42,7 @@ class Phonebook {
     private:
         Contacts contactsArray[8];
         int _index;
-        int _oldestIndex;
+        int _numElements;
     public:
         Phonebook();
         ~Phonebook();
