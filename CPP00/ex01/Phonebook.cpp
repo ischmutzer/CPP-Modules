@@ -40,8 +40,8 @@ void    alignText(const std::string& str, std::size_t width) {
 }
 
 void    Phonebook::printContacts() {
-    for (int i = 0; i < _numElements; i++) {
-        std::cout << "|" << i << "|" << " ";
+    for (int i = 0, j = 1; i < _numElements; i++, j++) {
+        std::cout << "|" << j << "|" << " ";
         //std::cout.write(contactsArray[i].getFirstName().c_str(), 8);
         alignText(contactsArray[i].getFirstName(), 8);
         std::cout << " " << "|" << " ";
