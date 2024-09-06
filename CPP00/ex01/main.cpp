@@ -39,6 +39,14 @@ int    add(Phonebook *phonebook) {
     return 0;
 }
 
+void search(Phonebook *phonebook) {
+    if (!phonebook->getNumElements()) {
+        std::cout << "Phonebook is empty" << std::endl;
+        return;
+    }
+    phonebook->printContacts();
+}
+
 int main(int argc, char **argv)
 {
     (void)argv;
@@ -59,9 +67,9 @@ int main(int argc, char **argv)
                 return 1;
         }
         else if (input == "SEARCH") {
+            search(&phonebook);
             //while (1) {
                 //if (phonebook.getIndex() == 0)
-                phonebook.printContacts();
                 // std::cout << "Input desired index to search" << std::endl;
                 // if (!std::getline(std::cin, input))
                 //     return 1;
