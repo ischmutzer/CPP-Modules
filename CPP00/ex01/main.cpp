@@ -28,6 +28,13 @@ int    add(Phonebook *phonebook) {
             std::cout << "Input phonenumber" << std::endl;
             if (!std::getline(std::cin, phoneNumber))
                 return 1;
+            std::stringstream   sstring(phoneNumber);
+            int num;
+            sstring >> num;
+            if (sstring.fail()) {
+                std::cout << "not valid" << std::endl;
+                phoneNumber.clear();
+            }
         }
         else if (secret.empty()) {
             std::cout << "Input darkest secret" << std::endl;
