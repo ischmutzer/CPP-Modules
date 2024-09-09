@@ -47,9 +47,10 @@ class Phonebook {
         Phonebook();
         ~Phonebook();
         int     getNumElements();
+        int     search();
         void    addContact(std:: string firstName, std:: string lastName, std:: string nickname, std:: string phoneNumber, std:: string secret);
         void    printContacts();
-        void    searchContact();
+        void    printContact(int index);
 };
 
 //dynamic alloc is forbidden

@@ -39,14 +39,6 @@ int    add(Phonebook *phonebook) {
     return 0;
 }
 
-void search(Phonebook *phonebook) {
-    if (!phonebook->getNumElements()) {
-        std::cout << "Phonebook is empty" << std::endl;
-        return;
-    }
-    phonebook->printContacts();
-}
-
 int main(int argc, char **argv)
 {
     (void)argv;
@@ -67,25 +59,8 @@ int main(int argc, char **argv)
                 return 1;
         }
         else if (input == "SEARCH") {
-            search(&phonebook);
-            //while (1) {
-                //if (phonebook.getIndex() == 0)
-                // std::cout << "Input desired index to search" << std::endl;
-                // if (!std::getline(std::cin, input))
-                //     return 1;
-                // for (int i = 0; i < 8; i++) {
-                //     std::stringstream object;
-
-                //     object << i;
-                //     std::string converted_int = object.str();
-                //     // if (input == converted_int)
-                //     //     //phonebook.printContact(i);
-                //     // else {
-                //     //     std::cout << "Invalid input" << std::endl;
-                //     //     break ;
-                //     // }
-                // }
-            //}
+            if (phonebook.search())
+                return 1;
         }
         else if (input == "EXIT") {
             break ;
