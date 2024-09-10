@@ -24,7 +24,6 @@ int    add(Phonebook *phonebook) {
                 return 1;
         }
         else if (phoneNumber.empty()) {
-            // should I check the phone number for some sort of validity?
             std::cout << "Input phonenumber" << std::endl;
             if (!std::getline(std::cin, phoneNumber))
                 return 1;
@@ -70,7 +69,7 @@ int main(int argc, char **argv)
                 return 1;
         }
         else if (input == "EXIT") {
-            break ;
+            return 0 ;
         }
         else {
             continue;
