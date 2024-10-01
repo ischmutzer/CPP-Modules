@@ -34,7 +34,7 @@ int main()
         club.setType("some other type of club");
         jim.attack();
     }
-    {
+    {   //NULL pointer check
         HumanB ali("Ali");
         ali.attack();
     }
