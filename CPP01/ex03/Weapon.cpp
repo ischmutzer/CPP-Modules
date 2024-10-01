@@ -4,6 +4,10 @@ Weapon::Weapon() {
 
 }
 
+Weapon::Weapon(std::string weaponType) {
+	_type = weaponType;
+}
+
 Weapon::~Weapon() {
 
 }
