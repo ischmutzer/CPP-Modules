@@ -3,17 +3,6 @@
 #include <string>
 #include "Data.hpp"
 
-/* void	replaceString(const Data& data, std::ofstream& file) {
-	std::string	fileContent;
-	std::string line;
-
-	while (std::getline(file, line)) {
-		fileContent += line + "\n";
-	}
-	size_t pos = 0;
-	 = find(fileContent, )
-} */
-
 //we pass a reference(&) instead of copying the string by passing the value (std::string filename)
 //for efficiency -> we make it const so the ft can't change the value of &filename
 int fileManipulation(Data& data, const std::string& filename) {
@@ -46,7 +35,6 @@ int fileManipulation(Data& data, const std::string& filename) {
 		return 0;
 	}
 	outFile << content;
-	//replaceString(data, outFile);
 	inFile.close();
 	outFile.close();
 	return 1;
@@ -70,7 +58,7 @@ int main(int argc, char** argv) {
 //3) read contents and, store it // CHECK
 //4) create a new file named filename.replace //CHECK
 //5) fill .replace with content str //CHECK
-//6) replace every occurrence of s1 with s2 in .replace
+//6) replace every occurrence of s1 with s2 in .replace //CHECK
 
 //no C functions allowed
 //all fts of satd::string allowed except replace
