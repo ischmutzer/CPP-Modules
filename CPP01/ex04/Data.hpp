@@ -11,6 +11,7 @@ class Data {
 
     public:
         Data();
+        Data(std::string filename, std::string s1, std::string s2);
         ~Data();
         std::string getFilename();
         std::string getS1();
