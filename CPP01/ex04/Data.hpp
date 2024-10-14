@@ -16,6 +16,8 @@ class Data {
         std::string getFilename();
         std::string getS1();
         std::string getS2();
+        size_t      getLengthS1();
+        size_t      getLengthS2();
 };
 
 #endif

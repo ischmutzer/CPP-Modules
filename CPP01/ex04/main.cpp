@@ -1,15 +1,39 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "Data.hpp"
+
+/* void	replaceString(const Data& data, std::ofstream& file) {
+	std::string	fileContent;
+	std::string line;
+
+	while (std::getline(file, line)) {
+		fileContent += line + "\n";
+	}
+	size_t pos = 0;
+	 = find(fileContent, )
+} */
 
 //we pass a reference(&) instead of copying the string by passing the value (std::string filename)
 //for efficiency -> we make it const so the ft can't change the value of &filename
-int fileManipulation(const std::string& filename) {
+int fileManipulation(Data& data, const std::string& filename) {
     std::ifstream	inFile(filename.c_str());
 
 	if (!inFile.is_open()) {
 		std::cout << "Error: inFile failed at .is_open()" << std::endl;
 		return 0;
+	}
+
+	std::string	line;
+	std::string	content;
+	while (std::getline(inFile, line)) {
+		content += line + "\n";
+	}
+	size_t	pos = 0;
+	while ((pos = content.find(data.getS1(), pos)) != std::string::npos) {
+		content.erase(pos, data.getLengthS1());
+		content.insert(pos, data.getS2());
+		pos += data.getLengthS2();
 	}
 
 	std::string	newFile = filename;
@@ -21,12 +45,8 @@ int fileManipulation(const std::string& filename) {
 		std::cout << "Error: outFile failed at .is_open()" << std::endl;
 		return 0;
 	}
-
-	std::string	line;
-	while (std::getline(inFile, line)) {
-		outFile << line << std::endl;
-	}
-
+	outFile << content;
+	//replaceString(data, outFile);
 	inFile.close();
 	outFile.close();
 	return 1;
@@ -35,7 +55,7 @@ int fileManipulation(const std::string& filename) {
 int main(int argc, char** argv) {
     if (argc == 4) {
         Data    data = Data(argv[1], argv[2], argv[3]);
-        if (!fileManipulation(data.getFilename())) {
+        if (!fileManipulation(data, data.getFilename())) {
             std::cout << "Error: File failure" << std::endl;
 			return 1;
         }
@@ -47,9 +67,9 @@ int main(int argc, char** argv) {
 
 //1) check that filename exists //CHECK
 //2) check that I have proper permissions to open -> open //CHECK
-//3) read contents and, store into a str
-//4) create a new file named filename.replace
-//5) fill .replace with content str
+//3) read contents and, store it // CHECK
+//4) create a new file named filename.replace //CHECK
+//5) fill .replace with content str //CHECK
 //6) replace every occurrence of s1 with s2 in .replace
 
 //no C functions allowed
