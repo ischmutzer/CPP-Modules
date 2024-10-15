@@ -19,10 +19,19 @@ int fileManipulation(Data& data, const std::string& filename) {
 		content += line + "\n";
 	}
 	size_t	pos = 0;
-	while ((pos = content.find(data.getS1(), pos)) != std::string::npos) {
-		content.erase(pos, data.getLengthS1());
-		content.insert(pos, data.getS2());
-		pos += data.getLengthS2();
+	/* if (data.getS1().empty()) {
+		std::cout << "Error: s1 is empty" << std::endl;
+		return 0;
+	} */
+	if (!data.getS1().empty()) {
+		while ((pos = content.find(data.getS1(), pos)) != std::string::npos) {
+			if (data.getS2().empty()) {
+				break;
+			}
+			content.erase(pos, data.getLengthS1());
+			content.insert(pos, data.getS2());
+			pos += data.getLengthS2();
+		}
 	}
 
 	std::string	newFile = filename;
