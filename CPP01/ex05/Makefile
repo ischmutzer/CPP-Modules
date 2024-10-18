@@ -9,7 +9,7 @@ Harl.cpp
 
 HEADERS = Harl.hpp
 
-OBJ:= $(SRC:%.cpp = %.o)
+OBJ:= $(SRC:%.cpp=%.o)
 
 RM = rm -rf
 
