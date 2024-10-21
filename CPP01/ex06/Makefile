@@ -1,13 +1,14 @@
-NAME = harl2
+NAME = harlFilter
 
 CXX = c++
 
 FLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRC = main.cpp\
+Harl.cpp
 
 
-HEADERS =
+HEADERS = Harl.hpp
 
 OBJ := $(SRC:%.cpp=%.o)
 
