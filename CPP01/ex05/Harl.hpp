@@ -14,7 +14,6 @@ class Harl {
 		Harl();
 		~Harl();
 		void	complain(std::string level);
-		int		levelIsValid(std::string lv);
 };
 
 #endif
