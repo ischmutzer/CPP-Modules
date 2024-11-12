@@ -29,21 +29,12 @@ Fixed::~Fixed() {
 	std::cout << "Destructor called" << std::endl;
 }
 
-//modified to be more encapsulated and adopt better practice
-//will print double message
 Fixed&	Fixed::operator=(const Fixed& source) {
 	std::cout << "Copy assignment operator called" << std::endl;
 	
 	if (this != &source)
 		this->_fixedPoint = source.getRawBits();
 	return *this;
-
-//original version:
-	/* if (this == &source)
-		return *this;
-	else
-	 	this->_fixedPoint = source._fixedPoint;
-	return *this; */
 }
 
 int	Fixed::getRawBits(void) const {
