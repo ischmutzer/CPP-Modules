@@ -11,10 +11,33 @@ class	Fixed {
 		Fixed(const Fixed& source);
 		~Fixed();
 		Fixed&	operator=(const Fixed& source);
+
+		bool	operator>(const Fixed& source) const;
+		bool	operator<(const Fixed& source) const;
+		bool	operator>=(const Fixed& source) const;
+		bool	operator<=(const Fixed& source) const;
+		bool	operator==(const Fixed& source) const;
+		bool	operator!=(const Fixed& source) const;
+
+		Fixed	operator+(const Fixed& source);
+		Fixed	operator-(const Fixed& source);
+		Fixed	operator*(const Fixed& source);
+		Fixed	operator/(const Fixed& source);
+
+		Fixed&	operator++(); //pre increment sytanx return a & and void parameter
+		Fixed	operator++(int); //post increment syntax returns obj & dummy int parameter
+		Fixed&	operator--();
+		Fixed	operator--(int);
+
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
+
+		static Fixed&		min(Fixed& num1, Fixed& num2);
+		static const Fixed&	min(const Fixed& num1, const Fixed& num2);
+		static Fixed&		max(Fixed& num1, Fixed& num2);
+		static const Fixed&	max(const Fixed& num1, const Fixed& num2);
 
 	private:
 		int					_fixedPoint;

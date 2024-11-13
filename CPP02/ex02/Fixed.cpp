@@ -63,33 +63,132 @@ std::ostream&	operator<<(std::ostream& outStream, const Fixed& fixedPointValue) 
 	return outStream;
 }
 
+//greater than
+bool	Fixed::operator>(const Fixed& source) const {
+	if (this->_fixedPoint > source._fixedPoint) {
+		return true;
+	}
+	return false;
+}
+
+//less than
+bool	Fixed::operator<(const Fixed& source) const {
+	if (this->_fixedPoint < source._fixedPoint)
+		return true;
+	return false;
+}
+
+bool	Fixed::operator>=(const Fixed& source) const {
+	if (this->_fixedPoint >= source._fixedPoint)
+		return true;
+	return false;
+}
+
+bool	Fixed::operator<=(const Fixed& source) const {
+	if (this->_fixedPoint <= source._fixedPoint)
+		return true;
+	return false;
+}
+
+bool	Fixed::operator==(const Fixed& source) const {
+	if (this->_fixedPoint == source._fixedPoint)
+		return true;
+	return false;
+}
+
+bool	Fixed::operator!=(const Fixed& source) const {
+	if (this->_fixedPoint != source._fixedPoint)
+		return true;
+	return false;
+}
+
+Fixed	Fixed::operator+(const Fixed& source) {
+	Fixed	sum;
+
+	sum._fixedPoint = this->_fixedPoint + source._fixedPoint;
+	return sum;
+}
+
+Fixed	Fixed::operator-(const Fixed& source) {
+	Fixed	diff;
+
+	diff._fixedPoint = this->_fixedPoint - source._fixedPoint;
+	return diff;
+}
+
+Fixed	Fixed::operator*(const Fixed& source) {
+	Fixed	res;
+
+	res._fixedPoint = (this->_fixedPoint * source._fixedPoint) >>_fractionalBits; //bitshift needed to maintain the correct fixed-point representation
+	return res;
+}
+
+// before dividing the two _fixedPoint values, you need to shift the numerator left by the number of fractional bits to account for the fixed-point scaling
+Fixed	Fixed::operator/(const Fixed& source) {
+	Fixed	div;
+
+	div._fixedPoint = ((this->_fixedPoint << _fractionalBits) / source._fixedPoint);
+	return div;
+}
+
+//++x
+Fixed&	Fixed::operator++() {
+	++_fixedPoint;
+	return *this;
+}
+
+//x++
+Fixed	Fixed::operator++(int) {
+	Fixed	temp = *this;
+	++_fixedPoint;
+	return temp;
+}
+
+Fixed&	Fixed::operator--() {
+	--_fixedPoint;
+	return *this;
+}
+
+Fixed	Fixed::operator--(int) {
+	Fixed	temp = *this;
+	--_fixedPoint;
+	return temp;
+}
+
+//A static member function min that takes as parameters two references on fixed-point
+//numbers, and returns a reference to the smallest one.
+Fixed&	Fixed::min(Fixed& num1, Fixed& num2) {
+	if (num1._fixedPoint < num2._fixedPoint)
+		return	num1;
+	return num2;
+}
+
+//A static member function min that takes as parameters two references to constant
+//fixed-point numbers, and returns a reference to the smallest one.
+const Fixed&	Fixed::min(const Fixed& num1, const Fixed& num2) {
+	if (num1._fixedPoint < num2._fixedPoint)
+		return	num1;
+	return	num2;
+}
+
+//A static member function max that takes as parameters two references on fixed-point
+//numbers, and returns a reference to the greatest one.
+Fixed&	Fixed::max(Fixed& num1, Fixed& num2) {
+	if (num1._fixedPoint > num2._fixedPoint)
+		return num1;
+	return num2;
+}
+
+//A static member function max that takes as parameters two references to constant
+//fixed-point numbers, and returns a reference to the greatest one.
+const Fixed&	Fixed::max(const Fixed& num1, const Fixed& num2) {
+	if (num1._fixedPoint > num2._fixedPoint)
+		return	num1;
+	return num2;
+}
+
 
 //NOTES:
 
-//Key Concepts:
-
-//Fixed-point Numbers
-//-> these are numbers where a fixed numver of digits are used for the fractional part.
-
-//Floating-point Numbers
-//-> these are numbers that can represent fractions and very large or very small numbers
-//using a format that includes a base (or mantissa) and an exponent.
-
-//to convert a float to a fixed-point number, you need to multiply the float by 2 to the power
-//of the number of fractional bits and then cast the result to an integer.
-
-//to convert a fixed-point number to a float, you need to divide the fixed-point number by 2 to
-//the power of the number of fractional bits.
-
-//EXAMPLE:
-
-//1 << 8 = 256
-//static_cast<float>(2560) / 256 = 10.0
-//float = 10.0 and fixed-point = 2560
-
-
-
-//Fixed-point arithmetic is a method of representing numbers that
-//have a fixed number of digits after the decimal point. This is 
-//in contrast to floating-point arithmetic, which allows for a variable
-//number of digits after the decimal point.
+//the "this" pointer is a pointer to the current object. To access the object itself, you need to dereference the "this" pointer.
+//You typically don't need to explicitly dereference this to access member variables or functions. You can directly access them using the member variable or function name.
