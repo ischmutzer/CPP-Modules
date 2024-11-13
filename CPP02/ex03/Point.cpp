@@ -1,4 +1,5 @@
 #include "Point.hpp"
+#include "Fixed.hpp"
 #include <iostream>
 
 Point::Point(): x(0), y(0) {
@@ -14,13 +15,9 @@ Point::Point(const Point& source) {
 	*this = source;
 }
 
+//x and y are const, how to reassign them?
 Point&	Point::operator=(const Point& source) {
 	std::cout << "Copy assignment operator called" << std::endl;
-
-	if (this != &source) {
-		x.setRawBits(source.x.getRawBits());
-		y.setRawBits(source.y.getRawBits());
-	}
 	return *this;
 }
 
@@ -28,4 +25,10 @@ Point::~Point() {
 	std::cout << "Destructor called" << std::endl;
 }
 
+Fixed	Point::getX() const {
+	return x;
+}
 
+Fixed	Point::getY() const {
+	return y;
+}
