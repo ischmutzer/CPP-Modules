@@ -1,8 +1,13 @@
 #include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 #include <iostream>
 
 ScavTrap::ScavTrap() : ClapTrap("Base", 100, 50, 20) {
 	std::cout << "ScavTrap default constructor called" << std::endl;
+}
+
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20) {
+	std::cout << "ScavTrap parameterized constructor called" << std::endl;
 }
 
 //ScavTrap is derived from ClapTrap therefore it can be treated as an instance of the base class.
@@ -20,6 +25,22 @@ ScavTrap&	ScavTrap::operator=(const ScavTrap& source) {
 	return *this;
 }
 
+ScavTrap::~ScavTrap() {
+	std::cout << "ScavTrap destructor called" << std::endl;
+}
+
+/* std::string	ScavTrap::getName() {
+	return ClapTrap::getName();
+}
+
+int	ScavTrap::getHealth() {
+	return ClapTrap::getHealth();
+}
+
+int	ScavTrap::getEnergy() {
+	return ClapTrap::getEnergy();
+}
+ */
 void	guardGate() {
 	std::cout << "ScavTrap is now in Gate keeper mode" << std::endl;
 }
