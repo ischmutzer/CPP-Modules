@@ -56,14 +56,16 @@ int	ClapTrap::getAttackDamage() {
 }
 
 void	ClapTrap::setHealth(unsigned int amount, int mode) {
-	if (_hitPoints < amount && mode == 1)
+	/* if (_hitPoints < amount && mode == 1)
 		_hitPoints = 0;
 	else {
-		if (amount > 10)
-			_hitPoints = 10;
+		if (amount > 100)
+			_hitPoints = 100;
 		else
 			_hitPoints = amount;
-	}
+	} */
+	mode = 0;
+	_hitPoints = amount;
 }
 
 void	ClapTrap::setEnergy(unsigned int amount) {
