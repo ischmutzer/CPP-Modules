@@ -7,6 +7,7 @@ class ClapTrap {
 		ClapTrap();
 		ClapTrap(const ClapTrap& source);
 		ClapTrap(std::string name);
+		ClapTrap(std::string name, unsigned int health, unsigned int energy, unsigned int damage);
 		ClapTrap&	operator=(const ClapTrap& source);
 		~ClapTrap();
 

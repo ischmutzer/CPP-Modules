@@ -16,6 +16,11 @@ ClapTrap::ClapTrap(std::string name): _hitPoints(10), _energyPoints(10), _attack
 	_name = name;
 }
 
+
+ClapTrap::ClapTrap(std::string name, unsigned int health, unsigned int energy, unsigned int damage): _name(name), _hitPoints(health), _energyPoints(energy), _attackDamage(damage) {
+	std::cout << "ClapTrap parameterized constructor called" << std::endl;
+}
+
 ClapTrap&	ClapTrap::operator=(const ClapTrap& source) {
 	std::cout << "ClapTrap copy assignment operator called" << std::endl;
 
