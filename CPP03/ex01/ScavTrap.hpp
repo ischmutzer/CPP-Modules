@@ -10,12 +10,8 @@ class ScavTrap : public ClapTrap {
 		ScavTrap(const ScavTrap& source);
 		ScavTrap&	operator=(const ScavTrap& source);
 		~ScavTrap();
-/* 
-		std::string	getName();
-		int			getHealth();
-		int			getEnergy();
-		int			getAttackDamage(); */
 
+		void	attack(const std::string& target);
 		void	guardGate();
 
 	private:

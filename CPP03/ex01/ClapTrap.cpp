@@ -55,16 +55,7 @@ int	ClapTrap::getAttackDamage() {
 	return _attackDamage;
 }
 
-void	ClapTrap::setHealth(unsigned int amount, int mode) {
-	/* if (_hitPoints < amount && mode == 1)
-		_hitPoints = 0;
-	else {
-		if (amount > 100)
-			_hitPoints = 100;
-		else
-			_hitPoints = amount;
-	} */
-	mode = 0;
+void	ClapTrap::setHealth(unsigned int amount) {
 	_hitPoints = amount;
 }
 
@@ -95,7 +86,7 @@ void	ClapTrap::takeDamage(unsigned int amount) {
 	}
 	else {
 		std::cout << "ClapTrap " << this->getName() << " suffered " << amount << " points of damage!" << std::endl;
-		this->setHealth((this->getHealth() - amount), 1);
+		this->setHealth((this->getHealth() - amount));
 	}
 }
 
@@ -109,7 +100,7 @@ void	ClapTrap::beRepaired(unsigned int amount) {
 		return ;
 	}
 	else {
-		this->setHealth((this->getHealth() + amount), 2);
+		this->setHealth((this->getHealth() + amount));
 		this->setEnergy((this->getEnergy() - 1));
 		std::cout << "ClapTrap " << this->getName() << " regained " << amount << " hit/health points" << std::endl;
 	}

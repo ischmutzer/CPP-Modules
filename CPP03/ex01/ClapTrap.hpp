@@ -16,7 +16,7 @@ class ClapTrap {
 		int			getEnergy();
 		int			getAttackDamage();
 
-		void	setHealth(unsigned int amount, int mode);
+		void	setHealth(unsigned int amount);
 		void	setEnergy(unsigned int amount);
 
 		void	attack(const std::string& target);

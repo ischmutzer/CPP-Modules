@@ -29,18 +29,10 @@ ScavTrap::~ScavTrap() {
 	std::cout << "ScavTrap destructor called" << std::endl;
 }
 
-/* std::string	ScavTrap::getName() {
-	return ClapTrap::getName();
+void	ScavTrap::attack(const std::string& target) {
+	std::cout << "ScavTrap " << getName() << " attacks " << target << ", causing " << getAttackDamage() << " points of damage!" << std::endl;
 }
 
-int	ScavTrap::getHealth() {
-	return ClapTrap::getHealth();
-}
-
-int	ScavTrap::getEnergy() {
-	return ClapTrap::getEnergy();
-}
- */
 void	guardGate() {
 	std::cout << "ScavTrap is now in Gate keeper mode" << std::endl;
 }
