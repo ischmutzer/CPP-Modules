@@ -5,6 +5,11 @@
 
 class   DiamondTrap {
     public:
+        DiamondTrap();
+        DiamondTrap(const DiamondTrap& source);
+        DiamondTrap&    operator=(const DiamondTrap& source);
+        ~DiamondTrap();
+        
     private:
         std::string _name;
 };
