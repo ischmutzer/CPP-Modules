@@ -1,10 +1,10 @@
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include <iostream>
 
 int	main() {
 	
-	ScavTrap	a;
-	ScavTrap	b("willy");
+	FragTrap	a;
+	FragTrap	b("frilly");
 
 	std::cout << std::endl;
 	std::cout << "INITIAL POINT AND NAME CHECK" << std::endl;
@@ -50,4 +50,9 @@ int	main() {
 	std::cout << b.getName() << " has " << b.getHealth() << " hit points" << std::endl;
 	std::cout << b.getName() << " has " << b.getEnergy() << " energy points" << std::endl;
 	std::cout << b.getName() << " has " << b.getAttackDamage() << " attack damage" << std::endl << std::endl;
+
+	std::cout << "HIGH FIVE CHECK" << std::endl;
+	a.highFivesGuys();
+	b.highFivesGuys();
+	std::cout << std::endl;
 }
