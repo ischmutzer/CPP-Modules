@@ -4,7 +4,7 @@
 int	main() {
 	
 	ScavTrap	a;
-	ScavTrap	b("willy");
+	ClapTrap	b("willy");
 
 	std::cout << std::endl;
 	std::cout << "INITIAL POINT AND NAME CHECK" << std::endl;
