@@ -10,13 +10,16 @@ Animal::Animal(std::string type) : _type(type) {
 	std::cout << "Animal parameterized constructor called" << std::endl;
 }
 
-/* Animal::Animal(const Animal& source) {
+Animal::Animal(const Animal& source) : _type(source._type) {
 	std::cout << "Animal copy constructor called" << std::endl;
 }
 
 Animal&	Animal::operator=(const Animal& source) {
 	std::cout << "Animal copy assignment operator called" << std::endl;
-} */
+	if (this != &source)
+		_type = source._type;
+	return *this;
+}
 
 Animal::~Animal() {
 	std::cout << "Animal destructor called" << std::endl;

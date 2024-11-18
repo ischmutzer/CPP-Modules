@@ -1,6 +1,8 @@
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 #include <iostream>
 
 int main() {
@@ -18,10 +20,21 @@ int main() {
 	meta->makeSound();
 	std::cout << std::endl;
 
-	//... more tests needed
-
 	delete meta;
 	delete j;
 	delete i;
+
+	WrongAnimal		a;
+	WrongAnimal*	c = new WrongAnimal();
+	WrongCat		b;
+	WrongAnimal*	d = new WrongCat();
+
+	std::cout << std::endl;
+	a.makeSound();
+	b.makeSound();
+	c->makeSound();
+	d->makeSound(); //calling makeSound() on a WrongCat obj through a WrongAnimal ptr will call the WrongAnimal version of makeSound().
+	std::cout << std::endl;
+
 	return 0;
 }
