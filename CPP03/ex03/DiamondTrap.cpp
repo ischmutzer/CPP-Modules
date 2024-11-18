@@ -11,14 +11,14 @@ DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name, 100, 50, 30), FragTr
     _name = "_" + name;
 }
 
-// DiamondTrap::DiamondTrap(const DiamondTrap& source) {
-//     std::cout << "DiamondTrap copy constructor called" << std::endl;
-// }
+ DiamondTrap::DiamondTrap(const DiamondTrap& source) {
+     std::cout << "DiamondTrap copy constructor called" << std::endl;
+ }
 
-// DiamondTrap&    DiamondTrap::operator=(const DiamondTrap& source) {
-//     std::cout << "DiamondTrap copy assignment operator called" << std::endl;
-//     return *this;
-// }
+ DiamondTrap&    DiamondTrap::operator=(const DiamondTrap& source) {
+     std::cout << "DiamondTrap copy assignment operator called" << std::endl;
+     return *this;
+ }
 
 DiamondTrap::~DiamondTrap() {
     std::cout << "DiamondTrap destructor called" << std::endl;
