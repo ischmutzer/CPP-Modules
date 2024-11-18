@@ -30,7 +30,17 @@ ScavTrap::~ScavTrap() {
 }
 
 void	ScavTrap::attack(const std::string& target) {
-	std::cout << "ScavTrap " << getName() << " attacks " << target << ", causing " << getAttackDamage() << " points of damage!" << std::endl;
+	if (this->getHealth() == 0 || this->getEnergy() == 0) {
+		if (this->getHealth() == 0)
+			std::cout << "ScavTrap " << this->getName() << " has no hit/health points left" << std::endl;
+		else
+			std::cout << "ScavTrap " << this->getName() << " has no energy points left" << std::endl;
+		return ;
+	}
+	else {
+		this->setEnergy((this->getEnergy() - 1));
+		std::cout << "ScavTrap " << this->getName() << " attacks " << target << ", causing " << this->getAttackDamage() << " points of damage!" << std::endl;
+	}
 }
 
 void	guardGate() {
