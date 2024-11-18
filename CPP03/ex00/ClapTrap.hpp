@@ -23,10 +23,10 @@ class ClapTrap {
 		void	beRepaired(unsigned int amount);
 
 	private:
-		std::string	_name;
-		unsigned int			_hitPoints;
-		unsigned int			_energyPoints;
-		unsigned int			_attackDamage;
+		std::string 	_name;
+		unsigned int	_hitPoints;
+		unsigned int	_energyPoints;
+		unsigned int	_attackDamage;
 };
 
 #endif

@@ -13,10 +13,23 @@ DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name, 100, 50, 30), FragTr
 
  DiamondTrap::DiamondTrap(const DiamondTrap& source) {
      std::cout << "DiamondTrap copy constructor called" << std::endl;
+     /* if (this != &source) {
+        this->_name = source._name;
+        this->_hitPoints = source._hitPoints;
+        this->_energyPoints = source._energyPoints;
+        this->_attackDamage = source._attackDamage;
+     } */
+     *this = source;
  }
 
  DiamondTrap&    DiamondTrap::operator=(const DiamondTrap& source) {
      std::cout << "DiamondTrap copy assignment operator called" << std::endl;
+     if (this != &source) {
+        this->_name = source._name;
+        this->_hitPoints = source._hitPoints;
+        this->_energyPoints = source._energyPoints;
+        this->_attackDamage = source._attackDamage;
+     }
      return *this;
  }
 
