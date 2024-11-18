@@ -34,7 +34,7 @@ ClapTrap&	ClapTrap::operator=(const ClapTrap& source) {
 }
 
 ClapTrap::~ClapTrap() {
-	std::cout << " ClapTrap destructor called" << std::endl;
+	std::cout << "ClapTrap destructor called" << std::endl;
 }
 
 std::string	ClapTrap::getName() {
