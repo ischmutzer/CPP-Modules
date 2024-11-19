@@ -15,10 +15,6 @@ Fixed::Fixed(const Fixed& source) {
 	_fixedPoint = source._fixedPoint;
 }
 
-Fixed::~Fixed() {
-	std::cout << "Destructor called" << std::endl;
-}
-
 Fixed& Fixed::operator=(const Fixed& source) {
 	std::cout << "Copy assignment operator called" << std::endl;
 
@@ -28,6 +24,10 @@ Fixed& Fixed::operator=(const Fixed& source) {
 		this->_fixedPoint = source._fixedPoint;
 	}
 	return *this;
+}
+
+Fixed::~Fixed() {
+	std::cout << "Destructor called" << std::endl;
 }
 
 int	Fixed::getRawBits(void) const {
