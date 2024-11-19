@@ -1,13 +1,24 @@
-NAME = 
+NAME = ex02
 
 CXX = c++
 
 FLAGS = -Wall -Werror -Wextra -Wshadow -Wno-shadow -std=c++98
 
 SRC = main.cpp\
+Animal.cpp\
+Brain.cpp\
+Cat.cpp\
+Dog.cpp\
+WrongAnimal.cpp\
+WrongCat.cpp
 
 
-HEADERS = .hpp
+HEADERS = Animal.hpp\
+Brain.hpp\
+Cat.hpp\
+Dog.hpp\
+WrongAnimal.hpp\
+WrongCat.hpp
 
 OBJ := $(SRC:%.cpp=%.o)
 
