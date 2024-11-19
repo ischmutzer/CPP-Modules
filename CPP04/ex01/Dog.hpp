@@ -2,11 +2,11 @@
 #define DOG_HPP
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Dog : public Animal {
 	public:
 		Dog();
-		//Dog(std::string type);
 		Dog(const Dog& source);
 		Dog&	operator=(const Dog& source);
 		~Dog();
@@ -14,6 +14,8 @@ class Dog : public Animal {
 		void	makeSound() const;
 
 	private:
+		Brain*	_dogBrain;
+		
 	protected:
 };
 

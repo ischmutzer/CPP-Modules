@@ -9,7 +9,7 @@ class Animal {
 		Animal(std::string type);
 		Animal(const Animal& source);
 		Animal&	operator=(const Animal& source);
-		virtual ~Animal();
+		virtual ~Animal(); //what happens if virtual keyword is gone
 
 		std::string		getType() const;
 		virtual void	makeSound() const;
