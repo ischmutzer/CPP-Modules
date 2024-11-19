@@ -21,7 +21,15 @@ int main() {
 	std::cout << copyCat.getCatBrain()->getIdea(1) << std::endl;
 	std::cout << std::endl;
 
-	//test deep copy
+	Dog	dog;
+	Dog	copyDog = dog;
+	
+	dog.getDogBrain()->setIdea("woof woof x", 10);
+	std::cout << std::endl;
+	dog.getDogBrain()->setIdea("woof woof woof", -1);
+	std::cout << dog.getDogBrain()->getIdea(10) << std::endl;
+	std::cout << copyDog.getDogBrain()->getIdea(10) << std::endl;
+	std::cout << std::endl;
 
 	Animal*	animalArray[6];
 	for (int i = 0; i < 6; i++) {

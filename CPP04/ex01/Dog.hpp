@@ -12,10 +12,11 @@ class Dog : public Animal {
 		~Dog();
 
 		void	makeSound() const;
+		Brain*	getDogBrain();
 
 	private:
 		Brain*	_dogBrain;
-		
+
 	protected:
 };
 
