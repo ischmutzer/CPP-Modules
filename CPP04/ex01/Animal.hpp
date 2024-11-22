@@ -9,7 +9,7 @@ class Animal {
 		Animal(std::string type);
 		Animal(const Animal& source);
 		Animal&	operator=(const Animal& source);
-		virtual ~Animal(); //what happens if virtual keyword is gone
+		virtual ~Animal(); //if destructor isn't virtual, the destructors from the derived classes won't be called when stored in an Animal ptr
 
 		std::string		getType() const;
 		virtual void	makeSound() const;
