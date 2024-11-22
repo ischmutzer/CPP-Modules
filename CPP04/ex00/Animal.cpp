@@ -44,3 +44,16 @@ void	Animal::makeSound() const {
 //derived classes. It enables the program to dynamically determine the appropriate
 //ft to call based on the type of object being pointed to, rather than the type of
 //the pointer or reference.
+
+//Dynamic Binding -> when a member ft is declared as virtual in the base class, C++
+//uses dynamic binding to determine which ft to call at runtime. This means that the ft
+//is resolved based on the actual type of the obj, not the type of ptr or ref.
+
+//Virtual keyword in destructor declaration
+//-> adding the virtual keyword to the destructor in a base class is necessary to ensure
+//the correct destructor is called for derived class objs when they are deleted through a
+//ptr to the base class.
+
+//Polymorphic deletion -> when deleting an obj through a ptr to a base class, the base class
+//destructor is called. If the destructor is not virtual, the derived class destructor will
+//not be called.

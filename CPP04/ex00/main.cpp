@@ -42,3 +42,5 @@ int main() {
 
 	return 0;
 }
+
+//WrongCat class should only output "wrong cat sound" when instantiated as a WrongCat class.
