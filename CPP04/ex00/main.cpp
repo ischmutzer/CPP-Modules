@@ -6,6 +6,7 @@
 #include <iostream>
 
 int main() {
+	Animal	animalClass;
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
@@ -25,8 +26,8 @@ int main() {
 	delete i;
 
 	WrongAnimal		a;
-	WrongAnimal*	c = new WrongAnimal();
 	WrongCat		b;
+	WrongAnimal*	c = new WrongAnimal();
 	WrongAnimal*	d = new WrongCat();
 
 	std::cout << std::endl;
@@ -35,6 +36,9 @@ int main() {
 	c->makeSound();
 	d->makeSound(); //calling makeSound() on a WrongCat obj through a WrongAnimal ptr will call the WrongAnimal version of makeSound().
 	std::cout << std::endl;
+
+	delete c;
+	delete d;
 
 	return 0;
 }
