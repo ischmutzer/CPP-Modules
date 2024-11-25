@@ -24,10 +24,11 @@ int	main() {
 	try {
 		cog4.decrementGrade();
 	} catch (const char* e) {
-		std::cout << e << std::endl; 
+		std::cout << e << std::endl;
 	}
 
 	std::cout << std::endl;
+
 
 	return 0;
 }

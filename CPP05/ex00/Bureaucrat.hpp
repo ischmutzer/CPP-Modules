@@ -3,6 +3,7 @@
 
 #include <ostream>
 #include <string>
+#include <exception>
 
 class Bureaucrat {
 	public:
@@ -16,9 +17,19 @@ class Bureaucrat {
 		int			getGrade() const;
 		void		incrementGrade(); //should it be only incremented by a fixed amount always or should I accept a value to increment?
 		void		decrementGrade();
+
+		//const char*	GradeTooHigh(); //should this be a class of its own and inherit from the exception class?
+		//const char*	GradeTooLow(); //should this be a class of its own and inherit from the exception class?
 		
-		const char*	GradeTooHigh(); //should this be a class of its own and inherit from the exception class?
-		const char*	GradeTooLow(); //should this be a class of its own and inherit from the exception class?
+		class GradeTooHigh : public std::exception {
+			public:
+				const char* what() const throw();
+		};
+
+		class GradeTooLow : public std::exception {
+			public:
+				const char* what() const throw();
+		};
 
 	protected:
 	private:

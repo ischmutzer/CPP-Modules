@@ -59,10 +59,10 @@ std::ostream&	operator<<(std::ostream& outStream, const Bureaucrat& Bureaucrat) 
 	return outStream;
 }
 
-const char*	Bureaucrat::GradeTooHigh() {
+const char*	Bureaucrat::GradeTooHigh::what() const throw() {
 	return "Bureaucrat grade is too high!";
 }
 
-const char*	Bureaucrat::GradeTooLow() {
+const char*	Bureaucrat::GradeTooLow::what() const throw() {
 	return "Bureaucrat garde is too low!";
 }
