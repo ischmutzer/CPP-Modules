@@ -11,12 +11,12 @@ Bureaucrat::Bureaucrat(): _name("Default Bureaucrat"), _grade(1) {
 Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade) {
 	std::cout << "Parameterized constructor called" << std::endl;
 	if (_grade < 1)
-		throw "Bureaucrat::GradeTooHigh"; // 1 is the highest grade, therefore 0 is too high
+		throw GradeTooHigh(); // 1 is the highest grade, therefore 0 is too high
 	else if (_grade > 150)
-		throw "Bureaucrat::GradeTooLow"; 
+		throw GradeTooLow(); 
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& source) {
+Bureaucrat::Bureaucrat(const Bureaucrat& source): _name("Default Copy Bureaucrat") {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = source;
 }
@@ -42,6 +42,14 @@ int	Bureaucrat::getGrade() const {
 	return _grade;
 }
 
+// void	Bureaucrat::setGrade(int value) {
+// 	_grade = value;
+// 	if (value < 1)
+// 		throw GradeTooHigh();
+// 	else if (value > 150)
+// 		throw GradeTooLow();
+// }
+
 void	Bureaucrat::incrementGrade() {
 	_grade--;
 	if (_grade < 1)
@@ -54,6 +62,18 @@ void	Bureaucrat::decrementGrade() {
 		throw GradeTooLow();
 }
 
+/* void	Bureaucrat::incrementGradeByValue(int value) {
+	_grade -= value;
+	if (_grade < 1)
+		throw GradeTooHigh();
+}
+
+void	Bureaucrat::decrementGradeByValue(int value) {
+	_grade += value;
+	if (_grade > 150)
+		throw GradeTooLow();
+} */
+
 std::ostream&	operator<<(std::ostream& outStream, const Bureaucrat& Bureaucrat) {
 	outStream << Bureaucrat.getName() << ", bureaucrat grade " << Bureaucrat.getGrade();
 	return outStream;
@@ -64,5 +84,5 @@ const char*	Bureaucrat::GradeTooHigh::what() const throw() {
 }
 
 const char*	Bureaucrat::GradeTooLow::what() const throw() {
-	return "Bureaucrat garde is too low!";
+	return "Bureaucrat grade is too low!";
 }

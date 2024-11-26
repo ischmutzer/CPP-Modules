@@ -15,20 +15,20 @@ class Bureaucrat {
 
 		std::string	getName() const;
 		int			getGrade() const;
-		void		incrementGrade(); //should it be only incremented by a fixed amount always or should I accept a value to increment?
+		//void		setGrade(int value);
+		void		incrementGrade();
 		void		decrementGrade();
-
-		//const char*	GradeTooHigh(); //should this be a class of its own and inherit from the exception class?
-		//const char*	GradeTooLow(); //should this be a class of its own and inherit from the exception class?
+		// void		incrementGradeByValue(int value);
+		// void		decrementGradeByValue(int value);
 		
 		class GradeTooHigh : public std::exception {
 			public:
-				const char* what() const throw();
+				virtual const char* what() const throw();
 		};
 
 		class GradeTooLow : public std::exception {
 			public:
-				const char* what() const throw();
+				virtual const char* what() const throw();
 		};
 
 	protected:
