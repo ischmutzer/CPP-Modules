@@ -13,7 +13,8 @@ class	ShrubberyCreationForm : public AForm {
 		ShrubberyCreationForm&	operator=(const ShrubberyCreationForm& source);
 		~ShrubberyCreationForm();
 
-		void	execute(const Bureaucrat& executor) const;
+		void		execute(const Bureaucrat& executor) const;
+		std::string	generateTree() const;
 
 	protected:
 	private:

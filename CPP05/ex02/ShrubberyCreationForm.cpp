@@ -18,6 +18,17 @@ ShrubberyCreationForm&	ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
+std::string	ShrubberyCreationForm::generateTree() const {
+	return 
+	 	"        ^        \n"
+        "       ^^^       \n"
+        "      ^^^^^      \n"
+        "     ^^^^^^^     \n"
+        "    ^^^^^^^^^    \n"
+        "       |||       \n"
+        "       |||       \n";
+}
+
 void	ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 	if (!getSigned())
 		throw UnsignedFormException();
@@ -29,5 +40,6 @@ void	ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 	if (!file) {
 		return ;
 	}
+	file << generateTree();
 	file.close();
 }
