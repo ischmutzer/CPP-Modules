@@ -2,6 +2,7 @@
 #include <iostream>
 #include <ostream>
 #include <string>
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat(): _name("Default Bureaucrat"), _grade(1) {
 	std::cout << "Bureaucrat Default constructor called" << std::endl;
@@ -71,4 +72,12 @@ const char*	Bureaucrat::GradeTooHigh::what() const throw() {
 
 const char*	Bureaucrat::GradeTooLow::what() const throw() {
 	return "Bureaucrat grade is too low!";
+}
+
+void	Bureaucrat::executeForm(const AForm& form) {
+	if (!form.getSigned())
+		throw AForm::UnsignedFormException();
+	if (getGrade() > form.getGradeToExecute())
+		throw AForm::GradeTooLowException();
+	std::cout << _name << " executed " << form.getName() << std::endl;
 }

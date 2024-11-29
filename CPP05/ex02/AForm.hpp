@@ -14,12 +14,12 @@ class	AForm {
 		AForm&	operator=(const AForm& source);
 		~AForm();
 		
-		virtual void execute(const Bureaucrat& executor) const = 0; //to make AForm abstract
-		std::string	getName() const;
-		bool		getSigned() const;
-		int			getGradeToSign() const;
-		int			getGradeToExecute() const;
-		void		beSigned(Bureaucrat& cog);
+		virtual void	execute(const Bureaucrat& executor) const = 0; //to make AForm abstract
+		std::string		getName() const;
+		bool			getSigned() const;
+		int				getGradeToSign() const;
+		int				getGradeToExecute() const;
+		void			beSigned(Bureaucrat& cog);
 
 		class GradeTooHighException : public std::exception {
 			public:

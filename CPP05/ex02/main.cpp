@@ -18,7 +18,7 @@ int main() {
 	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 	} */
-	try {
+	/* try {
 		Bureaucrat	ceo;
 		RobotomyRequestForm	b("steve");
 
@@ -26,7 +26,7 @@ int main() {
 		b.execute(ceo);
 	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-	}
+	} */
 /* 	try {
 		Bureaucrat fakeCeo("David", 130);
 		PresidentialPardonForm	c("Evil janitor");
@@ -36,5 +36,19 @@ int main() {
 	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 	} */
-	return 0;
+	try {
+		Bureaucrat	janet("Janet", 50);
+		ShrubberyCreationForm	home("home");
+
+		home.beSigned(janet);
+		janet.executeForm(home);
+	} catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+/*	Bureaucrat	janet("Janet", 50);
+	ShrubberyCreationForm	home("home");
+
+	home.beSigned(janet);
+	janet.executeForm(home);
+	return 0;*/
 }

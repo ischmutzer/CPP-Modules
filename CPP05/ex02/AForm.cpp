@@ -70,3 +70,4 @@ std::ostream&	operator<<(std::ostream& outStream, AForm& source) {
 	outStream << source.getName() << " requires the Bureaucrat to have:\nGrade " << source.getGradeToSign() << " to sign\nGrade " << source.getGradeToExecute() << " to execute" << std::endl;
 	return outStream;
 }
+
