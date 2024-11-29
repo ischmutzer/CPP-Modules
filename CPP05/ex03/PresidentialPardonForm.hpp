@@ -14,6 +14,7 @@ class	PresidentialPardonForm : public AForm {
 		~PresidentialPardonForm();
 
 		void	execute(const Bureaucrat& executor) const;
+		AForm*	createPresidentialForm(std::string target);
 		
 	protected:
 	private:

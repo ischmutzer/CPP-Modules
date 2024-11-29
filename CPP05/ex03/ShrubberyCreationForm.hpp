@@ -15,6 +15,7 @@ class	ShrubberyCreationForm : public AForm {
 
 		void		execute(const Bureaucrat& executor) const;
 		std::string	generateTree() const;
+		AForm*		createShrubberyForm(std::string target);
 
 	protected:
 	private:

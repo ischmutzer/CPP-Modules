@@ -31,3 +31,7 @@ void	RobotomyRequestForm::execute(const Bureaucrat& executor) const {
 	 	std::cout << "Robotomy failed" << std::endl;
 	}
 }
+
+AForm*	RobotomyRequestForm::createRobotomyForm(std::string target) {
+	return new RobotomyRequestForm(target);
+}

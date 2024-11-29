@@ -34,7 +34,6 @@ void	ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 		throw UnsignedFormException();
 	if (executor.getGrade() > getGradeToExecute())
 		throw GradeTooLowException();
-	//create target_shrubbery
 	std::string	fileName = _target + "_shrubbery";
 	std::ofstream	file(fileName.c_str());
 	if (!file) {
@@ -42,4 +41,8 @@ void	ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 	}
 	file << generateTree();
 	file.close();
+}
+
+AForm*	ShrubberyCreationForm::createShrubberyForm(std::string target) {
+	new ShrubberyCreationForm(target);
 }

@@ -14,6 +14,7 @@ class	RobotomyRequestForm : public AForm {
 		~RobotomyRequestForm();
 
 		void	execute(const Bureaucrat& executor) const;
+		AForm*	createRobotomyForm(std::string target);
 		
 	protected:
 	private:
