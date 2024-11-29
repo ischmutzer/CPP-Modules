@@ -12,7 +12,7 @@ class	AForm {
 		AForm(std::string name, int gradeToSign, int gradeToExec);
 		AForm(const AForm& source);
 		AForm&	operator=(const AForm& source);
-		~AForm();
+		virtual ~AForm();
 		
 		virtual void	execute(const Bureaucrat& executor) const = 0; //to make AForm abstract
 		std::string		getName() const;
