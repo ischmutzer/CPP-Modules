@@ -4,9 +4,12 @@
 #include "ShrubberyCreationForm.hpp"
 #include <exception>
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 
 int main() {
-	try {
+	std::srand(std::time(0)); //seeding random number generator
+/* 	try {
 		ShrubberyCreationForm	a("gaia");
 		Bureaucrat				ceo;
 
@@ -14,8 +17,8 @@ int main() {
 		a.execute(ceo);
 	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-	}
-/* 	try {
+	} */
+	try {
 		Bureaucrat	ceo;
 		RobotomyRequestForm	b("steve");
 
@@ -23,7 +26,7 @@ int main() {
 		b.execute(ceo);
 	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-	} */
+	}
 /* 	try {
 		Bureaucrat fakeCeo("David", 130);
 		PresidentialPardonForm	c("Evil janitor");
