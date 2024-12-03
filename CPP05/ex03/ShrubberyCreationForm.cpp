@@ -3,15 +3,15 @@
 #include <fstream>
 #include <string>
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Shrubbery Creation Form", 145, 137) {}
+ShrubberyCreationForm::ShrubberyCreationForm() : Form("Shrubbery Creation Form", 145, 137) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("Shrubbery Creation Form", 145, 137), _target(target) {}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("Shrubbery Creation Form", 145, 137), _target(target) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& source) : AForm(source) {}
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& source) : Form(source) {}
 
 ShrubberyCreationForm&	ShrubberyCreationForm::operator=(const ShrubberyCreationForm& source) {
 	if (this != &source) {
-		AForm::operator=(source);
+		Form::operator=(source);
 	}
 	return *this;
 }
@@ -41,8 +41,4 @@ void	ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 	}
 	file << generateTree();
 	file.close();
-}
-
-AForm*	ShrubberyCreationForm::createShrubberyForm(std::string target) {
-	new ShrubberyCreationForm(target);
 }

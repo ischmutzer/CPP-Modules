@@ -1,16 +1,16 @@
 #include "PresidentialPardonForm.hpp"
-#include "AForm.hpp"
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm("Presidential Pardon Form", 25, 5), _target("Default Target") {}
+PresidentialPardonForm::PresidentialPardonForm() : Form("Presidential Pardon Form", 25, 5), _target("Default Target") {}
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("Presidential Pardon Form", 25, 5), _target(target) {}
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : Form("Presidential Pardon Form", 25, 5), _target(target) {}
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& source) : AForm(source) {}
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& source) : Form(source) {}
 
 PresidentialPardonForm&	PresidentialPardonForm::operator=(const PresidentialPardonForm& source) {
 	if (this != &source) {
-		AForm::operator=(source);
+		Form::operator=(source);
 	}
 	return *this;
 }
@@ -23,8 +23,4 @@ void	PresidentialPardonForm::execute(const Bureaucrat& executor) const {
 	if (executor.getGrade() > getGradeToExecute())
 		throw	GradeTooLowException();
 	std::cout << _target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
-}
-
-AForm*	PresidentialPardonForm::createPresidentialForm(std::string target) {
-	return new PresidentialPardonForm(target);
 }

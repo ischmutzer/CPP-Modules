@@ -1,11 +1,11 @@
 #ifndef SHRUBBERYCREATIONFORM_HPP
 #define SHRUBBERYCREATIONFORM_HPP
 
-#include "AForm.hpp"
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 #include <string>
 
-class	ShrubberyCreationForm : public AForm {
+class	ShrubberyCreationForm : public Form {
 	public:
 		ShrubberyCreationForm();
 		ShrubberyCreationForm(std::string target);
@@ -15,7 +15,6 @@ class	ShrubberyCreationForm : public AForm {
 
 		void		execute(const Bureaucrat& executor) const;
 		std::string	generateTree() const;
-		AForm*		createShrubberyForm(std::string target);
 
 	protected:
 	private:

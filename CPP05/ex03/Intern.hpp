@@ -1,10 +1,7 @@
 #pragma once
 
 #include <string>
-#include "AForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
-#include "ShrubberyCreationForm.hpp"
+#include "Form.hpp"
 
 class	Intern {
 	public:
@@ -13,7 +10,10 @@ class	Intern {
 		Intern&	operator=(const Intern& source);
 		~Intern();
 
-		AForm*	makeForm(std::string& formName, std::string& formTarget);
+		Form*	makeForm(std::string formName, std::string formTarget);
+		static Form*	createPresidentialForm(std::string& target);
+		static Form*	createRobotomyForm(std::string& target);
+		static Form*	createShrubberyForm(std::string& target);
 
 	protected:
 	private:

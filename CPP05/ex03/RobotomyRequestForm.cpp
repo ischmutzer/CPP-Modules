@@ -1,17 +1,17 @@
 #include "RobotomyRequestForm.hpp"
-#include "AForm.hpp"
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 #include <cstdlib>
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy Request Form", 72, 45), _target("Default Target") {}
+RobotomyRequestForm::RobotomyRequestForm() : Form("Robotomy Request Form", 72, 45), _target("Default Target") {}
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy Request Form", 72, 45), _target(target) {}
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form("Robotomy Request Form", 72, 45), _target(target) {}
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& source) : AForm(source) {}
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& source) : Form(source) {}
 
 RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm& source) {
 	if (this != &source) {
-		AForm::operator=(source);
+		Form::operator=(source);
 	}
 	return *this;
 }
@@ -30,8 +30,4 @@ void	RobotomyRequestForm::execute(const Bureaucrat& executor) const {
 	else {
 	 	std::cout << "Robotomy failed" << std::endl;
 	}
-}
-
-AForm*	RobotomyRequestForm::createRobotomyForm(std::string target) {
-	return new RobotomyRequestForm(target);
 }

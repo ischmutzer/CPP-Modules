@@ -6,7 +6,7 @@ FLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRC = main.cpp\
 Bureaucrat.cpp\
-AForm.cpp\
+Form.cpp\
 ShrubberyCreationForm.cpp\
 RobotomyRequestForm.cpp\
 PresidentialPardonForm.cpp\
@@ -14,7 +14,7 @@ Intern.cpp
 
 
 HEADERS = Bureaucrat.hpp\
-AForm.hpp\
+Form.hpp\
 ShrubberyCreationForm.hpp\
 RobotomyRequestForm.hpp\
 PresidentialPardonForm.hpp\

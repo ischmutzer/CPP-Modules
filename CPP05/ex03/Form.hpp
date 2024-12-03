@@ -1,20 +1,20 @@
 #pragma once
-#ifndef AFORM_HPP
-#define AFORM_HPP
+#ifndef FORM_HPP
+#define FORM_HPP
 
 #include "Bureaucrat.hpp"
 #include <iostream>
 #include <ostream>
 
-class	AForm {
+class	Form {
 	public:
-		AForm();
-		AForm(std::string name, int gradeToSign, int gradeToExec);
-		AForm(const AForm& source);
-		AForm&	operator=(const AForm& source);
-		virtual ~AForm();
+		Form();
+		Form(std::string name, int gradeToSign, int gradeToExec);
+		Form(const Form& source);
+		Form&	operator=(const Form& source);
+		virtual ~Form();
 		
-		virtual void	execute(const Bureaucrat& executor) const = 0; //to make AForm abstract
+		virtual void	execute(const Bureaucrat& executor) const = 0;
 		std::string		getName() const;
 		bool			getSigned() const;
 		int				getGradeToSign() const;
@@ -43,6 +43,6 @@ class	AForm {
 		const int			_gradeToSign;
 		const int			_gradeToExec;
 };
-std::ostream&	operator<<(std::ostream& outStream, AForm& source);
+std::ostream&	operator<<(std::ostream& outStream, Form& source);
 
 #endif

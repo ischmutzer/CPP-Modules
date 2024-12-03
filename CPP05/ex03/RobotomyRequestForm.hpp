@@ -1,11 +1,11 @@
 #ifndef ROBOTOMYREQUESTFORM_HPP
 #define ROBOTOMYREQUESTFORM_HPP
 
-#include "AForm.hpp"
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 #include <string>
 
-class	RobotomyRequestForm : public AForm {
+class	RobotomyRequestForm : public Form {
 	public:
 		RobotomyRequestForm();
 		RobotomyRequestForm(std::string target);
@@ -14,7 +14,6 @@ class	RobotomyRequestForm : public AForm {
 		~RobotomyRequestForm();
 
 		void	execute(const Bureaucrat& executor) const;
-		AForm*	createRobotomyForm(std::string target);
 		
 	protected:
 	private:
