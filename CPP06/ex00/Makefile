@@ -1,13 +1,14 @@
-NAME = ex00
+NAME = convert
 
 CXX = c++
 
 FLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = .cpp
+SRC = main.cpp\
+ScalarConverter.cpp
 
 
-HEADERS = .hpp
+HEADERS = ScalarConverter.hpp
 
 OBJ := $(SRC:%.cpp=%.o)
 

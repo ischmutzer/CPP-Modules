@@ -1,0 +1,4 @@
+char -> string -> . 
+digit alone -> int -> 0, 1, 2
+digit with a dot -> double . -> 4. a float, . + digit
+digit with a dot and f at the end .f -> 4.f
