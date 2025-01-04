@@ -4,10 +4,12 @@ CXX = c++
 
 FLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = .cpp
+SRC = Base.cpp\
+main.cpp
 
 
-HEADERS = .hpp
+HEADERS = Base.hpp\
+ABC.hpp
 
 OBJ := $(SRC:%.cpp=%.o)
 
