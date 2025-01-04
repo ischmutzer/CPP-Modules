@@ -20,9 +20,17 @@ Base*	generate(void) {
 }
 
 void	identify(Base* p) {
-	//a
+	A*	derivedA = dynamic_cast<A*>(p);
+	if (derivedA)
+		std::cout << "Base* type A class" << std::endl;
+	B*	derivedB = dynamic_cast<B*>(p);
+	if (derivedB)
+		std::cout << "Base* type B class" << std::endl;
+	C*	derivedC = dynamic_cast<C*>(p);
+	if (derivedC)
+		std::cout << "Base* type C class" << std::endl;
 }
 
-void	identify(Base& p) {
-	//a
-}
+// void	identify(Base& p) {
+// 	//a
+// }
