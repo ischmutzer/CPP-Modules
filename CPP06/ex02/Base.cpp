@@ -31,6 +31,22 @@ void	identify(Base* p) {
 		std::cout << "Base* type C class" << std::endl;
 }
 
-// void	identify(Base& p) {
-// 	//a
-// }
+void	identify(Base& p) {
+	try {
+		(void)dynamic_cast<A&>(p);
+		std::cout << "Base ref is type A class" << std::endl;
+		return ;
+	} catch (std::exception& e) {}
+
+	try {
+		(void)dynamic_cast<B&>(p);
+		std::cout << "Base ref is type B class" << std::endl;
+		return ;
+	} catch (std::exception& e) {}
+
+	try {
+		(void)dynamic_cast<C&>(p);
+		std::cout << "Base ref is type C class" << std::endl;
+		return ;
+	} catch (std::exception& e) {}
+}

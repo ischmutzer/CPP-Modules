@@ -11,10 +11,13 @@ int	main() {
         std::cout << "Pointer identification: ";
         identify(ptr);
 
+		std::cout << "Reference identification: ";
+        identify(*ptr);
+
 		std::cout << "-------------------" << std::endl;
         
         delete ptr;
 	}
-	// Base* a = new C();
-	// identify(a);
+	// Base* a = new B();
+	// identify(*a);
 };
