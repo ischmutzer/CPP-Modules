@@ -31,6 +31,11 @@ void	identify(Base* p) {
 		std::cout << "Base* type C class" << std::endl;
 }
 
+//SYNTAX
+//-> dynamic_cast<target-type>(expression)
+//<target-type> is the type you want to cast the obj to  
+//(expression) is the obj, ptr or ref youz want to cast
+
 void	identify(Base& p) {
 	try {
 		(void)dynamic_cast<A&>(p);
@@ -50,3 +55,13 @@ void	identify(Base& p) {
 		return ;
 	} catch (std::exception& e) {}
 }
+
+
+//NOTES
+
+//<target_type> an (expression) must involve classes in the same
+//inheritance hierarchy.
+//RTTI Dependency -> meaning dynamic_cast uses runtime type info to determine if (expression) can be safely cast to <target_type> 
+//the base class must include at least one virtual ft
+//ptrs return NULL if failure
+//refs throw an exception
