@@ -28,3 +28,9 @@ Data*	Serializer::deserialize(uintptr_t raw) {
 	Data*	ptr = reinterpret_cast<Data*>(raw);
 	return ptr;
 }
+
+
+//NOTES
+
+//reinterpret wont fail but can cause undefined behaviour if used incorrectly
+//cant use static_cast or dynamic_cast ( for polymorphism) bc theyre both type safe 
