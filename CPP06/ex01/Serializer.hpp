@@ -1,9 +1,11 @@
-#pragma
+#pragma once
 
-#include <cstdint>
+#include <stdint.h>
+#include <string>
 
 struct Data {
-    /* data */
+    int         num;
+    std::string str;
 };
 
 class Serializer
@@ -12,15 +14,16 @@ class Serializer
         Serializer();
         Serializer(const Serializer &source);
         Serializer &operator=(const Serializer &source);
-        virtual ~Serializer();
+        virtual ~Serializer() = 0;
 
-        virtual void pureVirtualFt() = 0;
-        uintptr_t   serialize(Data* ptr);
-        Data*       deserialize(uintptr_t raw);
+        //virtual void pureVirtualFt() = 0;
+        static uintptr_t   serialize(Data* ptr);
+        static Data*       deserialize(uintptr_t raw);
     
     protected:
     private:
 };
+
 
 //NOTES
 
@@ -34,3 +37,18 @@ class Serializer
 //2)hash computation
 //3) memory manipulation -> ptrs need to be represented as ints
 
+
+//ABSTRACT NON-INSTANTIABLE CLASS WITH STATIC MEMBER FUNCTIONS
+
+//why?
+
+//1) static fts in a class can act like namespaced fts that belong to the class
+//but do not require an obj to call on them
+
+//2) making the class non-instantiable ensures the class is used strictly as
+//a utility or an interface
+
+//3) abstract classes can also store const or static data members that are
+//logically grouped together
+
+//4) "no object creation" policy

@@ -4,10 +4,11 @@ CXX = c++
 
 FLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRC = .cpp
+SRC = Serializer.cpp\
+main.cpp
 
 
-HEADERS = .hpp
+HEADERS = Serializer.hpp
 
 OBJ := $(SRC:%.cpp=%.o)
 
