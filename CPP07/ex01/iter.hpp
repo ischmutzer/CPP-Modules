@@ -8,18 +8,9 @@ void iter(T* arrayAddress, size_t arrayLength, func function) {
 	for (size_t i = 0; i < arrayLength; i++) {
 		function(arrayAddress[i]);
 	}
+	std::cout << "\n";
 }
 
-//test functions
-
-#include <typeinfo>
-
-template <typename T>
-void	print(T* arr, size_t size) {
-	for (size_t i = 0; i < size; i++) {
-		std::cout << typeid(arr[i]).name() << " " << arr[i] << std::endl;
-	}
-}
 
 
 //NOTES
