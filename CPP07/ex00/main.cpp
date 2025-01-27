@@ -1,4 +1,5 @@
 #include "whatever.hpp"
+#include <iostream>
 
 int	main() {
 	int a = 2, b = 8;

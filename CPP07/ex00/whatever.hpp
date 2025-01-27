@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 /* template <typename T>
 bool	checkDataType(T, T) {
 	return true;
