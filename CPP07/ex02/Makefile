@@ -6,7 +6,7 @@ CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRC = main.cpp
 
-HEADERS = .hpp
+HEADERS = Array.hpp
 
 OBJ := $(SRC:%.cpp=%.o)
 
