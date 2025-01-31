@@ -18,10 +18,10 @@ class	Array {
 		const T&	operator[](size_t size) const;
 		size_t		size(void) const;
 
+	protected:
 	private:
 		T*				_array;
 		unsigned int	_n;
-	protected:
 };
 
 

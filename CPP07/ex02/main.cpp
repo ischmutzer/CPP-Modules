@@ -14,6 +14,8 @@ int	main() {
 	intArray[3] = 4 * 2;
 	intArray[4] = 3;
 	intArray[0] = 1;
+	// intArray[-1] = 0;
+	// intArray[7] = 7; -> will throw exception
 	printArray(intArray, "int arr");
 
 	const Array<std::string>	test(2);

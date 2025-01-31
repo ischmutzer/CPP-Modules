@@ -1,5 +1,6 @@
 #include "Array.hpp"
 #include <exception>
+#include <stdexcept>
 
 template <typename T>
 Array<T>::Array() : _array(NULL), _n(0) {}
@@ -39,14 +40,14 @@ Array<T>::~Array() {
 template <typename T>
 T&	Array<T>::operator[](size_t size) {
 	if (size < 0 || size >= _n)
-		throw std::exception();
+		throw std::out_of_range("EROOR: Index out of range");
 	return _array[size];
 }
 
 template <typename T>
 const T&	Array<T>::operator[](size_t size) const {
 	if (size < 0 || size >= _n)
-		throw std::exception();
+		throw std::out_of_range("EROOR: Index out of range");
 	return	_array[size];
 }
 
@@ -54,4 +55,3 @@ template <typename T>
 size_t	Array<T>::size() const {
 	return _n;
 }
-
