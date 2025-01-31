@@ -38,26 +38,20 @@ Array<T>::~Array() {
 
 template <typename T>
 T&	Array<T>::operator[](size_t size) {
-	if (size < 0 || size > _n)
+	if (size < 0 || size >= _n)
 		throw std::exception();
 	return _array[size];
 }
 
 template <typename T>
 const T&	Array<T>::operator[](size_t size) const {
-	if (size < 0 || size > _n)
+	if (size < 0 || size >= _n)
 		throw std::exception();
 	return	_array[size];
 }
 
 template <typename T>
-size_t	Array<T>::size() {
+size_t	Array<T>::size() const {
 	return _n;
 }
 
-template <typename T>
-void	Array<T>::changeValueElement(T newValue, size_t index) {
-	if (index < 0 || index > _n)
-		throw std::exception();
-	_array[index] = newValue;
-}

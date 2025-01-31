@@ -2,6 +2,8 @@
 
 #include <cstddef>
 #include <exception>
+#include <string>
+#include <iostream>
 
 template <typename T>
 class	Array {
@@ -14,8 +16,7 @@ class	Array {
 
 		T&			operator[](size_t size);
 		const T&	operator[](size_t size) const;
-		size_t		size(void);
-		void		changeValueElement(T newValue, size_t index);
+		size_t		size(void) const;
 
 	private:
 		T*				_array;
@@ -23,8 +24,17 @@ class	Array {
 	protected:
 };
 
-#include "Array.tpp"
 
+template <typename T>
+void	printArray(Array<T>& arr, const std::string& id) {
+	std::cout << id << " (size = " << arr.size() << ")\n";
+	for (unsigned int i = 0; i < arr.size(); i++) {
+		std::cout << arr[i] << " ";
+	}
+	std::cout << "\n";
+}
+
+#include "Array.tpp"
 //NOTES
 
 //a class template is a blueprint for a class where the data type is determined at instantiation 
