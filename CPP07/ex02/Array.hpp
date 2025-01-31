@@ -1,9 +1,9 @@
 #pragma once
 
 #include <cstddef>
-#include <exception>
 #include <string>
 #include <iostream>
+#include <exception>
 
 template <typename T>
 class	Array {
@@ -35,12 +35,3 @@ void	printArray(Array<T>& arr, const std::string& id) {
 }
 
 #include "Array.tpp"
-//NOTES
-
-//a class template is a blueprint for a class where the data type is determined at instantiation 
-
-
-//Key notes
-//-> T is a placeholder for the data type
-//-> the actual data type needs to be specified at instantiating the template class
-//ex. Array<int>	obj;
