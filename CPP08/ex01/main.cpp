@@ -33,7 +33,9 @@ int main() {
 		Span	negSp(-1); //que pasa aqui ***
 		negSp.addNumber(2); //expected invalid format
 
-		//SHORTEST SPAN BASIC TEST CASE with overloaded addNumbers ft
+		//####SHORTEST SPAN TESTS####
+
+		//BASIC TEST CASE with overloaded addNumbers ft
 		Span				overload(5);
 		std::vector<int>	num;
 		num.push_back(5);
@@ -152,6 +154,17 @@ int main() {
 		//EMPTY CONTAINER
 		Span	empty;
 		//std::cout << "~~\nEmpty container:\n" << empty.shortestSpan();
+
+		//####LARGEST SPAN TESTS####
+		Span	basic(5);
+		basic.addNumber(5);
+		basic.addNumber(3);
+		basic.addNumber(9);
+		basic.addNumber(1);
+		basic.addNumber(4);
+
+		std::cout << "\n\n##LONGEST SPAN##\n~~\nLongest span found = " << basic.longestSpan() << std::endl;
+		//expected output = 8
 
 	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
