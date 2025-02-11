@@ -1,4 +1,6 @@
 #include "Span.hpp"
+#include <climits>
+#include <stdexcept>
 
 Span::Span() : _n(0) {}
 
@@ -39,20 +41,21 @@ int	Span::shortestSpan() const {
 	
 	std::vector<int>	sorted = _container;
 	std::sort(sorted.begin(), sorted.end());
-	int	minDiff = sorted[1] - sorted[0];
+	long long	minDiff = static_cast<long long>(sorted[1]) - static_cast<long long>(sorted[0]);
 	for (size_t i = 1; i < sorted.size(); i++) {
-		int	diff = sorted[i] - sorted[i - 1];
+		long long	diff = static_cast<long long>(sorted[i]) - static_cast<long long>(sorted[i - 1]);
 		if (diff < minDiff)
 			minDiff = diff;
 	}
-	return minDiff;
+	return static_cast<int>(minDiff);
 }
 
-int	Span::longestSpan() {
+long long	Span::longestSpan() {
 	if (_container.size() < 2)
 		throw std::logic_error("Error: Insufficient elements to calculate a span.");
-	int	min = *std::min_element(_container.begin(), _container.end());
-	int	max = *std::max_element(_container.begin(), _container.end());
+	long long	min = *std::min_element(_container.begin(), _container.end());
+	long long	max = *std::max_element(_container.begin(), _container.end());
+	
 	return (max - min);
 }
 

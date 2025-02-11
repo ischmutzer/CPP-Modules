@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <algorithm>
+#include <climits>
 
 class Span {
     public:
@@ -17,7 +18,7 @@ class Span {
         void    addNumber(unsigned int n);
         void    addNumber(const std::vector<int>& numbers);
         int     shortestSpan() const;
-        int     longestSpan();
+        long long     longestSpan();
     
     protected:
 

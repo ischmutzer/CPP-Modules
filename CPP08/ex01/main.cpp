@@ -153,7 +153,7 @@ int main() {
 		
 		//EMPTY CONTAINER
 		Span	empty;
-		//std::cout << "~~\nEmpty container:\n" << empty.shortestSpan();
+		//std::cout << "~~\nEmpty Container:\n" << empty.shortestSpan();
 
 		//####LARGEST SPAN TESTS####
 		Span	basic(5);
@@ -163,8 +163,79 @@ int main() {
 		basic.addNumber(1);
 		basic.addNumber(4);
 
-		std::cout << "\n\n##LONGEST SPAN##\n~~\nLongest span found = " << basic.longestSpan() << std::endl;
+		std::cout << "\n\n##LONGEST SPAN##\n~~\nBasic Test\nLongest span found = " << basic.longestSpan() << std::endl;
 		//expected output = 8
+
+		//EMPTY CONTAINER
+		Span	lEmpty;
+		//std::cout << "~~\nEmpty Container:\n" << lEmpty.longestSpan();
+
+		//SINGLE ELEMENT
+		Span	one(1);
+		one.addNumber(2);
+		//std::cout << "~~\nSingle Number:\n" << one.longestSpan();
+
+		//IDENTICAL ELEMENTS
+		Span	igual(4);
+		igual.addNumber(3);
+		igual.addNumber(3);
+		igual.addNumber(3);
+		igual.addNumber(3);
+
+		std::cout << "~~\nIdentical Elements\nLongest span found = " << igual.longestSpan() << std::endl;
+		//expected output = 0
+
+		//ALREADY SORTED ASCENDING ORDER
+		Span	aSort(5);
+		aSort.addNumber(1);
+		aSort.addNumber(2);
+		aSort.addNumber(3);
+		aSort.addNumber(4);
+		aSort.addNumber(5);
+
+		std::cout << "~~\nAscending Order Sorted \nLongest span found = " << aSort.longestSpan() << std::endl;
+		//expected output = 4
+
+		//ALLREADY SORTED DESCENDING ORDER
+		Span	dSort(5);
+		dSort.addNumber(10);
+		dSort.addNumber(8);
+		dSort.addNumber(6);
+		dSort.addNumber(4);
+		dSort.addNumber(2);
+
+		std::cout << "~~\nDescending Order Sorted\nLongest span found = " << dSort.longestSpan() << std::endl;
+		//expected output = 8
+
+		//LARGE POSITIVE AND NEGATIVE NUMBERS
+		Span	gran(4);
+		gran.addNumber(-1000);
+		gran.addNumber(500);
+		gran.addNumber(9999);
+		gran.addNumber(-5000);
+
+		std::cout << "~~\nLarge Positive and Negative Numbers\nLongest span found = " << gran.longestSpan() << std::endl;
+		//expected output = 14999
+
+		//ONLY NEGATIVE NUMBERS
+		Span	oNeg(4);
+		oNeg.addNumber(-10);
+		oNeg.addNumber(-50);
+		oNeg.addNumber(-3);
+		oNeg.addNumber(-100);
+
+		std::cout << "~~\nOnly Negative Numbers\nLongestpan found = " << oNeg.longestSpan() << std::endl;
+		//expected output = 97
+
+		//NUMBERS CLOSE TO INT_MAX AND INT_MIN
+		Span	maxMin(2);
+		maxMin.addNumber(2147483647);
+		maxMin.addNumber(-2147483648);
+
+		std::cout << "~~\nMax Int Value and Min Int Value\nLongest span found = " << maxMin.longestSpan() << std::endl;
+		//expected output 
+
+		//VECTOR WITH DUPLICATE VALUES AND OUTLIERS
 
 	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
