@@ -63,11 +63,13 @@ void	Bureaucrat::decrementGrade() {
 		throw GradeTooLow();
 }
 
-void	Bureaucrat::signForm(bool status, std::string formName) {
-	if (status)
-		std::cout << _name << " signed " << formName << std::endl;
-	else
-		std::cout << _name << " couldn't sign " << formName << " due to insufficient grade" << std::endl;
+void	Bureaucrat::signForm(Form& form) {
+	try {
+		form.beSigned(*this);
+		std::cout << getName() << " signed " << form.getName() << std::endl;
+	} catch (const Form::GradeTooLowException& e) {
+		std::cout << getName() << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+	}
 }
 
 /* void	Bureaucrat::incrementGradeByValue(int value) {

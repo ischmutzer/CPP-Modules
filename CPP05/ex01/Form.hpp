@@ -1,5 +1,4 @@
-#ifndef FORM_HPP
-#define FORM_HPP
+#pragma once
 
 #include <exception>
 #include <iostream>
@@ -17,7 +16,7 @@ class Form {
 		bool		getSigned();
 		int			getGradeToSign() const;
 		int			getGradeToExecute() const;
-		void		beSigned(Bureaucrat& cog);
+		void		beSigned(const Bureaucrat& cog);
 
 		class GradeTooHighException : public std::exception {
 			public:
@@ -37,5 +36,3 @@ class Form {
 		const int			_gradeToExec; //a const grade require to execute it
 };
 std::ostream&	operator<<(std::ostream& outStream, Form& source);
-
-#endif

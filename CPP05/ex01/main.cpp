@@ -14,12 +14,12 @@ int	main() {
 	} catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
-	cog.signForm(form.getSigned(), form.getName());
+	cog.signForm(form);
 	std::cout << std::endl;
 
 	cog.incrementGrade();
 	form.beSigned(cog);
-	cog.signForm(form.getSigned(), form.getName());
+	cog.signForm(form);
 	std::cout << std::endl;
 
 	try {

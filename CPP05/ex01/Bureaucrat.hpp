@@ -1,9 +1,10 @@
-#ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
+#pragma once
 
 #include <ostream>
 #include <string>
 #include <exception>
+
+class Form;
 
 class Bureaucrat {
 	public:
@@ -17,7 +18,7 @@ class Bureaucrat {
 		int			getGrade() const;
 		void		incrementGrade();
 		void		decrementGrade();
-		void		signForm(bool status, std::string formName);
+		void		signForm(Form& form);
 		//void		setGrade(int value);
 		// void		incrementGradeByValue(int value);
 		// void		decrementGradeByValue(int value);
@@ -38,5 +39,3 @@ class Bureaucrat {
 		int					_grade;
 };
 std::ostream&	operator<<(std::ostream& outStream, const Bureaucrat& Bureaucrat);
-
-#endif
