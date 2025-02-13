@@ -11,14 +11,14 @@ HEADER = RPN.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-RM: rm -rf
+RM = rm -rf
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADER)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-%.o = %.cpp $(HEADERS)
+%.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
