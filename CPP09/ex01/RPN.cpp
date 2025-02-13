@@ -1,4 +1,5 @@
 #include "RPN.hpp"
+#include <stdexcept>
 #include <string>
 #include <iostream>
 
@@ -39,8 +40,27 @@ void	RPN::tokenization(std::string& input) {
 			int digit = input[i] - '0';
 			numbers.push(digit);
 		}
-		else
-			operators.push(input[i]);
+		else {
+			if (numbers.size() < 2 || numbers.empty())
+				throw std::logic_error("Error: Insufficient operands in stack");
+			int	b = numbers.top(); numbers.pop();
+			int a = numbers.top(); numbers.pop();
+			int result	= 0;
+			switch (input[i]) {
+				case '+': result = a + b;
+				case '-': result = a - b;
+				case '*': result = a * b;
+				case '/':
+					if (b == 0) {
+						throw std::logic_error("Error: Division by zero");
+					}
+					result = a / b;
+					break;
+				default:
+				throw std::invalid_argument("Error: Unknown operator");
+			}
+			numbers.push(result);
+		}
 	}
 }
 

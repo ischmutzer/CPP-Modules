@@ -18,7 +18,6 @@ class RPN {
 	protected:
 	private:
 		std::stack<int>		numbers;
-		std::stack<char>	operators;
 		std::string			cleanInput;
 };
 
@@ -40,3 +39,11 @@ class RPN {
 //3) Final stack must have exactly one value:
 //If the stack has more or fewer values after processing all
 //tokens, the expression is invalid.
+
+
+
+// ** STACK DATA STRUCT **
+//Operations:
+//	->push: adds to the stack
+//	->pop: removes the top element from the stack
+//	->top: accesses the top element without removing it 
