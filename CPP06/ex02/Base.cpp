@@ -56,6 +56,13 @@ void	identify(Base& p) {
 	} catch (std::exception& e) {}
 }
 
+// The function uses a series of try-catch blocks to attempt the dynamic_cast for each
+//derived type (A, B, and C).
+// If the cast succeeds, the corresponding type is printed, and the function returns
+//immediately.
+// If the cast fails, the std::bad_cast exception is caught, and the function moves on
+//to the next try-catch block.
+
 
 //NOTES
 
