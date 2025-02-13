@@ -26,5 +26,5 @@ class	ScalarConverter {
 };
 
 
-//making constructor priavte acomplishes the same as virtual (type) ft() const = 0
+//making constructor private acomplishes the same as virtual (type) ft() const = 0
 //-> it makes the class abstract 
