@@ -9,7 +9,7 @@ int	main(int argc, char** argv) {
 	}
 	try {
 		RPN	calculator;
-		calculator.launch(argv[1]);
+		calculator.processInput(argv[1]);
 	} catch (std::exception& e) {
 		std::cerr << e.what() << std::endl;
 		return 1;

@@ -11,9 +11,13 @@ class RPN {
 		RPN&	operator=(const RPN& source);
 		~RPN();
 
-		void	launch(std::string	input);
-		void	checkForInvalidChar(std::string input);
+		void	processInput(std::string	input);
+		void	checkForInvalidChar(std::string& input);
 		void	tokenization(std::string& input);
+		void	tokenization2(std::string& expression);
+		void	validateToken(std::string& expression);
+		bool	isOperator(char c) const;
+		void	printResult();
 
 	protected:
 	private:

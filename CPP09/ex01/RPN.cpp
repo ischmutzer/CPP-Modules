@@ -2,19 +2,23 @@
 #include <stdexcept>
 #include <string>
 #include <iostream>
+#include <sstream>
 
 RPN::RPN() {}
 
 RPN::RPN(const RPN& source) { *this = source; }
 
 RPN&	RPN::operator=(const RPN& source) {
-	if (this != &source) {}
+	if (this != &source) {
+		numbers = source.numbers;
+		cleanInput = source.cleanInput;
+	}
 	return *this;
 }
 
 RPN::~RPN() {}
 
-void	RPN::checkForInvalidChar(std::string input) {
+void	RPN::checkForInvalidChar(std::string& input) {
 	for (size_t i = 0; i < input.size(); i++) {
 		if (input[i] == ' ')
 			continue ;
@@ -31,7 +35,6 @@ void	RPN::checkForInvalidChar(std::string input) {
 			cleanString += input[i];
 	}
 	cleanInput = cleanString;
-	std::cout << cleanString << std::endl;
 }
 
 void	RPN::tokenization(std::string& input) {
@@ -45,26 +48,77 @@ void	RPN::tokenization(std::string& input) {
 				throw std::logic_error("Error: Insufficient operands in stack");
 			int	b = numbers.top(); numbers.pop();
 			int a = numbers.top(); numbers.pop();
-			int result	= 0;
+			long long result	= 0;
 			switch (input[i]) {
-				case '+': result = a + b;
-				case '-': result = a - b;
-				case '*': result = a * b;
+				case '+': result = a + b; break;
+				case '-': result = a - b; break;
+				case '*': result = a * b; break;
 				case '/':
-					if (b == 0) {
-						throw std::logic_error("Error: Division by zero");
-					}
+					if (b == 0) throw std::logic_error("Error: Division by zero");
 					result = a / b;
 					break;
-				default:
-				throw std::invalid_argument("Error: Unknown operator");
+				default: throw std::invalid_argument("Error: Unknown operator");
 			}
 			numbers.push(result);
 		}
 	}
+	if (numbers.size() != 1)
+		throw	std::logic_error("Error: Stack has remaining operands");
 }
 
-void	RPN::launch(std::string input) {
-	checkForInvalidChar(input);
-	tokenization(cleanInput);
+
+bool	RPN::isOperator(char c) const {
+	return (c == '+' || c == '-' || c == '/' || c == '*');
+}
+
+void	RPN::validateToken(std::string& token) {
+	if (token.length() != 1 || (!isdigit(token[0]) && !isOperator(token[0]))) {
+		throw std::invalid_argument("Error: Invalid token");
+	}
+}
+
+void	RPN::tokenization2(std::string& expression) {
+	char c = expression[0];
+	if (isdigit(c)) {
+		numbers.push(c - '0');
+	}
+	else {
+		if (numbers.size() < 2)
+			throw std::logic_error("Error: Insufficient operands");
+		int b = numbers.top(); numbers.pop();
+		int a = numbers.top(); numbers.pop();
+		switch (c) {
+				case '+': numbers.push(a + b); break;
+				case '-': numbers.push(a - b); break;
+				case '*': numbers.push(a * b); break;
+				case '/':
+					if (b == 0) throw std::logic_error("Error: Division by zero");
+					numbers.push(a / b);
+					break;
+				default: throw std::invalid_argument("Error: Unknown operator");
+			}
+	}
+}
+
+void	RPN::printResult() {
+	if (numbers.empty())
+		throw std::runtime_error("Error: Stack is empty");
+	long long result = numbers.top();
+	std::cout << result << std::endl;
+}
+
+void	RPN::processInput(std::string input) {
+	//checkForInvalidChar(input);
+	//tokenization(cleanInput);
+
+	std::istringstream	str(input);
+	std::string			token;
+
+	while (str >> token) {
+		validateToken(input);
+		tokenization2(input);	
+	}
+	if (numbers.size() != 1)
+		throw std::runtime_error("Error: Invalid expression");
+	printResult();
 }
