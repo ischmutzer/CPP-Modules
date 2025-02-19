@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <climits>
 
 RPN::RPN() {}
 
@@ -46,20 +47,18 @@ void	RPN::tokenization(std::string& input) {
 		else {
 			if (numbers.size() < 2 || numbers.empty())
 				throw std::logic_error("Error: Insufficient operands in stack");
-			int	b = numbers.top(); numbers.pop();
-			int a = numbers.top(); numbers.pop();
-			long long result	= 0;
+			long long	b = numbers.top(); numbers.pop();
+			long long	a = numbers.top(); numbers.pop();
 			switch (input[i]) {
-				case '+': result = a + b; break;
-				case '-': result = a - b; break;
-				case '*': result = a * b; break;
+				case '+': numbers.push(a + b); break;
+				case '-': numbers.push(a - b); break;
+				case '*': numbers.push(a * b); break;
 				case '/':
 					if (b == 0) throw std::logic_error("Error: Division by zero");
-					result = a / b;
+					numbers.push(a / b);
 					break;
 				default: throw std::invalid_argument("Error: Unknown operator");
 			}
-			numbers.push(result);
 		}
 	}
 	if (numbers.size() != 1)
@@ -67,7 +66,7 @@ void	RPN::tokenization(std::string& input) {
 }
 
 
-bool	RPN::isOperator(char c) const {
+/* bool	RPN::isOperator(char c) const {
 	return (c == '+' || c == '-' || c == '/' || c == '*');
 }
 
@@ -98,20 +97,24 @@ void	RPN::tokenization2(std::string& expression) {
 				default: throw std::invalid_argument("Error: Unknown operator");
 			}
 	}
-}
+} */
 
 void	RPN::printResult() {
 	if (numbers.empty())
 		throw std::runtime_error("Error: Stack is empty");
 	long long result = numbers.top();
+	if (result > INT_MAX)
+		throw std::runtime_error("Error: Result is bigger than int max");
+	else if (result < INT_MIN)
+		throw std::runtime_error("Error: Result is smaller than int min");
 	std::cout << result << std::endl;
 }
 
 void	RPN::processInput(std::string input) {
-	//checkForInvalidChar(input);
-	//tokenization(cleanInput);
+	checkForInvalidChar(input);
+	tokenization(cleanInput);
 
-	std::istringstream	str(input);
+/* 	std::istringstream	str(input);
 	std::string			token;
 
 	while (str >> token) {
@@ -119,6 +122,6 @@ void	RPN::processInput(std::string input) {
 		tokenization2(input);	
 	}
 	if (numbers.size() != 1)
-		throw std::runtime_error("Error: Invalid expression");
+		throw std::runtime_error("Error: Invalid expression"); */
 	printResult();
 }

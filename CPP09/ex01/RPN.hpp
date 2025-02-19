@@ -14,14 +14,14 @@ class RPN {
 		void	processInput(std::string	input);
 		void	checkForInvalidChar(std::string& input);
 		void	tokenization(std::string& input);
-		void	tokenization2(std::string& expression);
-		void	validateToken(std::string& expression);
-		bool	isOperator(char c) const;
+		// void	tokenization2(std::string& expression);
+		// void	validateToken(std::string& expression);
+		// bool	isOperator(char c) const;
 		void	printResult();
 
 	protected:
 	private:
-		std::stack<int>		numbers;
+		std::stack<long long>		numbers;
 		std::string			cleanInput;
 };
 
