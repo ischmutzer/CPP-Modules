@@ -62,6 +62,14 @@ int	main() {
 	largerArray = smallArray;
 	printArray(largerArray, "Larger array after being assigned a smaller one");
 
+	Array<int>	big(4);
+	big[0] = 1;
+	big[1] = 2;
+	big[2] = 2;
+	big[3] = 4;
+	smallArray = big;
+	printArray(smallArray, "Smaller array into bigger array");
+
 	// Edge case: Copying an empty array
 	Array<int> emptyArray;
 	Array<int> copiedEmpty(emptyArray);

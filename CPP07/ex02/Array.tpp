@@ -1,4 +1,5 @@
 #include "Array.hpp"
+#include <stdexcept>
 
 template <typename T>
 Array<T>::Array() : _array(NULL), _n(0) {}
@@ -19,12 +20,17 @@ Array<T>::Array(const Array& source) : _n(source._n) {
 template <typename T>
 Array<T>& Array<T>::operator=(const Array& source) {
 	if (this != &source) {
-		if (_array)
-			delete [] _array;
-		_n = source._n;
-		_array = new T[_n];
-		for (unsigned int i = 0; i < _n; i++) {
-			_array[i] = source._array[i];
+		if (_array) {
+			for (unsigned int i = 0; i < _n; i++) {
+				_array[i] = source._array[i];
+			}
+		}
+		else {
+			_n = source._n;
+			_array = new T[_n];
+			for (unsigned int i = 0; i < _n; i++) {
+				_array[i] = source._array[i];
+			}
 		}
 	}
 	return *this;
