@@ -66,13 +66,13 @@ void	RPN::tokenization(std::string& input) {
 }
 
 
-/* bool	RPN::isOperator(char c) const {
+bool	RPN::isOperator(char c) const {
 	return (c == '+' || c == '-' || c == '/' || c == '*');
 }
 
 void	RPN::validateToken(std::string& token) {
 	if (token.length() != 1 || (!isdigit(token[0]) && !isOperator(token[0]))) {
-		throw std::invalid_argument("Error: Invalid token");
+		throw std::invalid_argument("Error: Invalid token '" + token + "'");
 	}
 }
 
@@ -97,7 +97,7 @@ void	RPN::tokenization2(std::string& expression) {
 				default: throw std::invalid_argument("Error: Unknown operator");
 			}
 	}
-} */
+}
 
 void	RPN::printResult() {
 	if (numbers.empty())
@@ -111,17 +111,17 @@ void	RPN::printResult() {
 }
 
 void	RPN::processInput(std::string input) {
-	checkForInvalidChar(input);
-	tokenization(cleanInput);
+	// checkForInvalidChar(input);
+	// tokenization(cleanInput);
 
-/* 	std::istringstream	str(input);
+	std::istringstream	str(input);
 	std::string			token;
 
 	while (str >> token) {
-		validateToken(input);
-		tokenization2(input);	
+		validateToken(token);
+		tokenization2(token);	
 	}
 	if (numbers.size() != 1)
-		throw std::runtime_error("Error: Invalid expression"); */
+		throw std::runtime_error("Error: Invalid expression");
 	printResult();
 }
