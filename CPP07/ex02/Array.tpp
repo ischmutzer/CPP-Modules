@@ -38,14 +38,14 @@ Array<T>::~Array() {
 template <typename T>
 T&	Array<T>::operator[](size_t size) {
 	if (size < 0 || size >= _n)
-		throw std::out_of_range("EROOR: Index out of range");
+		throw std::out_of_range("ERROR: Index out of range");
 	return _array[size];
 }
 
 template <typename T>
 const T&	Array<T>::operator[](size_t size) const {
 	if (size < 0 || size >= _n)
-		throw std::out_of_range("EROOR: Index out of range");
+		throw std::out_of_range("ERROR: Index out of range");
 	return	_array[size];
 }
 
