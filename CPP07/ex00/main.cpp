@@ -15,14 +15,28 @@ int	main() {
 	swap(c, d);
 	std::cout << "c = " << c << ", d = " << d << std::endl;
 
-	std::cout << "\nMax of a and b: " << max(a, b) << std::endl;
-	std::cout << "Min of a and b: " << min(a, b) << std::endl;
+	std::cout << "\nMax(2, 8): " << max(a, b) << std::endl;
+	std::cout << "Min(2, 8): " << min(a, b) << std::endl;
 
-	std::cout << "\nMax of c and d: " << max(c, d) << std::endl;
-	std::cout << "Min of c and d: " << min(c, d) << std::endl;
+	std::cout << "\nMax(2.2, 8.8): " << max(c, d) << std::endl;
+	std::cout << "Min(2.2, 8.8): " << min(c, d) << "\n\n";
 	
 	// std::cout << "Mismatched data types: " << std::endl;
 	// swap(a, c);
+
+	// Edge case: Swapping same values
+	int e = 5, f = 5;
+	std::cout << "Before swap: e = " << e << ", f = " << f << std::endl;
+	swap(e, f);
+	std::cout << "After swap: e = " << e << ", f = " << f << "\n\n"; // should remain same
+
+	// Edge case: min/max with negative numbers
+	std::cout << "Min(-10, -20): " << min(-10, -20) << std::endl;
+	std::cout << "Max(-10, -20): " << max(-10, -20) << "\n\n";
+
+	// Edge case: Large numbers
+	std::cout << "Min(999999999, -999999999): " << min(999999999, -999999999) << std::endl;
+	std::cout << "Max(999999999, -999999999): " << max(999999999, -999999999) << std::endl;
 
 	return 0;
 }

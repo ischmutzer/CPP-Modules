@@ -1,6 +1,8 @@
 #include "iter.hpp"
+#include <cstddef>
 #include <iostream>
 #include <typeinfo>
+#include <climits>
 
 template <typename T>
 void	print(T& element) {
@@ -8,7 +10,7 @@ void	print(T& element) {
 }
 
 void	printString(std::string& str) {
-	std::cout << str << " ";
+    std::cout << str << " ";
 }
 
 void    printInt(int& x) {
@@ -41,6 +43,21 @@ int main() {
     iter(num, 4, multiplyByTwo<int>);
     std::cout << "Double x 2 = ";
     iter(d, 4, multiplyByTwo<double>);
+
+    // Edge case: Empty array
+    std::string empty[0] = {};
+    std::cout << "Empty array = ";
+    iter(empty, 0, printString);
+
+    // Edge case: Single element array
+    int single[1] = {42};
+    std::cout << "Single element array = ";
+    iter(single, 1, printInt);
+
+    // Edge case: Large numbers in array
+    int largeNumbers[3] = {INT_MAX, INT_MIN, 0};
+    std::cout << "Large number array = ";
+    iter(largeNumbers, 3, printInt);
 
     return 0;
 }
