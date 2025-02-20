@@ -17,3 +17,24 @@ int	main(int argc, char** argv) {
 	}
 	return EXIT_SUCCESS;
 }
+
+
+//Test Cases:
+
+//OVERFLOW CHECK
+//./RPN "9 9 * 9 * 9 * 9 * 9 * 9 * 9 * 9 * 9 *"
+
+//VALID SIMPLE EXPRESSION
+//./RPN "3 4 +"
+
+//VALID MIXED OPERATIONS
+//./RPN "5 1 2 + 4 * + 3 -"
+
+//DIVISION BY ZERO
+//./RPN "5 0 /"
+
+//INSUFFICIENT OPERANDS FOR AN OPERATOR
+//./RPN "3 +"
+
+//EXTRA OPERANDS LEFT OVER
+//./RPN "3 4"
