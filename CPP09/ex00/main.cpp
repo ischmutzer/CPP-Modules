@@ -1,14 +1,17 @@
 #include "BitcoinExchange.hpp"
 #include <cstdlib>
+#include <stdexcept>
 
 int main(int argc, char** argv) {
-	if (argc == 2) {
-		try {
-			//Implementation
-			EXIT_SUCCESS;
-		} catch (std::exception& e) {
-			std::cerr << e.what() << std::endl;
-		}
+	try {
+		if (argc != 2)
+			throw std::invalid_argument("Error: could not open file."); //throw std::invalid_argument("Error: '" + std::to_string(argc - 1) + "' files")
+		btc	calculator;
+		argc = 0;
+		calculator.processInput(argv[1]);
+		EXIT_SUCCESS;
+	} catch (std::exception& e) {
+		std::cerr << e.what() << std::endl;
 	}
 	EXIT_FAILURE;
 }
