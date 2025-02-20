@@ -22,7 +22,7 @@ class RPN {
 	protected:
 	private:
 		std::stack<long long>		numbers;
-		std::string			cleanInput;
+		std::string					cleanInput;
 };
 
 //std::stack

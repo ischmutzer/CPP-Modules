@@ -84,12 +84,18 @@ void	RPN::tokenization2(std::string& expression) {
 	else {
 		if (numbers.size() < 2)
 			throw std::logic_error("Error: Insufficient operands");
-		int b = numbers.top(); numbers.pop();
-		int a = numbers.top(); numbers.pop();
+		long long b = numbers.top(); numbers.pop();
+		long long a = numbers.top(); numbers.pop();
 		switch (c) {
-				case '+': numbers.push(a + b); break;
-				case '-': numbers.push(a - b); break;
-				case '*': numbers.push(a * b); break;
+				case '+':
+					numbers.push(a + b);
+					break;
+				case '-':
+					numbers.push(a - b);
+					break;
+				case '*':
+					numbers.push(a * b);
+					break;
 				case '/':
 					if (b == 0) throw std::logic_error("Error: Division by zero");
 					numbers.push(a / b);
@@ -104,9 +110,9 @@ void	RPN::printResult() {
 		throw std::runtime_error("Error: Stack is empty");
 	long long result = numbers.top();
 	if (result > INT_MAX)
-		throw std::runtime_error("Error: Result is bigger than int max");
+		throw std::overflow_error("Error: Result is bigger than int max");
 	else if (result < INT_MIN)
-		throw std::runtime_error("Error: Result is smaller than int min");
+		throw std::overflow_error("Error: Result is smaller than int min");
 	std::cout << result << std::endl;
 }
 
