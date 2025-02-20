@@ -12,10 +12,8 @@ class RPN {
 		~RPN();
 
 		void	processInput(std::string	input);
-		void	checkForInvalidChar(std::string& input);
-		void	tokenization(std::string& input);
-		void	tokenization2(std::string& expression);
-		void	validateToken(std::string& expression);
+		void	tokenization(const std::string& expression);
+		void	validateToken(const std::string& expression);
 		bool	isOperator(char c) const;
 		void	printResult();
 
@@ -25,7 +23,10 @@ class RPN {
 		std::string					cleanInput;
 };
 
-//std::stack
+
+//** OLD IMPLEMENTATION **
+// void	checkForInvalidChar(std::string& input);
+// void	tokenization(std::string& input);
 
 //NOTES:
 
