@@ -12,11 +12,15 @@ class	btc {
 		btc&	operator=(const btc& source);
 		~btc();
 
-		void	processInput(const std::string& file);
+		void	processFile(const std::string& file);
+		void	processDatabase();
+		void	launch(const std::string& inputFile);
 
 	protected:
 	private:
-		std::map<int, int>	map;
+		std::map<std::string, double>	_btcPrices;
 };
 
 //std::map
+
+//NOTES
