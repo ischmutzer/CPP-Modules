@@ -33,6 +33,6 @@ clear: all
 	clear
 
 run: all
-	./$(NAME)
+	./$(NAME) text.txt
 
 .PHONY: all clean fclean re clear run

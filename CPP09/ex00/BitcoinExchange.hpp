@@ -12,9 +12,10 @@ class	btc {
 		btc&	operator=(const btc& source);
 		~btc();
 
-		void	processFile(const std::string& file);
+		std::string		trim(const	std::string& str);
+		void		processFile(const std::string& file);
 		void	processDatabase();
-		void	launch(const std::string& inputFile);
+		void		launch(const std::string& inputFile);
 
 	protected:
 	private:
