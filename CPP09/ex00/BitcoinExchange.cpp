@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <cstdlib>
+#include <ctime>
 
 btc::btc() {}
 
@@ -25,6 +26,33 @@ std::string	btc::trim(const std::string& str) {
 		end--;
 	}
 	return str.substr(start, end - start);
+}
+
+bool	btc::dateValidation(const std::string& key) {
+	if (key.size() != 10 || key[4] != '-' || key[7] != '-')
+		return false;
+	int	year, month, day;
+	if (sscanf(key.c_str(), "%4d-%2d-%2d", &year, &month, &day) != 3)
+		return false;
+	if (month < 1 || month > 12 || day < 1 || day > 31)
+		return false;
+
+	int	daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	if (day > daysInMonth[month - 1])
+		return false;
+	
+	std::time_t	now = std::time(0);
+	struct tm*	localTime = localtime(&now);
+	
+	if (year > localTime->tm_year + 1900)
+		return false;
+	if (year == localTime->tm_year + 1900) {
+		if (month > localTime->tm_mon + 1)
+			return false;
+		if (month == localTime->tm_mon + 1 && day > localTime->tm_mday)
+			return false;
+	}
+	return true;
 }
 
 void	btc::processFile(const std::string& file) {
@@ -52,13 +80,22 @@ void	btc::processDatabase() {
 	while (std::getline(database, line)) {
 		if (line.empty())
 			continue ;
+
 		//std::cout << "Normal line:" << line  << "\nLine size length:" << line.length() << std::endl;
 		std::string	cleanLine = trim(line);
 		//std::cout << "Clean Line:" << cleanLine << "\nClean line lenght" << cleanLine.length() << std::endl;
+		
 		std::istringstream	iss(cleanLine);
 		std::string	key, value;
 		if (std::getline(iss, key, ',') && getline(iss, value)) {
+			std::cout << "\nkey = " << key << " \n" << "value = " << value << std::endl;
 			//check key and value format and convert value to double
+			//_btcPrices[key] = value;
+			if (!dateValidation(key)) {
+				std::cerr << "Error: Invalid date" << std::endl;
+				continue ;
+			}
+			
 			//_btcPrices[key] = value;
 
 		}

@@ -13,9 +13,11 @@ class	btc {
 		~btc();
 
 		std::string		trim(const	std::string& str);
-		void		processFile(const std::string& file);
-		void	processDatabase();
-		void		launch(const std::string& inputFile);
+		bool			dateValidation(const std::string& key);
+		bool			numberValidation(const std::string& value);
+		void			processFile(const std::string& file);
+		void			processDatabase();
+		void			launch(const std::string& inputFile);
 
 	protected:
 	private:
