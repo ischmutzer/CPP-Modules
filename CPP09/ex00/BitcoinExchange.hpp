@@ -14,7 +14,7 @@ class	btc {
 
 		std::string		trim(const	std::string& str);
 		bool			dateValidation(const std::string& key);
-		bool			numberValidation(const std::string& value);
+		double			numberValidation(const std::string& value);
 		void			processFile(const std::string& file);
 		void			processDatabase();
 		void			launch(const std::string& inputFile);

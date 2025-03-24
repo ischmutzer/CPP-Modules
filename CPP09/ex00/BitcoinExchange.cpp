@@ -55,6 +55,20 @@ bool	btc::dateValidation(const std::string& key) {
 	return true;
 }
 
+double	btc::numberValidation(const std::string& value) {
+	std::istringstream	iss(value);
+	double				convertedValue;
+
+	if (!(iss >> convertedValue))
+		return -1.0;
+
+	std::string	rest;
+	iss >> rest;
+	if (!rest.empty())
+		return -1.0;
+	
+}
+
 void	btc::processFile(const std::string& file) {
 	std::cout << "Current dir: " << system("pwd");
 
@@ -75,7 +89,6 @@ void	btc::processDatabase() {
 	if (database.peek() == std::ifstream::traits_type::eof())
 		throw std::runtime_error("Error: Database file is empty"); //TO-DO: exit program
 
-	//read line by line, parse it at "," and store key and value in map
 	std::string	line;
 	while (std::getline(database, line)) {
 		if (line.empty())
@@ -89,12 +102,11 @@ void	btc::processDatabase() {
 		std::string	key, value;
 		if (std::getline(iss, key, ',') && getline(iss, value)) {
 			std::cout << "\nkey = " << key << " \n" << "value = " << value << std::endl;
-			//check key and value format and convert value to double
-			//_btcPrices[key] = value;
 			if (!dateValidation(key)) {
-				std::cerr << "Error: Invalid date" << std::endl;
+				std::cerr << "Error: Invalid date: " << key << std::endl;
 				continue ;
 			}
+			//check value format and convert value to double
 			
 			//_btcPrices[key] = value;
 
