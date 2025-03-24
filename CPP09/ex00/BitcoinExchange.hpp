@@ -14,7 +14,7 @@ class	btc {
 
 		std::string		trim(const	std::string& str);
 		bool			dateValidation(const std::string& key);
-		double			numberValidation(const std::string& value);
+		bool			numberValidation(const std::string& value);
 		void			processFile(const std::string& file);
 		void			processDatabase();
 		void			launch(const std::string& inputFile);
@@ -22,6 +22,7 @@ class	btc {
 	protected:
 	private:
 		std::map<std::string, double>	_btcPrices;
+		double							_newValue;
 };
 
 //std::map

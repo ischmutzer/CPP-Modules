@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 
-btc::btc() {}
+btc::btc() : _newValue(0.0) {}
 
 btc::btc(const btc& source) { *this = source; }
 
@@ -55,18 +55,22 @@ bool	btc::dateValidation(const std::string& key) {
 	return true;
 }
 
-double	btc::numberValidation(const std::string& value) {
-	std::istringstream	iss(value);
-	double				convertedValue;
-
-	if (!(iss >> convertedValue))
-		return -1.0;
-
-	std::string	rest;
-	iss >> rest;
-	if (!rest.empty())
-		return -1.0;
-	
+bool	btc::numberValidation(const std::string& value) {
+	std::cout << "\n value turned to cstr: " << value.c_str() << std::endl;
+	char*	endptr;
+	double	convertedValue = strtod(value.c_str(), &endptr);
+	std::cout << "\nconverted value = " << convertedValue << std::endl;
+	if (*endptr != '\0') {
+		std::cout << "\na\n" << std::endl;
+		return false;
+	}
+	if (convertedValue < 0.0 || convertedValue > 1000.0) {
+		std::cout << "\nb\n" << std::endl;
+		return false;
+	}
+	_newValue = convertedValue;
+	std::cout << "\nnew value = " << _newValue << std::endl;
+	return true;
 }
 
 void	btc::processFile(const std::string& file) {
@@ -107,8 +111,17 @@ void	btc::processDatabase() {
 				continue ;
 			}
 			//check value format and convert value to double
-			
-			//_btcPrices[key] = value;
+			/* double	checkedValue = numberValidation(value);
+			std::cout << "\nvalue before = " << value << "\nvalue after = " << checkedValue << std::endl;
+			if (checkedValue == -1.0) {
+				std::cerr << "Error: Invalid bitcoin price: " << checkedValue << std::endl;
+				continue;
+			} */
+			if (!numberValidation(value)) {
+				std::cerr << "Error: invalid value:" << _newValue << std::endl;
+				continue;
+			}
+			_btcPrices[key] = _newValue;
 
 		}
 		else
