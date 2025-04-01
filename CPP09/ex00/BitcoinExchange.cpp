@@ -55,22 +55,26 @@ bool	btc::dateValidation(const std::string& key) {
 	return true;
 }
 
-bool	btc::numberValidation(const std::string& value) {
-	std::cout << "\n value turned to cstr: " << value.c_str() << std::endl;
-	char*	endptr;
-	double	convertedValue = strtod(value.c_str(), &endptr);
-	std::cout << "\nconverted value = " << convertedValue << std::endl;
-	if (*endptr != '\0') {
-		std::cout << "\na\n" << std::endl;
+bool	btc::numberValidation(const std::string& key, const std::string& price) {
+	if (price.empty())
+		return false ;
+
+	std::istringstream	sStr(price);
+	double	num;
+
+	if (!(sStr >> num))
 		return false;
-	}
-	if (convertedValue < 0.0 || convertedValue > 1000.0) {
-		std::cout << "\nb\n" << std::endl;
+	
+	char	extra;
+	if (sStr >> extra)
 		return false;
-	}
-	_newValue = convertedValue;
-	std::cout << "\nnew value = " << _newValue << std::endl;
+		
+	if (num < 0)
+		return false;
+	
+	_btcPrices[key] = num;
 	return true;
+	
 }
 
 void	btc::processFile(const std::string& file) {
@@ -84,6 +88,15 @@ void	btc::processFile(const std::string& file) {
 	inputFile.close();
 }
 
+bool	btc::isWord(const std::string& word) {
+	std::istringstream	sStr(word);
+	std::string	toCheck;
+
+	if (!(sStr >> toCheck))
+		return false;
+	return true;
+}
+
 void	btc::processDatabase() {
 	std::ifstream	database("data.csv");
 	if (!database.is_open())
@@ -94,35 +107,34 @@ void	btc::processDatabase() {
 		throw std::runtime_error("Error: Database file is empty"); //TO-DO: exit program
 
 	std::string	line;
+	if (std::getline(database, line)) {
+		std::istringstream	sStr(line);
+		std::string word1, word2;
+
+		if (std::getline(sStr, word1, ',') && std::getline(sStr, word2)) {
+			if (!isWord(word1) || !isWord(word2))
+				std::cerr << "Error: Invalid header" << std::endl;
+		}
+	}
 	while (std::getline(database, line)) {
+
 		if (line.empty())
 			continue ;
 
-		//std::cout << "Normal line:" << line  << "\nLine size length:" << line.length() << std::endl;
-		std::string	cleanLine = trim(line);
-		//std::cout << "Clean Line:" << cleanLine << "\nClean line lenght" << cleanLine.length() << std::endl;
-		
-		std::istringstream	iss(cleanLine);
+		std::string	trimmedLine = trim(line);
+		std::istringstream	iss(trimmedLine);
 		std::string	key, value;
+
 		if (std::getline(iss, key, ',') && getline(iss, value)) {
-			std::cout << "\nkey = " << key << " \n" << "value = " << value << std::endl;
+			//std::cout << "\nkey = " << key << " \n" << "value = " << value << std::endl;
 			if (!dateValidation(key)) {
-				std::cerr << "Error: Invalid date: " << key << std::endl;
+				std::cerr << "Error: Invalid date" << std::endl;
 				continue ;
 			}
-			//check value format and convert value to double
-			/* double	checkedValue = numberValidation(value);
-			std::cout << "\nvalue before = " << value << "\nvalue after = " << checkedValue << std::endl;
-			if (checkedValue == -1.0) {
-				std::cerr << "Error: Invalid bitcoin price: " << checkedValue << std::endl;
-				continue;
-			} */
-			if (!numberValidation(value)) {
+			if (!numberValidation(key, value)) {
 				std::cerr << "Error: invalid value:" << _newValue << std::endl;
 				continue;
 			}
-			_btcPrices[key] = _newValue;
-
 		}
 		else
 			throw std::runtime_error("Error: getline() failed while processing database.");
@@ -133,6 +145,10 @@ void	btc::processDatabase() {
 void	btc::launch(const std::string& inputFile) {
 	try  {
 		processDatabase();
+		/* std::map<std::string, double>::iterator it;
+		for (it = _btcPrices.begin(); it != _btcPrices.end(); it++) {
+			std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
+		} */
 		processFile(inputFile);
 	} catch (std::exception& e) {
 		std::cerr << e.what() << std::endl;	
@@ -148,3 +164,6 @@ void	btc::launch(const std::string& inputFile) {
 //->ifstream is a class derived from isstream, when an obj is instantiated
 //and no mode is specified (only file path), the constructor defaults to ios::in (read-only)
 //this open can fail silently so it needs checking
+
+
+//when extracting a double using istringstream it does not lose precision but std::cout truncates the output

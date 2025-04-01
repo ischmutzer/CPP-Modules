@@ -1,0 +1,16 @@
+test cases to check for:
+
+~PRICELIST & DATE-AMOUNT FILE~
+    - empty file
+    - no file
+    - non existent file
+    - garbage file
+    - valid values more than two separated by comma
+    - invalid date
+    - dates in the future
+    - only spaces and commas
+    - only newlines
+    - " and commas
+    - check for garbage before/between/after valid input -> should work but throw an error and continue processing data (?*)
+    - throw appropriate message in case pricelist name has been changed
+    -
