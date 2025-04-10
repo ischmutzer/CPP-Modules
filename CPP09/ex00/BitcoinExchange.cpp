@@ -78,23 +78,22 @@ bool	btc::numberValidation(const std::string& key, const std::string& price) {
 }
 
 void	btc::processFile(const std::string& file) {
-	std::cout << "Current dir: " << system("pwd");
-
 	std::ifstream	inputFile(file.c_str());
 	if (!inputFile.is_open())
-		throw	std::runtime_error("Error: could not open file.");
-	//check file
+		throw	std::runtime_error("Error: Could not open input file.");
+	if (inputFile.peek() == std::ifstream::traits_type::eof())
+		throw std::runtime_error("Error: Input file is emtpy.");
 	
+	std::string	line;
+	while (std::getline(inputFile, line)) {
+		if (line.empty())
+			continue;
+		std::string	trimmedLine = trim(line);
+		
+	}
+	//check file
+	//if (value < 0.0 || value > 1000.0) //error
 	inputFile.close();
-}
-
-bool	btc::isWord(const std::string& word) {
-	std::istringstream	sStr(word);
-	std::string	toCheck;
-
-	if (!(sStr >> toCheck))
-		return false;
-	return true;
 }
 
 void	btc::processDatabase() {
@@ -111,7 +110,6 @@ void	btc::processDatabase() {
 			throw std::runtime_error("Error: Invalid header");
 	}
 	while (std::getline(database, line)) {
-
 		if (line.empty())
 			continue ;
 
@@ -126,7 +124,7 @@ void	btc::processDatabase() {
 				continue ;
 			}
 			if (!numberValidation(key, value)) {
-				std::cerr << "Error: invalid value:" << _newValue << std::endl;
+				std::cerr << "Error: Invalid value:" << _newValue << std::endl;
 				continue;
 			}
 		}
@@ -145,13 +143,10 @@ void	btc::launch(const std::string& inputFile) {
 		} */
 		processFile(inputFile);
 	} catch (std::exception& e) {
-		std::cerr << e.what() << std::endl;	
-	}
-	//check database
-	//check input
-	// checkFile("data.csv");
-	// checkFile(inputFile);
+		std::cerr << e.what() << std::endl;	}
 }
+
+
 
 //NOTES
 
