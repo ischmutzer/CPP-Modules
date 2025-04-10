@@ -100,7 +100,6 @@ bool	btc::isWord(const std::string& word) {
 void	btc::processDatabase() {
 	std::ifstream	database("data.csv");
 	if (!database.is_open())
-		//std::cerr << "Error: could not open file" << std::endl; return;
 		throw std::runtime_error("Error: Could not open database file");
 	
 	if (database.peek() == std::ifstream::traits_type::eof())
@@ -108,13 +107,8 @@ void	btc::processDatabase() {
 
 	std::string	line;
 	if (std::getline(database, line)) {
-		std::istringstream	sStr(line);
-		std::string word1, word2;
-
-		if (std::getline(sStr, word1, ',') && std::getline(sStr, word2)) {
-			if (!isWord(word1) || !isWord(word2))
-				std::cerr << "Error: Invalid header" << std::endl;
-		}
+		if (line != "date,exchange_rate")
+			throw std::runtime_error("Error: Invalid header");
 	}
 	while (std::getline(database, line)) {
 
