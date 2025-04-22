@@ -122,6 +122,7 @@ void	btc::processFile(const std::string& file) {
 		}
 		else
 			throw std::runtime_error("Error: getline() failed while processing the input file.");
+		//search price by date provided in database and multiply it with value
 	}
 	inputFile.close();
 }
