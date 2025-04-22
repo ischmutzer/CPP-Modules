@@ -5,8 +5,6 @@
 #include <cstdlib>
 #include <ctime>
 
-btc::btc() : _newValue(0.0) {}
-
 btc::btc(const btc& source) { *this = source; }
 
 btc&	btc::operator=(const btc& source) {
@@ -77,6 +75,26 @@ bool	btc::numberValidation(const std::string& key, const std::string& price) {
 	
 }
 
+bool	btc::valueValidation(const std::string& val) {
+	if (val.empty())
+		return false;
+
+	std::istringstream	value(val);
+	double				num;
+
+	if (!(value >> num))
+		return false;
+
+	char extra;
+	if (value >> extra)
+		return false;
+	
+	if (num < 0.0 || num > 1000.0)
+		return false;
+
+	return true;
+}
+
 void	btc::processFile(const std::string& file) {
 	std::ifstream	inputFile(file.c_str());
 	if (!inputFile.is_open())
@@ -88,21 +106,33 @@ void	btc::processFile(const std::string& file) {
 	while (std::getline(inputFile, line)) {
 		if (line.empty())
 			continue;
-		std::string	trimmedLine = trim(line);
-		
+		std::string			trimmedLine = trim(line);
+		std::istringstream	iss(trimmedLine);
+		std::string			key, value;
+
+		if (std::getline(iss, key, ',') && getline(iss, value)) {
+			if (!dateValidation(key)) {
+				std::cerr << "Error: Invalid date in input file." << std::endl;
+				continue;
+			}
+			if (!valueValidation(value)) {
+				std::cerr << "Error: Invalid value in input file." << std::endl;
+				continue;
+			}
+		}
+		else
+			throw std::runtime_error("Error: getline() failed while processing the input file.");
 	}
-	//check file
-	//if (value < 0.0 || value > 1000.0) //error
 	inputFile.close();
 }
 
 void	btc::processDatabase() {
 	std::ifstream	database("data.csv");
 	if (!database.is_open())
-		throw std::runtime_error("Error: Could not open database file");
+		throw std::runtime_error("Error: Could not open database file.");
 	
 	if (database.peek() == std::ifstream::traits_type::eof())
-		throw std::runtime_error("Error: Database file is empty"); //TO-DO: exit program
+		throw std::runtime_error("Error: Database file is empty."); //TO-DO: exit program
 
 	std::string	line;
 	if (std::getline(database, line)) {
@@ -113,9 +143,9 @@ void	btc::processDatabase() {
 		if (line.empty())
 			continue ;
 
-		std::string	trimmedLine = trim(line);
+		std::string			trimmedLine = trim(line);
 		std::istringstream	iss(trimmedLine);
-		std::string	key, value;
+		std::string			key, value;
 
 		if (std::getline(iss, key, ',') && getline(iss, value)) {
 			//std::cout << "\nkey = " << key << " \n" << "value = " << value << std::endl;
@@ -124,7 +154,7 @@ void	btc::processDatabase() {
 				continue ;
 			}
 			if (!numberValidation(key, value)) {
-				std::cerr << "Error: Invalid value:" << _newValue << std::endl;
+				std::cerr << "Error: Invalid price in database." << std::endl;
 				continue;
 			}
 		}
