@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <ctime>
 
+btc::btc() {}
+
 btc::btc(const btc& source) { *this = source; }
 
 btc&	btc::operator=(const btc& source) {
@@ -53,7 +55,7 @@ bool	btc::dateValidation(const std::string& key) {
 	return true;
 }
 
-bool	btc::numberValidation(const std::string& key, const std::string& price) {
+bool	btc::dbNumberValidation(const std::string& key, const std::string& price) {
 	if (price.empty())
 		return false ;
 
@@ -75,7 +77,7 @@ bool	btc::numberValidation(const std::string& key, const std::string& price) {
 	
 }
 
-bool	btc::valueValidation(const std::string& val) {
+bool	btc::inNumberValidation(const std::string& val) {
 	if (val.empty())
 		return false;
 
@@ -92,7 +94,27 @@ bool	btc::valueValidation(const std::string& val) {
 	if (num < 0.0 || num > 1000.0)
 		return false;
 
+	_value = num;
 	return true;
+}
+
+double	btc::getExchangeRate(const std::string& key) {
+	std::map<std::string, double>::iterator	it = _btcPrices.lower_bound(key);
+	if (it != _btcPrices.end() && it->first == key) {
+		return it->second;
+	}
+	else if (it != _btcPrices.begin()) {
+		--it;
+		return it->second;
+	}
+	else {
+		return it->second;
+	}
+}
+
+void	btc::calculateRateXValue(double rate, const std::string& key) {
+	double	total = rate * _value;
+	std::cout << key << " => " << _value << " = " << total << std::endl;
 }
 
 void	btc::processFile(const std::string& file) {
@@ -115,14 +137,14 @@ void	btc::processFile(const std::string& file) {
 				std::cerr << "Error: Invalid date in input file." << std::endl;
 				continue;
 			}
-			if (!valueValidation(value)) {
+			if (!inNumberValidation(value)) {
 				std::cerr << "Error: Invalid value in input file." << std::endl;
 				continue;
 			}
 		}
 		else
 			throw std::runtime_error("Error: getline() failed while processing the input file.");
-		//search price by date provided in database and multiply it with value
+		calculateRateXValue(getExchangeRate(key), key);
 	}
 	inputFile.close();
 }
@@ -154,7 +176,7 @@ void	btc::processDatabase() {
 				std::cerr << "Error: Invalid date" << std::endl;
 				continue ;
 			}
-			if (!numberValidation(key, value)) {
+			if (!dbNumberValidation(key, value)) {
 				std::cerr << "Error: Invalid price in database." << std::endl;
 				continue;
 			}

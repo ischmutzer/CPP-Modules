@@ -13,10 +13,16 @@ class	btc {
 		~btc();
 
 		std::string		trim(const	std::string& str);
-		bool			dateValidation(const std::string& key);
-		bool			numberValidation(const std::string& key, const std::string& price);
-		bool			valueValidation(const std::string& val);
 		bool			isWord(const std::string& word);
+
+		bool			dbNumberValidation(const std::string& key, const std::string& price);
+		bool			dateValidation(const std::string& key);
+
+		bool			inNumberValidation(const std::string& val);
+		double			getExchangeRate(const std::string& key);
+
+		void			calculateRateXValue(double rate, const std::string& key);
+
 		void			processFile(const std::string& file);
 		void			processDatabase();
 		void			launch(const std::string& inputFile);
@@ -24,7 +30,7 @@ class	btc {
 	protected:
 	private:
 		std::map<std::string, double>	_btcPrices;
-		double							_newValue;
+		double							_value;
 };
 
 //std::map
