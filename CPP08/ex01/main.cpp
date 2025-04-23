@@ -242,3 +242,66 @@ int main() {
 	}
     return 0;
 }
+
+// ## Notes & Recommendations
+
+// 1. **Large-scale test**  
+//    You should add one test that fills a `Span` with at least 10,000 random (or sequential) integers, then calls `shortestSpan()`/`longestSpan()`. This both verifies performance and satisfies the exercise demand.
+
+// 2. **Negative-N check**  
+//    You attempt `Span negSp(-1);` but since the constructor takes `unsigned int`, `-1` becomes `UINT_MAX`. You could guard against that if you wish (e.g. throw when `n` is zero or absurdly large), but the spec did not require handling signed inputs.
+
+// 3. **Const-correctness**  
+//    Consider making `longestSpan()` a `const` member function (i.e. `longestSpan() const`), to match `shortestSpan() const`. This won’t change functionality but improves API consistency.
+
+// With the addition of a single large-N test, your implementation fully meets the exercise’s requirements. Great work!
+
+/* #include <iostream>
+#include "Span.hpp"
+
+int main() {
+    try {
+        // … your existing tests …
+
+        std::cout << "\n=== ADDITIONAL TESTS ===\n\n";
+
+        // 1) Large-scale test (N = 10 000)
+        {
+            const unsigned int N = 10000;
+            Span large(N);
+            // fill with even numbers 0,2,4,… – so shortest span = 2, longest = (N−1)*2
+            for (unsigned int i = 0; i < N; ++i)
+                large.addNumber(i * 2);
+            std::cout << "Large-scale test (N=" << N << ")\n";
+            std::cout << " shortestSpan() = " << large.shortestSpan() << "  (expected 2)\n";
+            std::cout << " longestSpan()  = " << large.longestSpan()  << "  (expected " << (long long)(N-1)*2 << ")\n\n";
+        }
+
+        // 2) Zero-capacity test
+        try {
+            Span zero(0);
+            zero.addNumber(1);
+            std::cout << "Zero-capacity test: unexpectedly succeeded\n";
+        } catch (const std::exception& e) {
+            std::cout << "Zero-capacity test: caught \"" << e.what() << "\"\n\n";
+        }
+
+        // 3) Const-correctness test
+        {
+            Span s(3);
+            s.addNumber(10);
+            s.addNumber(20);
+            s.addNumber(30);
+            const Span& cs = s;
+            // shortestSpan() is const—this should compile and run:
+            std::cout << "Const test shortestSpan() = " << cs.shortestSpan() << "  (expected 10)\n";
+            // longestSpan() must be made const in your class to compile this line:
+            std::cout << "Const test longestSpan()  = " << cs.longestSpan()  << "  (expected 20)\n";
+        }
+
+    } catch (const std::exception& e) {
+        std::cerr << "Unexpected exception: " << e.what() << "\n";
+    }
+    return 0;
+}
+ */
