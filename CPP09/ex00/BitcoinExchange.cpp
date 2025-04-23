@@ -145,7 +145,6 @@ void	btc::processFile(const std::string& file) {
 		else {
 			std::cerr << "Error: getline() failed while processing the input file." << std::endl;
 			continue;
-
 		}
 		calculateRateXValue(getExchangeRate(key), key);
 	}
