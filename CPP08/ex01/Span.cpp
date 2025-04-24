@@ -50,7 +50,7 @@ int	Span::shortestSpan() const {
 	return static_cast<int>(minDiff);
 }
 
-long long	Span::longestSpan() {
+long long	Span::longestSpan() const {
 	if (_container.size() < 2)
 		throw std::logic_error("Error: Insufficient elements to calculate a span.");
 	long long	min = *std::min_element(_container.begin(), _container.end());
@@ -79,3 +79,10 @@ long long	Span::longestSpan() {
 //element in the range.
 //an iterator is an object that points to an element in a container
 //therefore you need to dereference the iterator to access the value
+
+
+//reserve(_n) -> is a performance optimization technique
+//without reserve, the vector would need to realloc and copz its elements as ir grows.
+
+//std::min_element and std::max_element return iterators, therefore we
+//dereference it to access the value it points to.

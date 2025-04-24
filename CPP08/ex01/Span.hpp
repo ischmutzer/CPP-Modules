@@ -15,10 +15,10 @@ class Span {
         Span& operator=(const Span& source);
         ~Span();
 
-        void    addNumber(unsigned int n);
-        void    addNumber(const std::vector<int>& numbers);
-        int     shortestSpan() const;
-        long long     longestSpan();
+        void            addNumber(unsigned int n);
+        void            addNumber(const std::vector<int>& numbers);
+        int             shortestSpan() const;
+        long long       longestSpan() const;
     
     protected:
 
