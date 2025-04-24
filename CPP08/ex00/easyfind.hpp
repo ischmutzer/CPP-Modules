@@ -21,3 +21,12 @@ typename T::const_iterator	easyfind(const T& container, int x) {
 }
 
 #endif
+
+
+
+//NOTES
+
+//template keyword -> defines that the given entity is a template
+//template ft syntax: template < parameter-list > function-declaration
+
+//typename keyword -> defines template parameters (can be replaced bz keyword <class>)
