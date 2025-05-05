@@ -2,6 +2,7 @@
 
 #include <string>
 #include <stdexcept>
+#include <list>
 
 #include <stack>
 class RPN {
@@ -19,8 +20,8 @@ class RPN {
 
 	protected:
 	private:
-		std::stack<long long>		numbers;
-		std::string					cleanInput;
+		std::stack<long long, std::list<long long> >		numbers;
+		std::string										cleanInput;
 };
 
 

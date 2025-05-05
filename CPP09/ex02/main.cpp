@@ -10,7 +10,6 @@ int main(int argc, char** argv) {
 		PmergeMe	instance;
 		for (int i = 1; i < argc; i++) {
 			instance.processInput(argv[i]);
-			//check that the value is a positive integer and store it in _array
 		}
 		//instance.mergeInsert();
 	} catch (std::exception &e) {

@@ -1,8 +1,10 @@
 #pragma once
 
-#include <vector>
-#include <string>
+#include <iostream>
 #include <stdexcept>
+#include <vector>
+#include <deque>
+#include <string>
 
 class PmergeMe {
     public:
@@ -13,11 +15,19 @@ class PmergeMe {
 
         //mergeInsert();
         //twoFingerAlgo();
-        bool    isSpace(const char& c);
-        bool    isDigit(const char& c);
         void    processInput(const std::string& str);
-
+        
     private:
-    std::vector<int>    _array;
-    std::vector<int>    _tmpArray;
-}
+    
+    bool    hasDuplicates() const;
+    bool    isSpace(const char& c);
+    bool    isDigit(const char& c);
+    void    convertAndStoreSequence(const std::string& str);
+
+    std::vector<int>    _vect;
+    std::vector<int>    _tmpVect;
+
+    std::deque<int>     _deque;
+    std::deque<int>     _tmpDeque; //can access any element in the deque with .at() or []
+
+};
