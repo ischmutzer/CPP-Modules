@@ -23,6 +23,7 @@ class PmergeMe {
     bool    isSpace(const char& c);
     bool    isDigit(const char& c);
     void    convertAndStoreSequence(const std::string& str);
+    void    insertionSequenceGenerator();
 
     std::vector<int>    _vect;
     std::vector<int>    _tmpVect;

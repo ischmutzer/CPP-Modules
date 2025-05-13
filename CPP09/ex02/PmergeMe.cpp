@@ -60,6 +60,8 @@ void    PmergeMe::convertAndStoreSequence(const std::string& str) {
         throw std::logic_error("ERROR: Duplicate detected.");
 }
 
+void    PmergeMe::insertionSequenceGenerator() {}
+
 //./exec 123 "12 2 4"
 void    PmergeMe::processInput(const std::string& str) {
    for (unsigned int i = 0; i < str.size(); i++) {
