@@ -50,8 +50,8 @@ void    PmergeMe::convertAndStoreSequence(const std::string& str) {
         if (iss.fail()) {
             throw std::runtime_error("ERROR: fail bit set.");
         }
-        _vect.push_back(num);
-        _deque.push_back(num);
+        _vectA.push_back(num);
+        _dequeA.push_back(num);
     }
     if (iss.fail() && !iss.eof()) {
         throw std::runtime_error("ERROR: istringstream() failed.");
@@ -61,6 +61,8 @@ void    PmergeMe::convertAndStoreSequence(const std::string& str) {
 }
 
 void    PmergeMe::insertionSequenceGenerator() {}
+
+
 
 //./exec 123 "12 2 4"
 void    PmergeMe::processInput(const std::string& str) {

@@ -6,6 +6,33 @@
 #include <deque>
 #include <string>
 
+template <typename container>
+class fordJohnsonSorter {
+    public:
+        // fordJohnsonSorter(/* args */);
+        // ~fordJohnsonSorter();
+        void    sort(container& sequence) {
+            fordJohnsonSort(sequence);
+        }
+    private:
+        typedef typename container::iterator    it;
+
+        std::pair    pairNumbers(int a, int b) {
+            if (a > b)
+                std::make_pair(a, b);
+            else
+                std::make_pair(b, a);
+        }
+
+        void    fordJohnsonSort(container& sequence) {
+            container   A;
+            container   B;
+            for (size_t i = 0; i < sequence.size(); i++) {
+                A = pairNumbers(sequence[i], sequence[i + 1]);
+            }
+        }
+};
+
 class PmergeMe {
     public:
         PmergeMe();
@@ -25,11 +52,11 @@ class PmergeMe {
     void    convertAndStoreSequence(const std::string& str);
     void    insertionSequenceGenerator();
 
-    std::vector<int>    _vect;
-    std::vector<int>    _tmpVect;
+    std::vector<int>    _vectA;
+    std::vector<int>    _vectB;
 
-    std::deque<int>     _deque;
-    std::deque<int>     _tmpDeque; //can access any element in the deque with .at() or []
+    std::deque<int>     _dequeA;
+    std::deque<int>     _dequeB; //can access any element in the deque with .at() or []
 
 };
 
