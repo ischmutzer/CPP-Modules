@@ -12,23 +12,27 @@ class fordJohnsonSorter {
         // fordJohnsonSorter(/* args */);
         // ~fordJohnsonSorter();
         void    sort(container& sequence) {
-            fordJohnsonSort(sequence);
+            fordJohnsonSort(sequence.begin(), sequence.end());
         }
     private:
-        typedef typename container::iterator    it;
+        //typedef typename container::iterator    it;
 
-        std::pair    pairNumbers(int a, int b) {
-            if (a > b)
-                std::make_pair(a, b);
-            else
-                std::make_pair(b, a);
-        }
-
-        void    fordJohnsonSort(container& sequence) {
-            container   A;
-            container   B;
-            for (size_t i = 0; i < sequence.size(); i++) {
-                A = pairNumbers(sequence[i], sequence[i + 1]);
+        template<typename iterator>
+        void    fordJohnsonSort(iterator first, iterator last) {
+            
+            typedef typename std::iterator_traits<iterator>::value_type T;
+    
+            std::vector<T>  largeE, smallE;
+            iterator it =   first;
+            while (it + 1 < last) {
+                if (*it < *(it + 1)) {
+                    largeE.push_back(*(it + 1));
+                    smallE.push_back(*it);
+                } else {
+                    largeE.push_back(*it);
+                    smallE.push_back(*(it + 1));
+                }
+                it += 2;
             }
         }
 };
