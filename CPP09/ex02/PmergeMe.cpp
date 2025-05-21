@@ -1,4 +1,5 @@
 #include "PmergeMe.hpp"
+#include <algorithm>
 #include <sstream>
 #include <stdexcept>
 #include <cctype>
@@ -50,8 +51,8 @@ void    PmergeMe::convertAndStoreSequence(const std::string& str) {
         if (iss.fail()) {
             throw std::runtime_error("ERROR: fail bit set.");
         }
-        _vectA.push_back(num);
-        _dequeA.push_back(num);
+        _vect.push_back(num);
+        _deque.push_back(num);
     }
     if (iss.fail() && !iss.eof()) {
         throw std::runtime_error("ERROR: istringstream() failed.");
@@ -71,7 +72,9 @@ void    PmergeMe::processInput(const std::string& str) {
             throw   std::invalid_argument("ERROR: Invalid input. Expected input: positive integer.");
     }
     convertAndStoreSequence(str);
-    std::cout << "Vector: ";
+    Sorter<std::vector<int> >  ex;
+    ex.sort(_vect);
+    /* std::cout << "Vector: ";
     for (unsigned int i = 0; i < _vect.size(); i++)
         std::cout << _vect[i] << " ";
     std::cout << std::endl;
@@ -79,7 +82,7 @@ void    PmergeMe::processInput(const std::string& str) {
     for (unsigned int i = 0; i < _deque.size(); i++) {
         std::cout << _deque[i] << " ";
     }
-    std::cout << std::endl;
+    std::cout << std::endl; */
 }
 
 /* void PmergeMe::mergeInsert() {

@@ -7,19 +7,25 @@
 #include <string>
 
 template <typename container>
-class fordJohnsonSorter {
+class Sorter {
     public:
-        // fordJohnsonSorter(/* args */);
-        // ~fordJohnsonSorter();
+        // Sorter(/* args */);
+        // ~Sorter();
         void    sort(container& sequence) {
             fordJohnsonSort(sequence.begin(), sequence.end());
         }
     private:
-        //typedef typename container::iterator    it;
 
         template<typename iterator>
         void    fordJohnsonSort(iterator first, iterator last) {
-            
+
+            /* if (first >= last) {
+                throw std::range_error("ERROR: Invalid/Empty iterator passed to Ford-Johnson sorter.");
+            } */
+            if (std::distance(first, last) <= 1) {
+        return;
+    }
+
             typedef typename std::iterator_traits<iterator>::value_type T;
     
             std::vector<T>  largeE, smallE;
@@ -34,6 +40,28 @@ class fordJohnsonSorter {
                 }
                 it += 2;
             }
+            //handle odd element
+            if (it < last) { // last* = undefined // one more
+                smallE.push_back(*it);
+            }
+            //basecase
+            if (!largeE.empty()) {
+                fordJohnsonSort(largeE.begin(), largeE.end());
+            }
+
+            static int i = 1;
+            std::cout << "Iteration " << i << " \nlargeE = {" << std::endl;
+            for (typename std::vector<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); it1++) {
+                std::cout << *it1 << ", " << std::endl; 
+            }
+            std::cout << "}\n" << std::endl;
+
+            std::cout << "Iteration " << i << " \nsmallE = {" << std::endl;
+            for (typename std::vector<T>::const_iterator it2 = smallE.begin(); it2 < smallE.end(); it2++) {
+                std::cout << *it2 << ", " << std::endl; 
+            }
+            std::cout << "}\n" << std::endl;
+            i++;
         }
 };
 
@@ -56,11 +84,11 @@ class PmergeMe {
     void    convertAndStoreSequence(const std::string& str);
     void    insertionSequenceGenerator();
 
-    std::vector<int>    _vectA;
-    std::vector<int>    _vectB;
+    std::vector<int>    _vect;
+    std::vector<int>    _tmpVect;
 
-    std::deque<int>     _dequeA;
-    std::deque<int>     _dequeB; //can access any element in the deque with .at() or []
+    std::deque<int>     _deque;
+    std::deque<int>     _tmpDeque; //can access any element in the deque with .at() or []
 
 };
 
