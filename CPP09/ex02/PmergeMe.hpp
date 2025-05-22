@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
@@ -17,8 +18,15 @@ class Sorter {
     private:
 
         template<typename T>
-        std::vector<T>  indexOrderGenerator() {
+        std::vector<T>  indexOrderGenerator(size_t size) {
+            std::vector<T>  order;
+            for (size_t i = 0; i < size; i++) {
+                //order = ;
+            }
             //calculate jacobstahl order and store
+            //
+
+            return order;
         }
     
         template<typename iterator>
@@ -72,7 +80,7 @@ class Sorter {
 //DEBUGGING
 
             //jacobstahl
-            std::vector<int>    order = indexOrderGenerator();
+            std::vector<int>    order = indexOrderGenerator(smallE.size());
         }
 };
 
