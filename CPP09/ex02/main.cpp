@@ -8,7 +8,7 @@ int main(int argc, char** argv) {
 	}
 	try {
 		PmergeMe	instance;
-		
+
 		for (int i = 1; i < argc; i++) {
 			instance.processInput(argv[i]);
 		}
@@ -21,3 +21,12 @@ int main(int argc, char** argv) {
 		std::cerr << e.what() << std::endl;
 	}
 }
+
+
+//posible way to call processInput() outside of a loop:
+
+/* 	std::ostringstream oss;
+	for (int i = 1; i < argc; ++i) {
+		oss << argv[i] << " ";
+	}
+	instance.processInput(oss.str()); */

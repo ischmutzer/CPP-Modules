@@ -16,6 +16,11 @@ class Sorter {
         }
     private:
 
+        template<typename T>
+        std::vector<T>  indexOrderGenerator() {
+            //calculate jacobstahl order and store
+        }
+    
         template<typename iterator>
         void    fordJohnsonSort(iterator first, iterator last, int depth = 1) {
 
@@ -40,16 +45,19 @@ class Sorter {
                 }
                 it += 2;
             }
+
             //handle odd element
-            if (it < last) { // last* = undefined // one more
+            if (it < last) {
                 smallE.push_back(*it);
             }
+
             //basecase
             if (!largeE.empty()) {
                 fordJohnsonSort(largeE.begin(), largeE.end(), depth + 1);
             }
 
-            std::string indent(depth * 2, ' ');
+//DEBUGGING
+            /* std::string indent(depth * 2, ' ');
             std::cout << indent << "Iteration " << depth << " largeE = {";
             for (typename std::vector<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); it1++) {
                 std::cout << *it1 << ", "; 
@@ -60,7 +68,11 @@ class Sorter {
             for (typename std::vector<T>::const_iterator it2 = smallE.begin(); it2 < smallE.end(); it2++) {
                 std::cout << *it2 << ", "; 
             }
-            std::cout << "}\n" << std::endl;
+            std::cout << "}\n" << std::endl; */
+//DEBUGGING
+
+            //jacobstahl
+            std::vector<int>    order = indexOrderGenerator();
         }
 };
 
