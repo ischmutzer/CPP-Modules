@@ -1,8 +1,10 @@
 #include "PmergeMe.hpp"
 #include <algorithm>
+#include <deque>
 #include <sstream>
 #include <stdexcept>
 #include <cctype>
+#include <vector>
 
 PmergeMe::PmergeMe() {}
 
@@ -63,7 +65,13 @@ void    PmergeMe::convertAndStoreSequence(const std::string& str) {
 
 void    PmergeMe::insertionSequenceGenerator() {}
 
+std::vector<int>    PmergeMe::getVect() {
+    return _vect;
+}
 
+std::deque<int>     PmergeMe::getDeque() {
+    return _deque;
+}
 
 //./exec 123 "12 2 4"
 void    PmergeMe::processInput(const std::string& str) {
@@ -72,8 +80,6 @@ void    PmergeMe::processInput(const std::string& str) {
             throw   std::invalid_argument("ERROR: Invalid input. Expected input: positive integer.");
     }
     convertAndStoreSequence(str);
-    Sorter<std::vector<int> >  ex;
-    ex.sort(_vect);
     /* std::cout << "Vector: ";
     for (unsigned int i = 0; i < _vect.size(); i++)
         std::cout << _vect[i] << " ";

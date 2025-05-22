@@ -17,7 +17,7 @@ class Sorter {
     private:
 
         template<typename iterator>
-        void    fordJohnsonSort(iterator first, iterator last) {
+        void    fordJohnsonSort(iterator first, iterator last, int depth = 1) {
 
             /* if (first >= last) {
                 throw std::range_error("ERROR: Invalid/Empty iterator passed to Ford-Johnson sorter.");
@@ -46,22 +46,21 @@ class Sorter {
             }
             //basecase
             if (!largeE.empty()) {
-                fordJohnsonSort(largeE.begin(), largeE.end());
+                fordJohnsonSort(largeE.begin(), largeE.end(), depth + 1);
             }
 
-            static int i = 1;
-            std::cout << "Iteration " << i << " \nlargeE = {" << std::endl;
+            std::string indent(depth * 2, ' ');
+            std::cout << indent << "Iteration " << depth << " largeE = {";
             for (typename std::vector<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); it1++) {
-                std::cout << *it1 << ", " << std::endl; 
+                std::cout << *it1 << ", "; 
             }
-            std::cout << "}\n" << std::endl;
+            std::cout << "}" << std::endl;
 
-            std::cout << "Iteration " << i << " \nsmallE = {" << std::endl;
+            std::cout << indent << "Iteration " << depth << " smallE = {";
             for (typename std::vector<T>::const_iterator it2 = smallE.begin(); it2 < smallE.end(); it2++) {
-                std::cout << *it2 << ", " << std::endl; 
+                std::cout << *it2 << ", "; 
             }
             std::cout << "}\n" << std::endl;
-            i++;
         }
 };
 
@@ -74,7 +73,9 @@ class PmergeMe {
 
         //mergeInsert();
         //twoFingerAlgo();
-        void    processInput(const std::string& str);
+        void                processInput(const std::string& str);
+        std::vector<int>    getVect();
+        std::deque<int>     getDeque();
         
     private:
     
