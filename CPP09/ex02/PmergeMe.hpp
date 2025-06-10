@@ -20,24 +20,30 @@ class Sorter {
         template<typename T>
         std::vector<T>  indexOrderGenerator(size_t size) {
             std::vector<T>  order;
-            for (size_t i = 0; i < size; i++) {
-                //order = ;
+            order.resize(size + 1);
+        
+            if (order.size() == 0) {
+                throw std::range_error("ERROR: Invalid/Empty vector passed to indexOrderGenerator.");
             }
-            //calculate jacobstahl order and store
-            //
-
+            if (order.size() >= 1)
+                order[0] = 1;
+            if (order.size() >= 2)
+                order[1] = 3;
+            for (size_t i = 2; i <= size; i++) {
+                order[i] = order[i - 1] + 2 * order[i - 2];
+            }
             return order;
         }
     
         template<typename iterator>
-        void    fordJohnsonSort(iterator first, iterator last, int depth = 1) {
+        void    fordJohnsonSort(iterator first, iterator last, int depth = 1) { // depth is used for debugging purposes
 
             /* if (first >= last) {
                 throw std::range_error("ERROR: Invalid/Empty iterator passed to Ford-Johnson sorter.");
             } */
             if (std::distance(first, last) <= 1) {
-        return;
-    }
+                 return;
+                }
 
             typedef typename std::iterator_traits<iterator>::value_type T;
     
@@ -80,7 +86,8 @@ class Sorter {
 //DEBUGGING
 
             //jacobstahl
-            std::vector<int>    order = indexOrderGenerator(smallE.size());
+            std::vector<int>    order = indexOrderGenerator<int>(smallE.size());
+            
         }
 };
 
