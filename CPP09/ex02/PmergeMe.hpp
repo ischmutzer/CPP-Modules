@@ -18,8 +18,8 @@ class Sorter {
     private:
 
         template<typename T>
-        std::vector<T>  indexOrderGenerator(size_t size) {
-            std::vector<T>  order;
+        std::deque<T>  indexOrderGenerator(size_t size) {
+            std::deque<T>  order;
             order.resize(size + 1);
         
             if (order.size() == 0) {
@@ -47,7 +47,7 @@ class Sorter {
 
             typedef typename std::iterator_traits<iterator>::value_type T;
     
-            std::vector<T>  largeE, smallE;
+            std::deque<T>  largeE, smallE;
             iterator it =   first;
             while (it + 1 < last) {
                 if (*it < *(it + 1)) {
@@ -71,22 +71,38 @@ class Sorter {
             }
 
 //DEBUGGING
-            /* std::string indent(depth * 2, ' ');
+            std::string indent(depth * 2, ' ');
             std::cout << indent << "Iteration " << depth << " largeE = {";
-            for (typename std::vector<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); it1++) {
+            for (typename std::deque<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); it1++) {
                 std::cout << *it1 << ", "; 
             }
             std::cout << "}" << std::endl;
 
             std::cout << indent << "Iteration " << depth << " smallE = {";
-            for (typename std::vector<T>::const_iterator it2 = smallE.begin(); it2 < smallE.end(); it2++) {
+            for (typename std::deque<T>::const_iterator it2 = smallE.begin(); it2 < smallE.end(); it2++) {
                 std::cout << *it2 << ", "; 
             }
-            std::cout << "}\n" << std::endl; */
+            std::cout << "}\n" << std::endl;
 //DEBUGGING
 
             //jacobstahl
-            std::vector<int>    order = indexOrderGenerator<int>(smallE.size());
+            std::deque<int>    order = indexOrderGenerator<int>(smallE.size());
+            largeE.push_front(smallE[0]);
+            //std::copy(largeE.begin(), largeE.end(), first);
+
+            std::string indent2(depth * 2, ' ');
+            std::cout << indent2 << "(Going Back) Iteration " << depth << " largeE = {";
+            for (typename std::deque<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); it1++) {
+                std::cout << *it1 << ", "; 
+            }
+            std::cout << "}" << std::endl;
+            
+            std::cout << indent << "(Going Back) Iteration " << depth << " smallE = {";
+            for (typename std::deque<T>::const_iterator it2 = smallE.begin(); it2 < smallE.end(); it2++) {
+                std::cout << *it2 << ", "; 
+            }
+            std::cout << "}\n" << std::endl;
+            std::cout << "\n-------------------\n" << std::endl;
             
         }
 };
