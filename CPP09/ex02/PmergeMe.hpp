@@ -17,22 +17,41 @@ class Sorter {
         }
     private:
 
+        std::deque<int>  fillRemainingIndexes(const std::deque<int>& jacobstahlOrder, size_t size) {
+            std::deque<int> insertOrder(size);
+
+            insertOrder[0] = jacobstahlOrder[0]; //we skip index 0 since it'll be inserted without comparison
+            insertOrder[1] = jacobstahlOrder[1]; //add  checks to indexOrderGen() to make sure this doesnt read random memory
+
+            for (size_t i = 2, k = 2; i < size;) {
+                for (int a = jacobstahlOrder[k - 1]; --a > jacobstahlOrder[k - 2];) { //pre decrement doesnt work if in 3rd pos bc 3rd pos gets exec after loop body runs
+                    insertOrder[i++] = a;
+                }
+                insertOrder[i] = jacobstahlOrder[k];
+                i++;
+                k++;
+            }
+            return insertOrder;
+        }
+
         template<typename T>
         std::deque<T>  indexOrderGenerator(size_t size) {
             std::deque<T>  order;
             order.resize(size + 1);
         
             if (order.size() == 0) {
-                throw std::range_error("ERROR: Invalid/Empty vector passed to indexOrderGenerator.");
+                throw std::range_error("ERROR: Invalid/Empty deque passed to indexOrderGenerator.");
             }
-            if (order.size() >= 1)
+
+            if (size >= 1)
                 order[0] = 1;
-            if (order.size() >= 2)
+            if (size >= 2)
                 order[1] = 3;
-            for (size_t i = 2; i <= size; i++) {
+            
+            for (size_t i = 2; i < size; i++) {
                 order[i] = order[i - 1] + 2 * order[i - 2];
             }
-            return order;
+            return fillRemainingIndexes(order, size);
         }
     
         template<typename iterator>
@@ -87,10 +106,15 @@ class Sorter {
 
             //jacobstahl
             std::deque<int>    order = indexOrderGenerator<int>(smallE.size());
-            largeE.push_front(smallE[0]);
+            std::cout << " --Beginning--" << std::endl;
+            for (size_t i = 0; i < order.size(); i++) {
+                std::cout << "order[" << i << "] =" << order[i] << std::endl;
+            }
+            std::cout << " --End--" << std::endl;
+            //largeE.push_front(smallE[0]);
             //std::copy(largeE.begin(), largeE.end(), first);
 
-            std::string indent2(depth * 2, ' ');
+           /*  std::string indent2(depth * 2, ' ');
             std::cout << indent2 << "(Going Back) Iteration " << depth << " largeE = {";
             for (typename std::deque<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); it1++) {
                 std::cout << *it1 << ", "; 
@@ -102,7 +126,7 @@ class Sorter {
                 std::cout << *it2 << ", "; 
             }
             std::cout << "}\n" << std::endl;
-            std::cout << "\n-------------------\n" << std::endl;
+            std::cout << "\n-------------------\n" << std::endl; */
             
         }
 };
