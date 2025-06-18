@@ -17,19 +17,24 @@ class Sorter {
         }
     private:
 
-        std::deque<int>  fillRemainingIndexes(const std::deque<int>& jacobstahlOrder, size_t size) {
+        std::deque<int>  generateInsertionOrderFromBoundaries(const std::deque<int>& boundaries, size_t size) {
             std::deque<int> insertOrder(size);
 
-            insertOrder[0] = jacobstahlOrder[0]; //we skip index 0 since it'll be inserted without comparison
-            insertOrder[1] = jacobstahlOrder[1]; //add  checks to indexOrderGen() to make sure this doesnt read random memory
+            if (size < 2 || boundaries.size() < 2)
+                //throw   std::logic_error("ERROR: Insufficient size for Ford-Johnson insertion order.");
+
+            insertOrder[0] = boundaries[0]; //we skip index 0 since it'll be inserted without comparison
+            insertOrder[1] = boundaries[1]; //add  checks to indexOrderGen() to make sure this doesnt read random memory
 
             for (size_t i = 2, k = 2; i < size;) {
-                for (int a = jacobstahlOrder[k - 1]; --a > jacobstahlOrder[k - 2];) { //pre decrement doesnt work if in 3rd pos bc 3rd pos gets exec after loop body runs
+                for (int a = boundaries[k - 1]; --a > boundaries[k - 2];) { //pre decrement doesnt work if in 3rd pos bc 3rd pos gets exec after loop body runs
                     insertOrder[i++] = a;
                 }
-                insertOrder[i] = jacobstahlOrder[k];
-                i++;
-                k++;
+                if (k < boundaries.size()) {
+                    insertOrder[i++] = boundaries[k++];
+                } else {
+                    break;
+                }
             }
             return insertOrder;
         }
@@ -51,7 +56,7 @@ class Sorter {
             for (size_t i = 2; i < size; i++) {
                 order[i] = order[i - 1] + 2 * order[i - 2];
             }
-            return fillRemainingIndexes(order, size);
+            return generateInsertionOrderFromBoundaries(order, size);
         }
     
         template<typename iterator>
