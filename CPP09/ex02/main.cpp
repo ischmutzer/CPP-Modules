@@ -9,14 +9,52 @@ int main(int argc, char** argv) {
 	try {
 		PmergeMe	instance;
 
-		for (int i = 1; i < argc; i++) {
-			instance.processInput(argv[i]);
+		std::ostringstream oss;
+		for (int i = 1; i < argc; ++i) {
+			oss << argv[i] << " ";
 		}
-		Sorter<std::vector<int> >  ex;
+		instance.processInput(oss.str());
 
+		Sorter<std::vector<int> >  v;
 		std::vector<int> vect = instance.getVect();
-		ex.sort(vect);
-		//instance.mergeInsert();
+
+		//PRINTING VECT BEFORE SORT
+		std::cout << "\n---Vector Before Sorting---\n";
+		for (size_t i = 0; i < vect.size(); ++i) {
+			std::cout << vect[i] << " ";
+		}
+		std::cout << std::endl;
+
+		//SORT
+		v.sort(vect);
+
+		//PRINTING VECT AFTER SORT
+		std::cout << "\n---Vector After Sorting---\n";
+		for (size_t i = 0; i < vect.size(); ++i) {
+			std::cout << vect[i] << " ";
+		}
+		std::cout << std::endl;
+
+		/* Sorter<std::deque<int> >	d;
+		std::deque<int>				deque = instance.getDeque();
+
+		//PRINTING DEQUE BEFORE SORT
+		std::cout << "\n---Deque Before Sorting---\n";
+		for (size_t i = 0; i < deque.size(); ++i) {
+			std::cout << deque[i] << " ";
+		}
+		std::cout << std::endl;
+
+		//SORT
+		d.sort(deque);
+
+		//PRINTING DEQUE AFTER SORT
+		std::cout << "\n---Deque After Sorting---\n";
+		for (size_t i = 0; i < deque.size(); ++i) {
+			std::cout << deque[i] << " ";
+		}
+		std::cout << std::endl; */
+
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 	}

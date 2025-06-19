@@ -29,15 +29,17 @@ bool    PmergeMe::isSpace(const char& c) {
 
 //TO CONSIDER: accept num with leading '+'?
 bool    PmergeMe::isDigit(const char& c) {
-    if (!(isSpace(c)) && (c > '9' || c < '0'))
+    /* if (!(isSpace(c)) && (c >= '9' || c <= '0'))
         return false;
     else
-        return true;
+        return true; */
+
+    return std::isdigit(c);
 }
 
 bool    PmergeMe::hasDuplicates() const {
-    for (unsigned int i = 0; i < _vect.size(); i++) {
-        for (unsigned int j = i + 1; j < _vect.size(); j++) {
+    for (unsigned int i = 0; i < _vect.size(); ++i) {
+        for (unsigned int j = i + 1; j < _vect.size(); ++j) {
             if (_vect[i] == _vect[j])
                 return true;
         }
@@ -75,17 +77,17 @@ std::deque<int>     PmergeMe::getDeque() {
 
 //./exec 123 "12 2 4"
 void    PmergeMe::processInput(const std::string& str) {
-   for (unsigned int i = 0; i < str.size(); i++) {
-        if (!(isDigit(str[i])))
+   for (unsigned int i = 0; i < str.size(); ++i) {
+        if (!(isDigit(str[i])) && !(isspace(str[i])))
             throw   std::invalid_argument("ERROR: Invalid input. Expected input: positive integer.");
     }
     convertAndStoreSequence(str);
     /* std::cout << "Vector: ";
-    for (unsigned int i = 0; i < _vect.size(); i++)
+    for (unsigned int i = 0; i < _vect.size(); ++i)
         std::cout << _vect[i] << " ";
     std::cout << std::endl;
     std::cout << "Deque: ";
-    for (unsigned int i = 0; i < _deque.size(); i++) {
+    for (unsigned int i = 0; i < _deque.size(); ++i) {
         std::cout << _deque[i] << " ";
     }
     std::cout << std::endl; */

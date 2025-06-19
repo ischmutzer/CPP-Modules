@@ -6,6 +6,7 @@
 #include <vector>
 #include <deque>
 #include <string>
+#include <sstream>
 
 template <typename container>
 class Sorter {
@@ -16,22 +17,37 @@ class Sorter {
             fordJohnsonSort(sequence.begin(), sequence.end());
         }
     private:
+    
+        std::deque<int>  generateJacobstahlBoundaries(size_t size) {
+            std::deque<int>  order;
+
+            if (size >= 1) order.push_back(1);
+            if (size >= 2) order.push_back(3);
+
+            for (size_t i = 2; i < size; ++i) {
+                int value = order[i - 1] + 2 * order[i - 2];
+                if (value > static_cast<int>(size)) break;
+                order.push_back(value);
+            }
+            return order;
+        }
 
         std::deque<int>  generateInsertionOrderFromBoundaries(const std::deque<int>& boundaries, size_t size) {
-            std::deque<int> insertOrder(size);
+            std::deque<int> insertOrder;
 
-            if (size < 2 || boundaries.size() < 2)
+            /* if (size < 2 || boundaries.size() < 2)
+                return insertOrder; */
                 //throw   std::logic_error("ERROR: Insufficient size for Ford-Johnson insertion order.");
 
-            insertOrder[0] = boundaries[0]; //we skip index 0 since it'll be inserted without comparison
-            insertOrder[1] = boundaries[1]; //add  checks to indexOrderGen() to make sure this doesnt read random memory
+            insertOrder.push_back(boundaries[0]); //we skip index 0 since it'll be inserted without comparison
+            insertOrder.push_back(boundaries[1]); //add  checks to make sure this doesnt read random memory
 
-            for (size_t i = 2, k = 2; i < size;) {
-                for (int a = boundaries[k - 1]; --a > boundaries[k - 2];) { //pre decrement doesnt work if in 3rd pos bc 3rd pos gets exec after loop body runs
-                    insertOrder[i++] = a;
+            for (size_t k = 2; insertOrder.size() < size;) {
+                for (int a = boundaries[k - 1] - 1; a > boundaries[k - 2] && insertOrder.size() < size; --a) { //pre decrement doesnt work if in 3rd pos bc 3rd pos gets exec after loop body runs
+                    insertOrder.push_back(a);
                 }
-                if (k < boundaries.size()) {
-                    insertOrder[i++] = boundaries[k++];
+                if (k < boundaries.size() && insertOrder.size() < size) {
+                    insertOrder.push_back(boundaries[k++]);
                 } else {
                     break;
                 }
@@ -39,40 +55,21 @@ class Sorter {
             return insertOrder;
         }
 
-        template<typename T>
-        std::deque<T>  indexOrderGenerator(size_t size) {
-            std::deque<T>  order;
-            order.resize(size + 1);
-        
-            if (order.size() == 0) {
-                throw std::range_error("ERROR: Invalid/Empty deque passed to indexOrderGenerator.");
-            }
-
-            if (size >= 1)
-                order[0] = 1;
-            if (size >= 2)
-                order[1] = 3;
-            
-            for (size_t i = 2; i < size; i++) {
-                order[i] = order[i - 1] + 2 * order[i - 2];
-            }
-            return generateInsertionOrderFromBoundaries(order, size);
-        }
-    
+        //Main sorting ft
         template<typename iterator>
         void    fordJohnsonSort(iterator first, iterator last, int depth = 1) { // depth is used for debugging purposes
 
             /* if (first >= last) {
                 throw std::range_error("ERROR: Invalid/Empty iterator passed to Ford-Johnson sorter.");
             } */
-            if (std::distance(first, last) <= 1) {
-                 return;
-                }
+
+            //basecase
+            if (std::distance(first, last) <= 1) return;
 
             typedef typename std::iterator_traits<iterator>::value_type T;
-    
             std::deque<T>  largeE, smallE;
-            iterator it =   first;
+
+            iterator it = first;
             while (it + 1 < last) {
                 if (*it < *(it + 1)) {
                     largeE.push_back(*(it + 1));
@@ -88,46 +85,94 @@ class Sorter {
             if (it < last) {
                 smallE.push_back(*it);
             }
+            //DEBUGGING
+                        std::string indent(depth * 2, ' ');
+                        std::cout << indent << "Iteration " << depth << " largeE = {";
+                        for (typename std::deque<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); ++it1) {
+                            std::cout << *it1 << ", "; 
+                        }
+                        std::cout << "}" << std::endl;
+            
+                        std::cout << indent << "Iteration " << depth << " smallE = {";
+                        for (typename std::deque<T>::const_iterator it2 = smallE.begin(); it2 < smallE.end(); ++it2) {
+                            std::cout << *it2 << ", "; 
+                        }
+                        std::cout << "}\n" << std::endl;
+            fordJohnsonSort(largeE.begin(), largeE.end(), depth + 1);
+            
 
-            //basecase
-            if (!largeE.empty()) {
-                fordJohnsonSort(largeE.begin(), largeE.end(), depth + 1);
+            std::deque<T> merged;
+            merged.push_back(smallE[0]);
+            merged.insert(merged.end(), largeE.begin(), largeE.end());
+
+            std::deque<int> boundaries = generateJacobstahlBoundaries(smallE.size());
+
+            //DEBUGGING
+                        /* std::cout << "\nBOUNDARIES\n";
+                        for (size_t i = 0; i < boundaries.size(); ++i) {
+                            std::cout << boundaries[i] << " ";
+                        }
+                        std::cout << std::endl; */
+
+
+            std::deque<int> insertOrder = generateInsertionOrderFromBoundaries(boundaries, smallE.size());
+
+            //DEBUGGING
+                        std::cout << "\nINSERTION ORDER\n";
+                        for (size_t i = 0; i < insertOrder.size(); ++i) {
+                            std::cout << insertOrder[i] << " ";
+                        }
+                        std::cout << std::endl;
+
+            for (size_t i = 1; i < insertOrder.size(); ++i) {
+                int index = insertOrder[i];
+                if (index >= static_cast<int>(smallE.size())) continue;
+
+                T value = smallE[index];
+                typename std::deque<T>::iterator pos = std::lower_bound(merged.begin(), merged.end(), value);
+                merged.insert(pos, value);
             }
+            //DEBUGGING
+                    std::cout << "\nMERGED\n";
+                    for (size_t i = 0; i < merged.size(); ++i) {
+                        std::cout << merged[i] << " ";
+                    }
+                    std::cout << std::endl;
+            std::copy(merged.begin(), merged.end(), first);
 
 //DEBUGGING
-            std::string indent(depth * 2, ' ');
-            std::cout << indent << "Iteration " << depth << " largeE = {";
-            for (typename std::deque<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); it1++) {
-                std::cout << *it1 << ", "; 
-            }
-            std::cout << "}" << std::endl;
-
-            std::cout << indent << "Iteration " << depth << " smallE = {";
-            for (typename std::deque<T>::const_iterator it2 = smallE.begin(); it2 < smallE.end(); it2++) {
-                std::cout << *it2 << ", "; 
-            }
-            std::cout << "}\n" << std::endl;
-//DEBUGGING
+                        std::string indent2(depth * 2, ' ');
+                        std::cout << indent2 << "Iteration " << depth << " largeE = {";
+                        for (typename std::deque<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); ++it1) {
+                            std::cout << *it1 << ", "; 
+                        }
+                        std::cout << "}" << std::endl;
+            
+                        std::cout << indent2 << "Iteration " << depth << " smallE = {";
+                        for (typename std::deque<T>::const_iterator it2 = smallE.begin(); it2 < smallE.end(); ++it2) {
+                            std::cout << *it2 << ", "; 
+                        }
+                        std::cout << "}\n" << std::endl;
 
             //jacobstahl
-            std::deque<int>    order = indexOrderGenerator<int>(smallE.size());
+            /* std::deque<int>    order = indexOrderGenerator<int>(smallE.size());
             std::cout << " --Beginning--" << std::endl;
-            for (size_t i = 0; i < order.size(); i++) {
+            for (size_t i = 0; i < order.size(); ++i) {
                 std::cout << "order[" << i << "] =" << order[i] << std::endl;
             }
-            std::cout << " --End--" << std::endl;
+            std::cout << " --End--" << std::endl; */
             //largeE.push_front(smallE[0]);
             //std::copy(largeE.begin(), largeE.end(), first);
 
            /*  std::string indent2(depth * 2, ' ');
             std::cout << indent2 << "(Going Back) Iteration " << depth << " largeE = {";
-            for (typename std::deque<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); it1++) {
+            for (typename std::deque<T>::const_iterator it1 = largeE.begin(); it1 < largeE.end(); ++it1) {
                 std::cout << *it1 << ", "; 
             }
             std::cout << "}" << std::endl;
             
             std::cout << indent << "(Going Back) Iteration " << depth << " smallE = {";
-            for (typename std::deque<T>::const_iterator it2 = smallE.begin(); it2 < smallE.end(); it2++) {
+            for (typename std::deque<T>::const_iterator it2 = smallE.begin(); it2 < smallE.end(); ++it2) {
                 std::cout << *it2 << ", "; 
             }
             std::cout << "}\n" << std::endl;
@@ -202,3 +247,10 @@ class PmergeMe {
 
 //In this case vector and deque were the better suited options for this
 //exercise due to their random access functionality and dynamic resizing. 
+
+//WHY PRE DECREMENT IN A FOR LOOP
+
+//In a for loop the third pos will be executed after the loop, therefore whether
+//you pre decrement or post decrement makes no difference in execution
+//however when you decrese/increase after (i++) you make a copy of the old value
+//which makes the (++i) in for loops a preferance in c++
