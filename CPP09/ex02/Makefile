@@ -30,6 +30,26 @@ fclean: clean
 re: fclean all
 
 run: all
-	./$(NAME)
+	./$(NAME) 14 3 27 9 10
+
+#####################
+N = 500
+test:			all
+					./$(NAME) `shuf -i 1-100000000 -n $(N) | tr "\n" " "`
+
+test5:			all
+					./$(NAME) `shuf -i 1-5 -n 5 | tr "\n" " "`
+
+fix5:			all
+					./$(NAME) 44 28 4 11 6 
+
+test10:			all
+					./$(NAME) `shuf -i 1-10 -n 10 | tr "\n" " "`
+
+valgrindtest:	all
+					valgrind ./$(NAME) `shuf -i 1-10000 -n $(N) | tr "\n" " "`
+
+###########################
+
 
 .PHONY: all clean fclean re run
