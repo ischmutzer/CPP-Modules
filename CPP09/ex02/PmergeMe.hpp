@@ -53,10 +53,18 @@ class Sorter {
             if (std::distance(first, last) <= 1) return;
 
             typedef typename std::iterator_traits<iterator>::value_type T;
-            std::deque<T>  largeE, smallE;
+            //std::deque<T>  largeE, smallE;
+            typedef std::pair<T, T> Pair;
+
+            std::deque<Pair>    pairs;
 
             iterator it = first;
             while (it + 1 < last) {
+                T   a = *it;
+                T   b = *(it + 1);
+                if (a < b) {}
+            }
+            /* while (it + 1 < last) {
                 if (*it < *(it + 1)) {
                     largeE.push_back(*(it + 1));
                     smallE.push_back(*it);
@@ -65,7 +73,7 @@ class Sorter {
                     smallE.push_back(*(it + 1));
                 }
                 it += 2;
-            }
+            } */
 
             //handle odd element
             if (it < last) {
