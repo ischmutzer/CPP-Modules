@@ -88,7 +88,7 @@ void	RPN::processInput(std::string input) {
 //** OLD IMPLEMENTATION **
 
 /* void	RPN::checkForInvalidChar(std::string& input) {
-	for (size_t i = 0; i < input.size(); i++) {
+	for (size_t i = 0; i < input.size(); ++i) {
 		if (input[i] == ' ')
 			continue ;
 		else if (input[i] >= '0' && input[i] <= '9')
@@ -99,7 +99,7 @@ void	RPN::processInput(std::string input) {
 		 	throw std::invalid_argument("Error: invalid character in input");
 	}
 	std::string	cleanString;
-	for (size_t i = 0; i < input.size(); i++) {
+	for (size_t i = 0; i < input.size(); ++i) {
 		if (input[i] != ' ')
 			cleanString += input[i];
 	}
@@ -107,7 +107,7 @@ void	RPN::processInput(std::string input) {
 }
 
 void	RPN::tokenization(std::string& input) {
-	for (size_t i = 0; i < input.size(); i++) {
+	for (size_t i = 0; i < input.size(); ++i) {
 		if (input[i] >= '0' && input[i] <= '9') {
 			int digit = input[i] - '0';
 			numbers.push(digit);
