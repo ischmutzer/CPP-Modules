@@ -13,8 +13,11 @@
 template <typename container>
 class Sorter {
     public:
-        // Sorter(/* args */);
-        // ~Sorter();
+        Sorter();
+        Sorter(const Sorter& source);
+        Sorter& operator=(const Sorter& source);
+        ~Sorter();
+
         void    sort(container& sequence) {
             fordJohnsonSort(sequence.begin(), sequence.end());
         }
@@ -95,10 +98,9 @@ class Sorter {
 
         fordJohnsonSort(largeE.begin(), largeE.end(), depth + 1);
 
-        // Now we need to reorder pairs according to the sorted large elements
+        //largeE gets modified bc its a coipy of first, so we need to reorder pairs according to the newly sorted large elements
         std::vector<std::pair<T, T> > sortedPairs;
         for (size_t i = 0; i < largeE.size(); ++i) {
-            // Find the original pair with this large element
             for (size_t j = 0; j < pairs.size(); ++j) {
                 if (pairs[j].first == largeE[i]) {
                     sortedPairs.push_back(pairs[j]);
@@ -179,8 +181,6 @@ class PmergeMe {
         PmergeMe& operator=(const PmergeMe& source);
         ~PmergeMe();
 
-        //mergeInsert();
-        //twoFingerAlgo();
         void                processInput(const std::string& str);
         std::vector<int>    getVect();
         std::deque<int>     getDeque();

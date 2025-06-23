@@ -17,6 +17,7 @@ class	btc {
 
 		bool			dbNumberValidation(const std::string& key, const std::string& price);
 		bool			dateValidation(const std::string& key);
+		bool			inputDateValidation(const std::string& key);
 
 		bool			inNumberValidation(const std::string& val);
 		double			getExchangeRate(const std::string& key);

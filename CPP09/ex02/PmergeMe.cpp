@@ -109,28 +109,28 @@ void    PmergeMe::printSequenceDeque(const std::deque<int>& sequence, const std:
 
 void    PmergeMe::sortPrintVector() {
     Sorter<std::vector<int> >   v;
-    printSequenceVector(_vect, "Before ");
+    // printSequenceVector(_vect, "Before ");
 
-    std::clock_t	start = std::clock();
+    // std::clock_t	start = std::clock();
 	v.sort(_vect);
-	std::clock_t	end = std::clock();
+	//std::clock_t	end = std::clock();
 
-	double	eSecs = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000.0;
+	//double	eSecs = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000.0;
 	
-    printSequenceVector(_vect, "After: ");
-	std::cout << "Time to process a range of " << _vect.size() << " elements with std::vector : " << eSecs << " us" << std::endl;
+    // printSequenceVector(_vect, "After: ");
+	//std::cout << "Time to process a range of " << _vect.size() << " elements with std::vector : " << eSecs << " us" << std::endl;
 }
 
 void    PmergeMe::sortPrintDeque() {
     Sorter<std::deque<int> >	d;
-    printSequenceDeque(_deque, "Before: ");
+    // printSequenceDeque(_deque, "Before: ");
 
-	std::clock_t	start = std::clock();
+	// std::clock_t	start = std::clock();
 	d.sort(_deque);
-	std::clock_t	end = std::clock();
+	//std::clock_t	end = std::clock();
 
-	double	eSecs = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000.0;
+	//double	eSecs = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000.0;
 	
-    printSequenceDeque(_deque, "After: ");
-	std::cout << "Time to process a range of " << _deque.size() << " elements with std::deque : " << eSecs << " us" << std::endl;
+    // printSequenceDeque(_deque, "After: ");
+	//std::cout << "Time to process a range of " << _deque.size() << " elements with std::deque : " << eSecs << " us" << std::endl;
 }

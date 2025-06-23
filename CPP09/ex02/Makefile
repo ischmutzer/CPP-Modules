@@ -2,7 +2,7 @@ NAME = PmergeMe
 
 CXX = c++
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -g
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -g -MMD -MP
 
 SRCS = main.cpp\
 PmergeMe.cpp
@@ -11,18 +11,22 @@ HEADER = PmergeMe.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 
+DEPS = $(OBJS:.o=.d)
+
 RM = rm -rf
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADER)
+$(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-%.o: %.cpp $(HEADERS)
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+-include $(DEPS)
+
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
 	$(RM) $(NAME)

@@ -21,6 +21,9 @@ $(NAME): $(OBJ) $(HEADERS)
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@ -I./
 
+debug:
+	$(MAKE) CXXFLAGS="$(CXXFLAGS) -g" re
+
 clean:
 	$(RM) $(OBJ)
 
