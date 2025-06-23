@@ -38,7 +38,7 @@ test:			all
 					./$(NAME) `shuf -i 1-100000000 -n $(N) | tr "\n" " "`
 
 test5:			all
-					./$(NAME) `shuf -i 1-5 -n 5 | tr "\n" " "`
+					./$(NAME) `shuf -i 1-50 -n 5 | tr "\n" " "`
 
 fix5:			all
 					./$(NAME) 44 28 4 11 6 

@@ -65,8 +65,6 @@ void    PmergeMe::convertAndStoreSequence(const std::string& str) {
         throw std::logic_error("ERROR: Duplicate detected.");
 }
 
-void    PmergeMe::insertionSequenceGenerator() {}
-
 std::vector<int>    PmergeMe::getVect() {
     return _vect;
 }
@@ -75,25 +73,64 @@ std::deque<int>     PmergeMe::getDeque() {
     return _deque;
 }
 
-//./exec 123 "12 2 4"
 void    PmergeMe::processInput(const std::string& str) {
    for (unsigned int i = 0; i < str.size(); ++i) {
         if (!(isDigit(str[i])) && !(isspace(str[i])))
             throw   std::invalid_argument("ERROR: Invalid input. Expected input: positive integer.");
     }
     convertAndStoreSequence(str);
-    /* std::cout << "Vector: ";
-    for (unsigned int i = 0; i < _vect.size(); ++i)
-        std::cout << _vect[i] << " ";
-    std::cout << std::endl;
-    std::cout << "Deque: ";
-    for (unsigned int i = 0; i < _deque.size(); ++i) {
-        std::cout << _deque[i] << " ";
-    }
-    std::cout << std::endl; */
 }
 
-/* void PmergeMe::mergeInsert() {
-    //divide and conquer
-    //two finger algorithm
-} */
+void    PmergeMe::printSequenceVector(const std::vector<int>& sequence, const std::string& tag) {
+    std::cout << tag;
+    for (size_t i = 0; i < sequence.size(); ++i) {
+        if (i < 4 || sequence.size() <= 8) {
+            std::cout << sequence[i] << " ";
+        } else if (i == 4) {
+            std::cout << "[...] ";
+            break;
+        }
+    }
+    std::cout << std::endl;
+}
+
+void    PmergeMe::printSequenceDeque(const std::deque<int>& sequence, const std::string& tag) {
+    std::cout << tag;
+    for (size_t i = 0; i < sequence.size(); ++i) {
+        if (i < 4 || sequence.size() <= 8) {
+            std::cout << sequence[i] << " ";
+        } else if (i == 4) {
+            std::cout << "[...] ";
+            break;
+        }
+    }
+    std::cout << std::endl;
+}
+
+void    PmergeMe::sortPrintVector() {
+    Sorter<std::vector<int> >   v;
+    printSequenceVector(_vect, "Before ");
+
+    std::clock_t	start = std::clock();
+	v.sort(_vect);
+	std::clock_t	end = std::clock();
+
+	double	eSecs = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000.0;
+	
+    printSequenceVector(_vect, "After: ");
+	std::cout << "Time to process a range of " << _vect.size() << " elements with std::vector : " << eSecs << " us" << std::endl;
+}
+
+void    PmergeMe::sortPrintDeque() {
+    Sorter<std::deque<int> >	d;
+    printSequenceDeque(_deque, "Before: ");
+
+	std::clock_t	start = std::clock();
+	d.sort(_deque);
+	std::clock_t	end = std::clock();
+
+	double	eSecs = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000.0;
+	
+    printSequenceDeque(_deque, "After: ");
+	std::cout << "Time to process a range of " << _deque.size() << " elements with std::deque : " << eSecs << " us" << std::endl;
+}
