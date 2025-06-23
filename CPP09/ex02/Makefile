@@ -41,7 +41,10 @@ test5:			all
 					./$(NAME) `shuf -i 1-50 -n 5 | tr "\n" " "`
 
 fix5:			all
-					./$(NAME) 44 28 4 11 6 
+					./$(NAME) 44 28 4 11 6
+
+test6:			all
+					./$(NAME) 8 3 1 5 9 2 
 
 test10:			all
 					./$(NAME) `shuf -i 1-10 -n 10 | tr "\n" " "`
