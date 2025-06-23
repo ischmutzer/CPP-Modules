@@ -21,7 +21,7 @@ class RPN {
 	protected:
 	private:
 		std::stack<long long, std::list<long long> >		numbers;
-		std::string										cleanInput;
+		std::string											cleanInput;
 };
 
 

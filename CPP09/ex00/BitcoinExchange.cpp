@@ -37,12 +37,19 @@ bool	btc::dateValidation(const std::string& key) {
 	int	year, month, day;
 	if (sscanf(key.c_str(), "%4d-%2d-%2d", &year, &month, &day) != 3)
 		return false;
+
 	if (month < 1 || month > 12 || day < 1 || day > 31)
 		return false;
+	bool leap = (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
 
 	int	daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	if (day > daysInMonth[month - 1])
+	
+	if (leap && month == 2) {
+		if (day > 29) return false;
+	} else {
+		if (day > daysInMonth[month - 1])
 		return false;
+	}
 	
 	std::time_t	now = std::time(0);
 	struct tm*	localTime = localtime(&now);

@@ -78,7 +78,7 @@ void	RPN::processInput(std::string input) {
 		tokenization(token);
 	}
 	if (numbers.size() != 1)
-		throw std::runtime_error("Error: Invalid expression");
+		throw std::runtime_error("Error: Invalid expression.");
 	printResult();
 }
 

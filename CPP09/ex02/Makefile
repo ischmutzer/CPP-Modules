@@ -2,7 +2,7 @@ NAME = PmergeMe
 
 CXX = c++
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -g -MMD -MP
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -MMD -MP
 
 SRCS = main.cpp\
 PmergeMe.cpp
@@ -11,22 +11,18 @@ HEADER = PmergeMe.hpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-DEPS = $(OBJS:.o=.d)
-
 RM = rm -rf
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(HEADER)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-%.o: %.cpp
+%.o: %.cpp $(HEADER)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
--include $(DEPS)
-
 clean:
-	$(RM) $(OBJS) $(DEPS)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
@@ -37,7 +33,7 @@ run: all
 	./$(NAME) 14 3 27 9 10
 
 #####################
-N = 500
+N = 21
 test:			all
 					./$(NAME) `shuf -i 1-100000000 -n $(N) | tr "\n" " "`
 

@@ -13,19 +13,38 @@
 template <typename container>
 class Sorter {
     public:
-        Sorter();
-        Sorter(const Sorter& source);
-        Sorter& operator=(const Sorter& source);
-        ~Sorter();
+        Sorter() {};
+        Sorter(const Sorter& source) { *this = source; };
+        Sorter& operator=(const Sorter& source) {
+            if (this != &source) {
+
+            }
+            return *this;
+        };
+        ~Sorter() {};
 
         void    sort(container& sequence) {
             fordJohnsonSort(sequence.begin(), sequence.end());
         }
+        size_t                  _comparisonCounter;
 
     private:
 
         static const size_t     _jacobstahlBoundariesSize = 38;
         static const size_t     _boundaries[_jacobstahlBoundariesSize];
+
+        template<typename T>
+        struct CountingComparator {
+            size_t& counter;
+            
+            CountingComparator(size_t& c) : counter(c) {}
+            
+            bool operator()(const T& a, const T& b) const {
+                counter++;
+                return a < b;
+            }
+        };
+
 
         std::deque<size_t> genInsertOrder(size_t size){
             std::deque<size_t> order;
@@ -48,6 +67,21 @@ class Sorter {
                 n++;
             } 
             return order;
+        }
+
+        template<typename iterator, typename T>
+        iterator binarySearch(iterator first, iterator last, const T& value) {
+            while (first < last) {
+                iterator mid = first + (last - first) / 2;
+
+                _comparisonCounter++;
+                if (*mid < value) {
+                    first = mid + 1;
+                } else {
+                    last = mid;
+                }
+            }
+            return first;
         }
 
         template<typename iterator>
@@ -73,6 +107,7 @@ class Sorter {
                 pairs.push_back(std::make_pair(a, b));
             }
             it += 2;
+            _comparisonCounter++;
         }
 
         //handle odd element
@@ -95,7 +130,7 @@ class Sorter {
         }
         std::cout << "}" << std::endl; */
         // DEBUGGING
-
+        
         fordJohnsonSort(largeE.begin(), largeE.end(), depth + 1);
 
         //largeE gets modified bc its a coipy of first, so we need to reorder pairs according to the newly sorted large elements
@@ -132,13 +167,15 @@ class Sorter {
         std::cout << std::endl; */
         // DEBUGGING
 
+        CountingComparator<T> comp(_comparisonCounter);
+
         for (size_t i = 0; i < insertOrder.size(); ++i) {
             size_t index = insertOrder[i];
 
             if (index >= pairs.size()) {
                 //if odd element hasnt been inserted
                 if (hasOdd && !inserted[pairs.size()]) {
-                    typename std::deque<T>::iterator pos = std::lower_bound(merged.begin(), merged.end(), oddElement);
+                    typename std::deque<T>::iterator pos = std::lower_bound(merged.begin(), merged.end(), oddElement, comp);
                     merged.insert(pos, oddElement);
                     inserted[pairs.size()] = true;
                 }
@@ -149,7 +186,7 @@ class Sorter {
                 typename std::deque<T>::iterator largePos = std::find(merged.begin(), merged.end(), pairs[index].first);
 
                 //we binary search from beginning to pairs[index].first in merged
-                typename std::deque<T>::iterator pos = std::lower_bound(merged.begin(), largePos + 1, value);
+                typename std::deque<T>::iterator pos = std::lower_bound(merged.begin(), largePos + 1, value, comp);
                 merged.insert(pos, value);
                 inserted[index] = true;
             }
@@ -184,25 +221,26 @@ class PmergeMe {
         void                processInput(const std::string& str);
         std::vector<int>    getVect();
         std::deque<int>     getDeque();
-        void    printSequenceVector(const std::vector<int>& sequence, const std::string& tag);
-        void    printSequenceDeque(const std::deque<int>& sequence, const std::string& tag);
-        void    sortPrintVector();
-        void    sortPrintDeque();
+        void                printSequenceVector(const std::vector<int>& sequence, const std::string& tag);
+        void                printSequenceDeque(const std::deque<int>& sequence, const std::string& tag);
+        void                sortPrintVector();
+        void                sortPrintDeque();
 
     private:
     
-    bool    hasDuplicates() const;
-    bool    isSpace(const char& c);
-    bool    isDigit(const char& c);
-    void    convertAndStoreSequence(const std::string& str);
-
-    std::vector<int>    _vect;
-    std::vector<int>    _tmpVect;
-
-    std::deque<int>     _deque;
-    std::deque<int>     _tmpDeque; //can access any element in the deque with .at() or []
+        bool    hasDuplicates() const;
+        bool    isSpace(const char& c);
+        bool    isDigit(const char& c);
+        void    convertAndStoreSequence(const std::string& str);
+    
+        std::vector<int>    _vect;
+        std::vector<int>    _tmpVect;
+    
+        std::deque<int>     _deque;
+        std::deque<int>     _tmpDeque; //can access any element in the deque with .at() or []
 
 };
+
 
 
 
