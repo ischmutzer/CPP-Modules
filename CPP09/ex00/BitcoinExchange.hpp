@@ -32,6 +32,7 @@ class	btc {
 	private:
 		std::map<std::string, double>	_btcPrices;
 		double							_value;
+		std::string						_date;
 };
 
 //std::map

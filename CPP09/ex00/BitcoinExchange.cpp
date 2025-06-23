@@ -10,7 +10,10 @@ btc::btc() {}
 btc::btc(const btc& source) { *this = source; }
 
 btc&	btc::operator=(const btc& source) {
-	if (this != &source) {}
+	if (this != &source) {
+		_btcPrices = source._btcPrices;
+		_value = source._value;
+	}
 	return *this;
 }
 
@@ -58,15 +61,23 @@ bool	btc::dateValidation(const std::string& key) {
 bool	btc::inputDateValidation(const std::string& key) {
 	if (key.size() != 11 || key[4] != '-' || key[7] != '-')
 		return false;
+
 	int	year, month, day;
 	if (sscanf(key.c_str(), "%4d-%2d-%2d", &year, &month, &day) != 3)
 		return false;
+
 	if (month < 1 || month > 12 || day < 1 || day > 31)
 		return false;
+	bool leap = (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
 
 	int	daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	if (day > daysInMonth[month - 1])
+
+	if (leap && month == 2) {
+		if (day > 29) return false;
+	} else {
+		if (day > daysInMonth[month - 1])
 		return false;
+	}
 	
 	std::time_t	now = std::time(0);
 	struct tm*	localTime = localtime(&now);
@@ -132,17 +143,24 @@ bool	btc::inNumberValidation(const std::string& val) {
 }
 
 double	btc::getExchangeRate(const std::string& key) {
+	if (_btcPrices.empty()) {
+		throw std::runtime_error("Error: No exchange rate data available.");
+	}
 	std::map<std::string, double>::iterator	it = _btcPrices.lower_bound(key);
 	if (it != _btcPrices.end() && it->first == key) {
+		_date = it->first;
 		return it->second;
 	}
-	else if (it != _btcPrices.begin()) {
+	if (it != _btcPrices.begin()) {
 		--it;
+		_date = it->first;
 		return it->second;
 	}
 	else {
+		_date = it->first;
 		return it->second;
 	}
+	//return _btcPrices.begin()->second;
 }
 
 void	btc::calculateRateXValue(double rate, const std::string& key) {
@@ -183,7 +201,7 @@ void	btc::processFile(const std::string& file) {
 			std::cerr << "Error: getline() failed while processing the input file." << std::endl;
 			continue;
 		}
-		calculateRateXValue(getExchangeRate(key), key);
+		calculateRateXValue(getExchangeRate(key), _date);
 	}
 	inputFile.close();
 }
