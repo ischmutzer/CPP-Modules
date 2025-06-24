@@ -5,7 +5,7 @@
 
 int	main(int argc, char** argv) {
 	if (argc != 2) {
-		std::cerr << "Error: Invalid Argument Count" << std::endl;
+		std::cerr << "Error: Invalid Argument Count." << std::endl;
 		return EXIT_FAILURE;
 	}
 	try {

@@ -17,7 +17,7 @@ class Sorter {
         Sorter(const Sorter& source) { *this = source; };
         Sorter& operator=(const Sorter& source) {
             if (this != &source) {
-
+                _comparisonCounter = source._comparisonCounter;
             }
             return *this;
         };
@@ -33,35 +33,24 @@ class Sorter {
         static const size_t     _jacobstahlBoundariesSize = 38;
         static const size_t     _boundaries[_jacobstahlBoundariesSize];
 
-        template<typename T>
-        struct CountingComparator {
-            size_t& counter;
-            
-            CountingComparator(size_t& c) : counter(c) {}
-            
-            bool operator()(const T& a, const T& b) const {
-                counter++;
-                return a < b;
-            }
-        };
 
-
-        std::deque<size_t> genInsertOrder(size_t size){
-            std::deque<size_t> order;
-            size_t last = 0;
-            size_t n = 0;
+        std::vector<size_t> genInsertOrder(size_t size){
+            std::vector<size_t> order;
+            
+            size_t  last = 0;
+            size_t  n = 0;
             size_t  jacobstahlNum;
-            size_t ogSize = size;
+            size_t  i = size;
             
-            while (size > 0) {
+            while (i > 0) {
                 jacobstahlNum = _boundaries[n];
-                if (jacobstahlNum > ogSize)
-                    jacobstahlNum = ogSize;
+                if (jacobstahlNum > size)
+                    jacobstahlNum = size;
                 size_t current = jacobstahlNum;
-                while (current > last && size > 0) {
+                while (current > last && i > 0) {
                     order.push_back(current);
                     current--;
-                    size--;
+                    i--;
                 }
                 last = jacobstahlNum;
                 n++;
@@ -85,14 +74,22 @@ class Sorter {
         }
 
         template<typename iterator>
-        void fordJohnsonSort(iterator first, iterator last, int depth = 1) {
-        
+        void fordJohnsonSort(iterator first, iterator last) { //for debugging add -> , int depth = 1 // to track recursion layers
+        size_t  n = std::distance(first, last);
+
         //basecase
-        if (std::distance(first, last) <= 1) return;
+        if (n <= 1) return;
+        if (n == 2) {
+            _comparisonCounter++;
+            if (*first > *(first + 1)) {
+                std::iter_swap(first, first + 1);
+            }
+            return;
+        }
 
         typedef typename std::iterator_traits<iterator>::value_type T;
     
-        // Store pairs to achieve mirroring -> index tracking
+        //store pairs to achieve mirroring -> index tracking
         std::vector<std::pair<T, T> > pairs; // (large, small)
         T oddElement;
         bool hasOdd = false;
@@ -121,19 +118,10 @@ class Sorter {
         for (size_t i = 0; i < pairs.size(); ++i) {
             largeE.push_back(pairs[i].first);
         }
-
-        // DEBUGGING
-        /* std::string indent(depth * 2, ' ');
-        std::cout << indent << "Iteration " << depth << " pairs = {";
-        for (size_t i = 0; i < pairs.size(); ++i) {
-            std::cout << "(" << pairs[i].first << "," << pairs[i].second << ") ";
-        }
-        std::cout << "}" << std::endl; */
-        // DEBUGGING
         
-        fordJohnsonSort(largeE.begin(), largeE.end(), depth + 1);
+        fordJohnsonSort(largeE.begin(), largeE.end());
 
-        //largeE gets modified bc its a coipy of first, so we need to reorder pairs according to the newly sorted large elements
+        //largeE gets modified bc its a copy of first, so we need to reorder pairs according to the newly sorted large elements
         std::vector<std::pair<T, T> > sortedPairs;
         for (size_t i = 0; i < largeE.size(); ++i) {
             for (size_t j = 0; j < pairs.size(); ++j) {
@@ -145,7 +133,7 @@ class Sorter {
         }
         pairs = sortedPairs;
 
-        std::deque<T> merged;
+        std::vector<T> merged;
         std::vector<bool> inserted(pairs.size() + (hasOdd ? 1 : 0), false);
 
         //insert index 0
@@ -157,52 +145,37 @@ class Sorter {
             merged.push_back(pairs[i].first);
         }
 
-        std::deque<size_t> insertOrder = genInsertOrder(pairs.size() + (hasOdd ? 1 : 0));
-
-        // DEBUGGING
-        /* std::cout << indent << "Insertion order: ";
-        for (size_t i = 0; i < insertOrder.size(); ++i) {
-            std::cout << insertOrder[i] << " ";
-        }
-        std::cout << std::endl; */
-        // DEBUGGING
-
-        CountingComparator<T> comp(_comparisonCounter);
+        std::vector<size_t> insertOrder = genInsertOrder(pairs.size() + (hasOdd ? 1 : 0));
 
         for (size_t i = 0; i < insertOrder.size(); ++i) {
             size_t index = insertOrder[i];
 
-            if (index >= pairs.size()) {
-                //if odd element hasnt been inserted
-                if (hasOdd && !inserted[pairs.size()]) {
-                    typename std::deque<T>::iterator pos = std::lower_bound(merged.begin(), merged.end(), oddElement, comp);
-                    merged.insert(pos, oddElement);
-                    inserted[pairs.size()] = true;
-                }
-            } else if (!inserted[index]) {
-                T value = pairs[index].second;
+            if (index < pairs.size()) {
+                T valueToInsert = pairs[index].second;
 
-                //-> jacb num is used to limit the search range of the binary insertion in the already sorted large elements
-                typename std::deque<T>::iterator largePos = std::find(merged.begin(), merged.end(), pairs[index].first);
+                typename std::vector<T>::iterator largePos = std::find(merged.begin(), merged.end(), pairs[index].first);
 
-                //we binary search from beginning to pairs[index].first in merged
-                typename std::deque<T>::iterator pos = std::lower_bound(merged.begin(), largePos + 1, value, comp);
-                merged.insert(pos, value);
+                typename std::vector<T>::iterator pos = binarySearch(merged.begin(), largePos, valueToInsert);
+                merged.insert(pos, valueToInsert);
                 inserted[index] = true;
+            } else if (hasOdd) {
+                typename std::vector<T>::iterator pos = std::lower_bound(merged.begin(), merged.end(), oddElement);
+                merged.insert(pos, oddElement);
+                hasOdd = false;
+                inserted[pairs.size()] = true;
             }
         }
 
-        std::copy(merged.begin(), merged.end(), first);
+        if (hasOdd) {
+                typename std::vector<T>::iterator pos = binarySearch(merged.begin(), merged.end(), oddElement);
+                merged.insert(pos, oddElement);
+                hasOdd = false;
+                inserted[pairs.size()] = true;
+            }
 
-        // DEBUGGING
-        /* std::cout << indent << "Final result: ";
-        for (typename std::deque<T>::iterator it = merged.begin(); it != merged.end(); ++it) {
-            std::cout << *it << " ";
-        }
-        std::cout << std::endl; */
-        // DEBUGGING
-        }
-    };
+        std::copy(merged.begin(), merged.end(), first);
+    }
+};
 
 
 template <typename container>
@@ -253,6 +226,30 @@ class PmergeMe {
 
 
 
+//DEBUGGING MESSAGES
+
+
+        // DEBUGGING
+        /* std::cout << indent << "Insertion order: ";
+        for (size_t i = 0; i < insertOrder.size(); ++i) {
+            std::cout << insertOrder[i] << " ";
+        }
+        std::cout << std::endl; */
+        // DEBUGGING
+
+
+        // DEBUGGING
+        /* std::cout << indent << "Final result: ";
+        for (typename std::deque<T>::iterator it = merged.begin(); it != merged.end(); ++it) {
+            std::cout << *it << " ";
+        }
+        std::cout << std::endl; */
+        // DEBUGGING
+
+
+//DEBUGGING
+
+
 //Deque vs Container
 
 //deque (double ended queue) -> container thatv allows for fast insertion
@@ -296,3 +293,5 @@ class PmergeMe {
 //you pre decrement or post decrement makes no difference in execution
 //however when you decrese/increase after (i++) you make a copy of the old value
 //which makes the (++i) in for loops a preferance in c++
+
+//us stands for microseconds

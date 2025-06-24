@@ -155,16 +155,16 @@ double	btc::getExchangeRate(const std::string& key) {
 	}
 	std::map<std::string, double>::iterator	it = _btcPrices.lower_bound(key);
 	if (it != _btcPrices.end() && it->first == key) {
-		_date = it->first;
+		//_date = it->first;
 		return it->second;
 	}
 	if (it != _btcPrices.begin()) {
 		--it;
-		_date = it->first;
+		//_date = it->first;
 		return it->second;
 	}
 	else {
-		_date = it->first;
+		//_date = it->first;
 		return it->second;
 	}
 	//return _btcPrices.begin()->second;
@@ -208,7 +208,7 @@ void	btc::processFile(const std::string& file) {
 			std::cerr << "Error: getline() failed while processing the input file." << std::endl;
 			continue;
 		}
-		calculateRateXValue(getExchangeRate(key), _date);
+		calculateRateXValue(getExchangeRate(key), key);
 	}
 	inputFile.close();
 }
