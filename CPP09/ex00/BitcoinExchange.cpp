@@ -86,7 +86,7 @@ bool	btc::inputDateValidation(const std::string& key) {
 		return false;
 	}
 	
-	std::time_t	now = std::time(0);
+	/* std::time_t	now = std::time(0);
 	struct tm*	localTime = localtime(&now);
 	
 	if (year > localTime->tm_year + 1900)
@@ -96,7 +96,7 @@ bool	btc::inputDateValidation(const std::string& key) {
 			return false;
 		if (month == localTime->tm_mon + 1 && day > localTime->tm_mday)
 			return false;
-	}
+	} */
 	return true;
 }
 
@@ -191,6 +191,8 @@ void	btc::processFile(const std::string& file) {
 	while (std::getline(inputFile, line)) {
 		if (line.empty())
 			continue;
+		if (line[0] == ' ')
+			throw std::runtime_error("Error: Leading space identified.");
 		std::string			trimmedLine = trim(line);
 		std::istringstream	iss(trimmedLine);
 		std::string			key, value;
